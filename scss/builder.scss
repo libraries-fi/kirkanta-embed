@@ -1,0 +1,38 @@
+
+$secondary: #ced4da;
+// $dark: #999;
+
+$cherry: rgb(23, 127, 166);
+$primary: lighten($cherry, 20%);
+
+$theme-colors: (
+  "cherry": $cherry,
+);
+
+$enable-gradients: true;
+$enable-rounded: false;
+
+@import "~bootstrap/scss/bootstrap";
+
+html {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+}
+
+.autocomplete-popup {
+  width: 100%;
+  background-color: $input-bg;
+  color: $input-color;
+
+  li {
+    @extend .pl-3;
+  }
+}

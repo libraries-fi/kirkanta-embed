@@ -1,0 +1,18 @@
+
+
+$kifi-orange: #ff6500;
+
+$font-size-base: 0.85rem;
+
+$grid-columns: 4;
+$grid-gutter-width: 0;
+
+$container-breakpoints: (
+  xs: 0,
+  sm: 400px,
+  md: 560px,
+  lg: 800px
+);
+
+
+@import "base";

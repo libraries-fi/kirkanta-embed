@@ -1,0 +1,56 @@
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -1 * map-get($spacers, 1);
+}
+
+.grid-half {
+  @extend .grid;
+}
+
+.col {
+  padding: map-get($spacers, 1) map-get($spacers, 1);
+  box-sizing: border-box;
+}
+
+@include media-breakpoint-down("sm") {
+  .grid {
+    flex-direction: column;
+    flex-grow: 1;
+
+    .col, .col-1, .col-2, .col-3, .col-4 {
+      flex-basis: unset;
+    }
+  }
+}
+
+@include media-breakpoint-up("md") {
+  .grid {
+    .col {
+      flex-basis: 25%;
+    }
+
+    .col-1 {
+      flex-basis: 25%;
+    }
+
+    .col-2 {
+      flex-basis: 50%;
+    }
+
+    .col-3 {
+      flex-basis: 75%;
+    }
+
+    .col-4 {
+      flex-basis: 100%;
+    }
+  }
+
+  .grid-half {
+    .col {
+      flex-basis: 50%;
+    }
+  }
+}

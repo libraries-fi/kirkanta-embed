@@ -1,0 +1,36 @@
+
+@import "~bootstrap/scss/variables";
+
+$enable-gradients: true;
+$enable-rounded: false;
+
+$text-muted: #333;
+
+$theme-colors: (
+  "primary":    $primary,
+  "secondary":  $secondary,
+  // "success":    $success,
+  // "info":       $info,
+  // "warning":    $warning,
+  "danger":     $danger,
+  "light":      rgb(255, 234, 213),
+  "dark":       $gray-900,
+);
+
+$table-dark-bg: $gray-500;
+$table-cell-padding: map-get($spacers, 2);
+
+$h1-font-size: 1.5rem;
+$h2-font-size: 1.3rem;
+$h3-font-size: 1.1rem;
+$h4-font-size: 1rem;
+$h5-font-size: 1rem;
+$h6-font-size: 1rem;
+
+$headings-margin-bottom: map-get($spacers, 2);
+$border-light: darken(map-get($theme-colors, "light"), 10%);
+
+
+$nav-pills-link-active-color: $text-muted;
+$nav-tabs-link-active-border-color: $border-light;
+$nav-pills-link-active-bg: darken(map-get($theme-colors, "light"), 10%);

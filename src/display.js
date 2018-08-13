@@ -1,0 +1,53 @@
+import Vue from "vue";
+import Router from "vue-router";
+import LibraryInfo from "./components/LibraryInfo.vue";
+
+import routerConfig from "./init.router";
+
+Vue.use(Router);
+
+class LibraryDisplay extends Vue {
+  constructor(container, params) {
+    let options = Object.assign({
+      lang: null,
+      library: null,
+      tabbed: false,
+      embedded: false,
+    }, params);
+
+    let router = new Router(Object.assign(routerConfig, {
+      routes: [
+        {
+          path: "/:id".replace(/:id/, options.library),
+          name: "library",
+          props: (route) => ({
+            id: options.library,
+            lang: options.lang
+          }),
+          children: [
+            {
+              path: "contact",
+              name: "contact",
+            },
+            {
+              path: "services",
+              name: "services",
+            }
+          ]
+        },
+      ]
+    }));
+
+    router.replace({name: "library", params: {library: options.library}});
+
+    super({
+      el: container,
+      template: '<library-info :library="library" :lang="lang" :tabbed="tabbed" :embedded="embedded"/>',
+      data: () => options,
+      components: { LibraryInfo },
+      router,
+    });
+  }
+}
+
+window["kirjastot.fi.display"] = LibraryDisplay;
