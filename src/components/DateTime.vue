@@ -11,12 +11,10 @@
   // Works when locale 'fi' is actually provided by the package maintainer.
   // import {fi, sv} from "date-fns/esm/locale";
 
-  // import fi from "date-fns/esm/locale/fi";
+  import fi from "date-fns/esm/locale/fi";
   import sv from "date-fns/esm/locale/sv";
 
-  // const locales = {fi, sv};
-
-  const locales = {};
+  const locales = {fi, sv};
 
   import formatRelative from "date-fns/formatRelative";
 
