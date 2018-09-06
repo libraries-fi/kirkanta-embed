@@ -8,15 +8,10 @@
   import format from "date-fns/format";
   import toDate from "date-fns/toDate";
 
-  // Works when locale 'fi' is actually provided by the package maintainer.
-  // import {fi, sv} from "date-fns/esm/locale";
-
   import fi from "date-fns/esm/locale/fi";
-  import sv from "date-fns/esm/locale/sv";
+  import sv from "date-fns/esm/locale/fi";
 
-  const locales = {fi, sv};
-
-  import formatRelative from "date-fns/formatRelative";
+  const locales = { fi, sv };
 
   export default {
     props: ["date", "time", "format", "formal", "short"],

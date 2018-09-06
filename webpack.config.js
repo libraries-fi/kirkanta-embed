@@ -1,6 +1,6 @@
-const path = require("path");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const autoprefixer = require("autoprefixer");
+const path = require("path");
 
 module.exports = {
   mode: "development",
@@ -9,12 +9,10 @@ module.exports = {
       "babel-polyfill",
       "./src/builder.js"
     ],
-
     "launcher": [
       "babel-polyfill",
       "./src/launcher.js",
     ],
-
     "display": [
       "./src/init.widget.js",
       "./src/display.js"
@@ -27,18 +25,16 @@ module.exports = {
       "./src/init.widget.js",
       "./src/search.js"
     ],
-
     "bootstrap": "./node_modules/bootstrap/dist/css/bootstrap.min.css"
   },
   output: {
     path: path.resolve(__dirname, "public"),
-    filename: "v1/[name].js"
+    filename: "dev/[name].js"
   },
   module: {
     rules: [
       {
-        test: /\.scss/,
-        // loader: "style-loader!css-loader!sass-loader",
+        test: /\.scss$/,
         use: [
           "style-loader",
           "css-loader",
