@@ -1,98 +1,90 @@
 <template>
-  <article class="zxc zxc-library-info" :data-tabbed="tabbed ? '' : false">
+  <article class="zxc zxc-library-info" :data-tabbed="tabbed ? '' : false" v-if="library">
     <button v-if="embedded" type="button" class="btn btn-link" @click="returnToList">Return to list</button>
 
-    <h1 class="titlebar">{{ data.name }}</h1>
+    <h1>{{ library.name }}</h1>
 
-    <div class="toolbar" v-if="tabbed">
-      <ul class="nav nav-pills">
-        <li class="nav-item">
-          <router-link :to="{name: 'library', params: {library}}" class="nav-link">Presentation</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link :to="{name: 'contact', params: {library}}" class="nav-link">Contact</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link :to="{name: 'services', params: {library}}" class="nav-link">Services</router-link>
-        </li>
-      </ul>
-    </div>
+    <p class="d-none d-sm-block d-md-none text-danger">SMALL</p>
 
     <div class="content">
       <div class="content-tab" id="tab-library" :data-active-tab="$route.name == 'library'">
-        <blockquote v-if="data.slogan">
+        <blockquote class="slogan" v-if="library.slogan">
           <font-awesome-icon :icon="faQuote"/>
-          {{ data.slogan }}
+          {{ library.slogan }}
         </blockquote>
 
-        <section>
-          <h2>Presentation</h2>
-          <div v-if="data.cover">
-            <img :src="data.cover.files.small" :alt="data.cover.name"/>
+        <section class="row">
+          <div class="col-md-2">
+            <div v-if="library.cover" class="pt-md-3 pr-md-3">
+              <img :src="library.cover.files.small" :alt="library.cover.name" class="cover-photo"/>
+            </div>
           </div>
-          <div v-if="data.description" v-html="data.description"/>
+
+          <aside class="col-md-2" v-if="library.schedules">
+            <h2 class="sr-only">Service hours</h2>
+            <schedules :schedules="library.schedules" expandMode="none"/>
+          </aside>
+        </section>
+        <section class="row">
+          <h2 class="sr-only">Presentation</h2>
+          <div class="row" v-if="library.description" v-html="library.description"/>
         </section>
       </div>
 
       <div class="content-tab" id="tab-contact" :data-active-tab="$route.name == 'contact'">
-        <section v-if="data.address">
-          <h2>Contact details</h2>
-          <h3>Location</h3>
+        <section v-if="library.address" class="row">
+          <h2 class="sr-only">Contact details</h2>
 
-          <address>
-            <p>{{ data.address.street }}, {{ data.address.zipcode }} {{ data.address.city }} <span v-if="data.address.area">({{ data.address.area }})</span></p>
-            <p v-if="data.address.info">{{ data.address.info }}</p>
-          </address>
-
-          <div v-if="data.mailAddress">
-            <h3>Mail Address</h3>
+          <div class="col-md-2">
             <address>
-              <div>{{ data.name }}</div>
-              <div v-if="data.mailAddress.street">{{ data.mailAddress.street }}</div>
-              <div v-if="data.mailAddress.box_number">P.O. Box {{ data.mailAddress.box_number}}</div>
-              <div>{{ data.mailAddress.zipcode }} {{ data.mailAddress.area.toUpperCase() }}</div>
+              <h3>Location</h3>
+              <p>{{ library.address.street }}, {{ library.address.zipcode }} {{ library.address.city }} <span v-if="library.address.area">({{ library.address.area }})</span></p>
+              <p v-if="library.address.info">{{ library.address.info }}</p>
             </address>
+          </div>
+
+          <div class="col-md-2">
+            <div v-if="library.mailAddress">
+              <h3>Mail Address</h3>
+              <address>
+                <div>{{ library.name }}</div>
+                <div v-if="library.mailAddress.street">{{ library.mailAddress.street }}</div>
+                <div v-if="library.mailAddress.box_number">P.O. Box {{ library.mailAddress.box_number}}</div>
+                <div>{{ library.mailAddress.zipcode }} {{ library.mailAddress.area.toUpperCase() }}</div>
+              </address>
+            </div>
           </div>
         </section>
 
-        <section v-if="data.transit">
-          <h2>Transit directions</h2>
+        <section v-if="library.transit">
+          <h2 class="sr-only">Transit directions</h2>
           <h3>Public transportation</h3>
 
           <dl>
-            <template v-if="data.transit.buses">
+            <template v-if="library.transit.buses">
               <dt>Buses</dt>
-              <dd>{{ data.transit.buses }}</dd>
+              <dd>{{ library.transit.buses }}</dd>
             </template>
-            <template v-if="data.transit.buses">
+            <template v-if="library.transit.trams">
               <dt>Trams</dt>
-              <dd>{{ data.transit.trams }}</dd>
+              <dd>{{ library.transit.trams }}</dd>
             </template>
-            <template v-if="data.transit.buses">
+            <template v-if="library.transit.trains">
               <dt>Trains</dt>
-              <dd>{{ data.transit.trains }}</dd>
+              <dd>{{ library.transit.trains }}</dd>
             </template>
           </dl>
 
-          <div v-if="data.transit.parking">
+          <div v-if="library.transit.parking">
             <h3>Parking instructions</h3>
-            {{ data.transit.parking }}
+            {{ library.transit.parking }}
           </div>
         </section>
       </div>
 
       <div class="content-tab" id="tab-services" :data-active-tab="$route.name == 'services'">
-        <section v-if="services">
-          <h2>Services</h2>
-          <template v-for="group of services">
-            <h3>{{ group.title }}</h3>
-            <ul>
-              <li v-for="service of group.services">
-                <span v-if="service.custom_name">{{ service.custom_name}}</span>
-                <span v-else>{{ service.name }}</span>
-              </li>
-            </ul>
-          </template>
+        <section v-if="library.services">
+          <services :services="library.services"/>
         </section>
       </div>
     </div>
@@ -102,49 +94,24 @@
 <script>
   import Library from "../entity/library";
   import apiCall from "../utils/api-call";
+  import Services from "./Services.vue";
+  import Schedules from "./Schedules.vue";
 
   import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
   import faQuoteRight from "@fortawesome/fontawesome-free-solid/faQuoteRight";
 
   export default {
-    props: ["library", "lang", "tabbed", "embedded"],
+    props: ["id", "lang", "tabbed", "embedded"],
     data: () => ({
-      data: {},
+      library: null,
       activeTab: "library"
     }),
     computed: {
       faQuote: () => faQuoteRight,
-      services() {
-        if (this.data.services) {
-          let groups = {};
-
-          for (let service of this.data.services) {
-            if (!groups[service.type]) {
-              groups[service.type] = {
-                title: service.type,
-                services: [service]
-              };
-            } else {
-              groups[service.type].services.push(service);
-            }
-          }
-
-          for (let gid of Object.keys(groups)) {
-            groups[gid].services.sort((a, b) => {
-              let va = a.custom_name || a.name;
-              let vb = b.custom_name || b.name;
-
-              return va.localeCompare(vb);
-            });
-          }
-
-          return groups;
-        }
-      }
     },
     async created() {
       let query = {
-        id: this.library,
+        id: this.id,
         limit: 1,
         with: "extra mail_address pictures schedules services",
         "period.start": "0w",
@@ -155,7 +122,7 @@
       let library = response.data.items[0];
 
       if (library) {
-        this.data = new Library(library);
+        this.library = new Library(library);
       } else {
         throw "Library '" + query.id + "' not found";
       }
@@ -170,21 +137,20 @@
         console.log("ROUTE CHANGE", route);
       }
     },
-    components: { FontAwesomeIcon }
+    components: { FontAwesomeIcon, Services, Schedules }
   };
 </script>
 
 <style lang="scss">
   .zxc-library-info {
     @import "../../scss/widget";
-    @import "~bootstrap/scss/nav";
 
-    background-color: $body-bg;
-    color: $body-color;
+    .slogan {
+      margin-top: spacing(2);
+    }
 
-
-    blockquote {
-      margin-top: map-get($spacers, 2);
+    .cover-photo {
+      width: 100%;
     }
 
     &[data-tabbed] {

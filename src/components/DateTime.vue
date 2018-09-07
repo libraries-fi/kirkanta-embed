@@ -20,8 +20,10 @@
         let p = this.$parent;
         while (p.$parent) { p = p.$parent; }
 
-        if (p.options.lang) {
+        if (p.ptions && p.options.lang) {
           return locales[p.options.lang];
+        } else {
+          return fi;
         }
       },
       wrap: function() {

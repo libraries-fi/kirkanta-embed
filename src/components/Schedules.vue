@@ -1,7 +1,5 @@
 <template>
-  <div class="zxc zxc-weekly-schedules" :data-expand-mode="expandMode">
-    <h1 class="titlebar">{{ library.name }}</h1>
-
+  <div class="zxc zxc-weekly-schedules" :data-expand-mode="expandMode" v-if="schedules">
     <div class="toolbar d-flex">
       <button type="button" v-on:click="previousWeek" class="btn btn-link btn-sm">
         <font-awesome-icon :icon="faWeekPrev"/>
@@ -13,7 +11,7 @@
     </div>
 
     <table class="table table-sm table-borderless schedules">
-      <thead>
+      <thead class="sr-only">
         <tr>
           <th class="col-date">Date</th>
           <th class="col-weekday">Day</th>
@@ -21,7 +19,7 @@
         </tr>
       </thead>
 
-      <tbody v-for="(day, index) of library.schedules.slice(this.i * 7, (this.i + 1) * 7)" :class="parseInt(day.live_status) ? 'current-day' : null" :data-expanded="index == expandedRow">
+      <tbody v-for="(day, index) of schedules.slice(this.i * 7, (this.i + 1) * 7)" :class="parseInt(day.live_status) ? 'current-day' : null" :data-expanded="index == expandedRow">
         <tr class="day-entry">
           <th :rowspan="day.times.length + 1 + (day.info ? 1 : 0)" scope="row" class="col-date">
             <date-time :date="day.date" format="P" formal short/>
@@ -57,8 +55,8 @@
 
     </table>
 
-    <div class="period-info p-1" v-if="periods.length">
-      <template v-for="period of periods">
+    <div class="period-info p-1" v-if="periodInfo.length">
+      <template v-for="period of periodInfo">
         <p v-if="period.description">
           <b v-if="period.valid_until">
             <date-time :date="period.valid_from" format="P" formal short/> –
@@ -90,25 +88,23 @@
   import DateTime from "./DateTime.vue";
 
   export default {
-    props: ["library", "expandMode"],
+    props: ["schedules", "periods", "expandMode"],
     data: () => ({
       i: 0,
       expandedRow: parseInt(format(new Date, "i")) - 1,
     }),
     computed: {
       week() {
-        if (this.library) {
-          let day = this.library.schedules[this.i * 7];
+        if (this.schedules) {
+          let day = this.schedules[this.i * 7];
           return day ? format(toDate(day.date), "I") : null;
         }
       },
-      periods() {
+      periodInfo() {
         let filtered = [];
-        if (this.library && this.library.periods) {
-          for (let pid of Object.keys(this.library.periods)) {
-            if (this.library.periods[pid].description) {
-              filtered.push(this.library.periods[pid]);
-            }
+        for (let pid in this.periods) {
+          if (this.periods[pid].description) {
+            filtered.push(this.periods[pid]);
           }
         }
         return filtered;
@@ -126,7 +122,7 @@
         this.i = Math.max(this.i - 1, 0);
       },
       nextWeek() {
-        this.i = Math.min(this.i + 1, (this.library.schedules.length / 7) - 1);
+        this.i = Math.min(this.i + 1, (this.schedules.length / 7) - 1);
       },
     },
     components: { DateTime, FontAwesomeIcon }
@@ -136,13 +132,6 @@
 <style lang="scss">
   .zxc-weekly-schedules {
     @import "../../scss/widget";
-    @import "../../scss/grid";
-    @import "~bootstrap/scss/tables";
-    @import "~bootstrap/scss/utilities/display";
-
-    background-color: $body-bg;
-    color: $body-color;
-
 
     th[scope="row"] {
       font-weight: unset;
@@ -206,8 +195,8 @@
 
     .current-day {
       background-color: theme-color("light");
-      border-top: 1px solid $border-light !important;
-      border-bottom: 1px solid $border-light !important;
+      // border-top: 1px solid $border-light !important;
+      // border-bottom: 1px solid $border-light !important;
     }
 
     .day-info {
@@ -255,6 +244,13 @@
 
     &[data-expand-mode="all"] {
 
+    }
+
+    &[data-no-browse] {
+      .toolbar,
+      .col-date {
+        display: none;
+      }
     }
   }
 </style>

@@ -17,7 +17,7 @@
       </div>
     </form>
 
-    <ol v-if="result.length" class="no-style search-results row">
+    <ol v-if="result.length" class="list-unstyled search-results row">
       <li v-for="library of result" class="col-md-2">
         <div class="library-card">
           <div class="icon">
@@ -106,13 +106,9 @@
 </script>
 
 <style lang="scss">
+  @import "../../scss/widget";
+
   .zxc-library-list {
-    @import "../../scss/widget";
-    // @import "../../scss/grid";
-    @import "~bootstrap/scss/grid";
-    @import "~bootstrap/scss/utilities/display";
-    @import "~bootstrap/scss/utilities/spacing";
-    @import "~bootstrap/scss/forms";
 
     background-color: $body-bg;
     color: $body-color;
@@ -120,8 +116,8 @@
     // Negative margins cause the iframe sandbox to show a scroll bar.
     overflow-x: hidden;
 
-    input[name="q"] {
-
+    input[type="search"] {
+      flex-grow: 1;
     }
 
     .throbber {
@@ -129,13 +125,13 @@
 
       width: 2rem;
       background-color: blue;
-      margin-left: -2rem - spacer(2);
+      margin-left: -2rem - spacing(2);
       display: none;
     }
 
     .search-results {
-      margin-left: -1 * spacer(1);
-      margin-right: -1 * spacer(1);
+      margin-left: -1 * spacing(1);
+      margin-right: -1 * spacing(1);
     }
 
     .library-card {
@@ -143,7 +139,7 @@
       border: 1px solid #ccc;
       display: flex;
       overflow: hidden;
-      margin: spacer(1);
+      margin: spacing(1);
 
       .icon {
         width: 120px;

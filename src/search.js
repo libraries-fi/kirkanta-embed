@@ -7,7 +7,7 @@ import routerConfig from "./init.router";
 
 Vue.use(Router);
 
-class Search extends Vue {
+class SearchWidget extends Vue {
   constructor(container, params) {
     let search = {
       q: params.q,
@@ -68,4 +68,4 @@ class Search extends Vue {
   }
 }
 
-window["kirjastot.fi.search"] = Search;
+window["kirjastot.fi.search"] = SearchWidget;

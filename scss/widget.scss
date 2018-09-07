@@ -1,18 +1,19 @@
 
-
 $kifi-orange: #ff6500;
-
 $font-size-base: 0.85rem;
 
 $grid-columns: 4;
 $grid-gutter-width: 0;
 
-$container-breakpoints: (
+$grid-breakpoints: (
   xs: 0,
-  sm: 400px,
-  md: 560px,
-  lg: 800px
-);
+  md: 640px,
+  // lg: 800px,
+) !default;
 
+$theme-colors: (
+  primary: blue,
+  secondary: #f5f5f5,
+);
 
 @import "base";

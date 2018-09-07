@@ -1,3 +1,6 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/mixins";
+@import "variables";
 
 $secondary: #ced4da;
 // $dark: #999;
@@ -13,6 +16,10 @@ $enable-gradients: true;
 $enable-rounded: false;
 
 @import "~bootstrap/scss/bootstrap";
+
+@function spacing($size) {
+  @return map-get($spacers, $size);
+}
 
 html {
   height: 100%;

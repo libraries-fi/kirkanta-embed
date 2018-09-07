@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueI18n from "vue-i18n";
 
-import WeeklySchedules from "./components/WeeklySchedules.vue";
+import Schedules from "./components/Schedules.vue";
 import Library from "./entity/library";
 import apiCall from "./utils/api-call";
 
@@ -13,7 +13,7 @@ const i18n = new VueI18n;
  * Options:
  *    expandMode: NULL|all|none
  */
-class Schedules extends Vue {
+class SchedulesWidget extends Vue {
   constructor(container, params) {
     const options = Object.assign({
 
@@ -37,15 +37,19 @@ class Schedules extends Vue {
 
     super({
       el: container,
-      template: '<weekly-schedules :library="library" :expandMode="options.expandMode"/>',
+      template: `
+        <div class="zxc-weekly-schedules" v-if="library">
+          <h1>{{ library.name }}</h1>
+          <schedules :schedules="schedules" :periods="periods" :expandMode="options.expandMode"/>
+        </div>
+      `,
       data: () => ({
         options,
-        library: {
-          name: null,
-          schedules: []
-        },
+        library: null,
+        schedules: null,
+        periods: null
       }),
-      async created() {
+      async mounted() {
         let query = {
           id: options.library,
           with: "schedules",
@@ -58,11 +62,13 @@ class Schedules extends Vue {
         let response = await apiCall("/library", options.lang, query);
         let library = new Library(response.data.items[0], response.data.references);
         this.library = library;
+        this.schedules = this.library.schedules;
+        this.periods = response.data.references.period;
       },
-      components: { WeeklySchedules },
+      components: { Schedules },
       i18n,
     });
   }
 }
 
-window["kirjastot.fi.schedules"] = Schedules;
+window["kirjastot.fi.schedules"] = SchedulesWidget;

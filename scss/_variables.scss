@@ -2,7 +2,7 @@
 @import "~bootstrap/scss/variables";
 
 $enable-gradients: true;
-$enable-rounded: false;
+$enable-rounded: true;
 
 $text-muted: #333;
 
@@ -27,9 +27,9 @@ $h4-font-size: 1rem;
 $h5-font-size: 1rem;
 $h6-font-size: 1rem;
 
+
 $headings-margin-bottom: map-get($spacers, 2);
 $border-light: darken(map-get($theme-colors, "light"), 10%);
-
 
 $nav-pills-link-active-color: $text-muted;
 $nav-tabs-link-active-border-color: $border-light;

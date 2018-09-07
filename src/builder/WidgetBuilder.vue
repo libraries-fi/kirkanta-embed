@@ -202,8 +202,8 @@
     flex-grow: 1;
     flex-direction: column;
 
-    $group-padding-x: map-get($spacers, 3);
-    $group-padding-y: map-get($spacers, 3);
+    $group-padding-x: spacing(3);
+    $group-padding-y: spacing(3);
 
     > .row {
       flex-grow: 1;
@@ -235,7 +235,7 @@
     }
 
     .details-group {
-      $details-spacing-y: map-get($spacers, 3) * 0.5;
+      $details-spacing-y: spacing(3) * 0.5;
       margin: 0 (-1 * $group-padding-x) $group-padding-y;
 
       details {
@@ -324,7 +324,7 @@
 
     summary {
       line-height: 3rem;
-      padding-left: map-get($spacers, 3);
+      padding-left: spacing(3);
       outline: none;
       border: 1px solid rgba(0, 0, 0, 0.2);
       border-width: 1px 0;
@@ -340,7 +340,7 @@
     }
 
     > div {
-      padding: map-get($spacers, 3);
+      padding: spacing(3);
     }
 
     @include media-breakpoint-up("lg") {

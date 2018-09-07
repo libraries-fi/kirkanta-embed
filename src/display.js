@@ -6,7 +6,7 @@ import routerConfig from "./init.router";
 
 Vue.use(Router);
 
-class LibraryDisplay extends Vue {
+class LibraryDisplayWidget extends Vue {
   constructor(container, params) {
     let options = Object.assign({
       lang: null,
@@ -42,7 +42,7 @@ class LibraryDisplay extends Vue {
 
     super({
       el: container,
-      template: '<library-info :library="library" :lang="lang" :tabbed="tabbed" :embedded="embedded"/>',
+      template: '<library-info :id="library" :lang="lang" :tabbed="tabbed" :embedded="embedded"/>',
       data: () => options,
       components: { LibraryInfo },
       router,
@@ -50,4 +50,4 @@ class LibraryDisplay extends Vue {
   }
 }
 
-window["kirjastot.fi.display"] = LibraryDisplay;
+window["kirjastot.fi.display"] = LibraryDisplayWidget;
