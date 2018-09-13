@@ -30,11 +30,11 @@ class SearchWidget extends Vue {
           })
         },
         {
-          path: "/:library",
+          path: "/:id",
           name: "library",
           component: LibraryInfo,
           props: (route) => ({
-            library: route.params.library,
+            id: route.params.id,
             lang: params.lang,
             tabbed: params.tabbed,
             embedded: true,

@@ -9,3 +9,14 @@
 @function spacing($size) {
   @return map-get($spacers, $size);
 }
+
+@include media-breakpoint-up("md") {
+  .two-columns-md {
+    column-count: 2;
+
+    > * {
+      display: unset;
+      break-inside: avoid;
+    }
+  }
+}

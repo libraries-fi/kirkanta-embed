@@ -1,31 +1,34 @@
 <template>
   <div class="zxc zxc-library-list" data-busy>
-    <h1 class="titlebar">Library Search</h1>
+    <div class="header">
+      <h1>Library Search</h1>
 
-    <form @submit="onSubmit">
-      <input type="hidden" name="id" :value="form.library"/>
-      <input type="hidden" name="city" :value="form.city"/>
-      <input type="hidden" name="type" :value="form.type"/>
-      <input type="hidden" name="branch_type" :value="form.branch_type"/>
+      <form @submit="onSubmit">
+        <input type="hidden" name="id" :value="form.library"/>
+        <input type="hidden" name="city" :value="form.city"/>
+        <input type="hidden" name="type" :value="form.type"/>
+        <input type="hidden" name="branch_type" :value="form.branch_type"/>
 
-      <div class="search-box d-flex my-2">
-        <input type="search" class="form-control-lg" name="q" placeholder="Search by name or municipality" v-model="form.q"/>
-        <div class="throbber"></div>
-        <button type="submit">
-          <font-awesome-icon :icon="faSearch"/>
-        </button>
-      </div>
-    </form>
+        <div class="input-group">
+          <input type="search" class="form-control form-control-lg" name="q" placeholder="Search by name or municipality" v-model="form.q"/>
+          <div class="input-group-append">
+            <div class="throbber"></div>
+            <button type="submit" class="btn btn-primary">
+              <font-awesome-icon :icon="faSearch"/>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
 
-    <ol v-if="result.length" class="list-unstyled search-results row">
+    <ol v-if="result.length" class="list-unstyled row">
       <li v-for="library of result" class="col-md-2">
         <div class="library-card">
           <div class="icon">
-            <!-- <font-awesome-icon :icon="faImage" size="4x"/> -->
             <img v-if="library.cover" :src="library.cover.files.small" alt=""/>
           </div>
           <div class="info px-2">
-            <a :href="'https://beta-hakemisto.kirjastot.fi/' + library.slug" @click="onClickLibrary" :data-id="library.id">{{ library.name }}</a>
+            <a :href="'https://hakemisto.kirjastot.fi/' + library.slug" @click="onClickLibrary" :data-id="library.id">{{ library.name }}</a>
             <p v-if="library.address">
               {{ library.address.street }},
               {{ library.address.area || library.address.city }}
@@ -63,7 +66,7 @@
       },
       onClickLibrary: function(event) {
         event.preventDefault();
-        this.$router.push({name: "library", params: {library: event.target.dataset.id}});
+        this.$router.push({name: "library", params: {id: event.target.dataset.id}});
       },
       submit: async function() {
         this.busy = true;

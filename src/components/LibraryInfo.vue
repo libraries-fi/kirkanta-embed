@@ -1,12 +1,12 @@
 <template>
   <article class="zxc zxc-library-info" :data-tabbed="tabbed ? '' : false" v-if="library">
-    <button v-if="embedded" type="button" class="btn btn-link" @click="returnToList">Return to list</button>
+    <div class="header">
+      <button v-if="embedded" type="button" class="btn btn-link" @click="returnToList">Return to list</button>
 
-    <h1>{{ library.name }}</h1>
+      <h1>{{ library.name }}</h1>
+    </div>
 
-    <p class="d-none d-sm-block d-md-none text-danger">SMALL</p>
-
-    <div class="content">
+    <div class="content main">
       <div class="content-tab" id="tab-library" :data-active-tab="$route.name == 'library'">
         <blockquote class="slogan" v-if="library.slogan">
           <font-awesome-icon :icon="faQuote"/>
@@ -142,8 +142,9 @@
 </script>
 
 <style lang="scss">
+  @import "../../scss/widget";
+  
   .zxc-library-info {
-    @import "../../scss/widget";
 
     .slogan {
       margin-top: spacing(2);
