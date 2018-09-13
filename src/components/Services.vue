@@ -103,7 +103,7 @@
 
         let close = document.createElement("button");
         close.type = "button";
-        close.className = "close";
+        close.className = "close ml-2";
         close.setAttribute("aria-label", "Close");
         close.innerHTML = '<span aria-hidden="true">&times;</span>';
 
@@ -123,5 +123,9 @@
 
   .link {
     cursor: pointer;
+  }
+
+  .popover-body {
+    white-space: pre-line;
   }
 </style>

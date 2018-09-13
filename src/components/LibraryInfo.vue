@@ -56,7 +56,7 @@
           </div>
         </section>
 
-        <section v-if="library.transit">
+        <section v-if="hasPublicTransportation()">
           <h2 class="sr-only">Transit directions</h2>
           <h3>Public transportation</h3>
 
@@ -102,6 +102,7 @@
 
   export default {
     props: ["id", "lang", "tabbed", "embedded"],
+    components: { FontAwesomeIcon, Services, Schedules },
     data: () => ({
       library: null,
       activeTab: "library"
@@ -130,20 +131,24 @@
     methods: {
       returnToList: function() {
         this.$emit("return-to-main");
+      },
+      hasPublicTransportation() {
+        if (this.library.transit) {
+          for (let [field, info] of Object.entries(this.library.transit)) {
+            if (info && info.length) {
+              return true;
+            }
+          }
+        }
+        return false;
       }
-    },
-    watch: {
-      $route(route) {
-        console.log("ROUTE CHANGE", route);
-      }
-    },
-    components: { FontAwesomeIcon, Services, Schedules }
+    }
   };
 </script>
 
 <style lang="scss">
   @import "../../scss/widget";
-  
+
   .zxc-library-info {
 
     .slogan {
@@ -160,7 +165,7 @@
       }
 
       .content-tab[data-active-tab] {
-        display: unset;
+        display: initial;
       }
     }
   }
