@@ -1,18 +1,21 @@
 <template>
-  <div @click="popupClose" class="two-columns-md">
+  <div @click="popupClose" class="row services-list">
     <h2 class="sr-only">Services</h2>
-    <div class="services-group" v-for="group of groups">
-      <h3>{{ group.title }}</h3>
-      <ul class="services-list">
-        <li v-for="(service, i) of group.services">
-          <span v-if="service.description" class="link text-primary" v-b-popover:services-list.click.blur.top="popup(service)">
-            {{ service.custom_name || service.name }}
-          </span>
-          <span v-else>
-            {{ service.custom_name || service.name }}
-          </span>
-        </li>
-      </ul>
+
+    <div class="col-md-2" v-for="column of columns">
+      <div class="services-list-group" v-for="group of column">
+        <h3>{{ group.title }}</h3>
+        <ul class="services-list-item">
+          <li v-for="(service, i) of group.services">
+            <span v-if="service.description" class="link text-primary" v-b-popover:services-list.click.blur.top="popup(service)">
+              {{ service.custom_name || service.name }}
+            </span>
+            <span v-else>
+              {{ service.custom_name || service.name }}
+            </span>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -39,6 +42,25 @@
       activePopups: []
     }),
     computed: {
+      columns() {
+        let sorted = this.groups;
+
+        let left = [sorted[0]];
+        let right = sorted.slice(1);
+
+        function itemCount(section) {
+          return section.reduce((acc, g) => acc + g.services.length, 0);
+        }
+
+        while (itemCount(left) < itemCount(right) - 5) {
+          if (right.length <= 2) {
+            break;
+          }
+          left.push(right.pop());
+        }
+
+        return [left, right];
+      },
       groups() {
         let groups = {};
 
@@ -63,15 +85,7 @@
           });
         }
 
-        let sorted = Object.values(groups).sort((a, b) => a.length - b.length);
-
-        if (sorted.length > 3) {
-          // Attempt at balancing the two-column layout.
-          let [second] = sorted.splice(1, 1);
-          sorted.splice(sorted.length - 1, 0, second);
-        }
-
-        return sorted;
+        return Object.values(groups).sort((a, b) => b.services.length - a.services.length);
       }
     },
     methods: {

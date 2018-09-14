@@ -76,14 +76,17 @@
   import format from "date-fns/format";
   import toDate from "date-fns/toDate";
 
-  import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
-  import faAngleDoubleLeft from "@fortawesome/fontawesome-free-solid/faAngleDoubleLeft";
-  import faAngleDoubleRight from "@fortawesome/fontawesome-free-solid/faAngleDoubleRight";
-  import faArrowCircleDown from "@fortawesome/fontawesome-free-solid/faArrowCircleDown";
-  import faArrowAltCircleRight from "@fortawesome/fontawesome-free-regular/faArrowAltCircleRight";
+  import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+  import { faAngleDoubleLeft, faAngleDoubleRight, faArrowCircleDown, faMinusSquare } from "@fortawesome/free-solid-svg-icons";
+  import { faArrowAltCircleRight, faPlusSquare } from "@fortawesome/free-regular-svg-icons";
 
-  import faPlusSquare from "@fortawesome/fontawesome-free-regular/faPlusSquare";
-  import faMinusSquare from "@fortawesome/fontawesome-free-solid/faMinusSquare";
+  // import { faAngleDoubleLeft } from "@fortawesome/free-solid-svg-icons/faAngleDoubleLeft";
+  // import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons/faAngleDoubleRight";
+  // import { faArrowCircleDown } from "@fortawesome/free-solid-svg-icons/faArrowCircleDown";
+  // import { faMinusSquare } from "@fortawesome/free-solid-svg-icons/faMinusSquare";
+  //
+  // import { faArrowAltCircleRight } from "@fortawesome/free-regular-svg-icons/faArrowAltCircleRight";
+  // import { faPlusSquare } from "@fortawesome/free-regular-svg-icons/faPlusSquare";
 
   import DateTime from "./DateTime.vue";
 
@@ -130,9 +133,9 @@
 </script>
 
 <style lang="scss">
-  .zxc-weekly-schedules {
-    @import "../../scss/widget";
+  @import "../../scss/variables";
 
+  .zxc-weekly-schedules {
     th[scope="row"] {
       font-weight: unset;
     }

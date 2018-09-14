@@ -41,11 +41,7 @@
 </template>
 
 <script>
-  import queryString from "query-string";
-
   import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
-  import faImage from "@fortawesome/fontawesome-free-solid/faImage";
-  import faSearch from "@fortawesome/fontawesome-free-solid/faSearch";
 
   import Library from "../entity/library";
   import Collection from "../utils/collection";
@@ -109,10 +105,9 @@
 </script>
 
 <style lang="scss">
-  @import "../../scss/widget";
+  @import "../../scss/variables";
 
   .zxc-library-list {
-
     background-color: $body-bg;
     color: $body-color;
 
@@ -124,11 +119,10 @@
     }
 
     .throbber {
-      @extend .mr-2;
-
       width: 2rem;
       background-color: blue;
       margin-left: -2rem - spacing(2);
+      margin-right: spacing(2);
       display: none;
     }
 

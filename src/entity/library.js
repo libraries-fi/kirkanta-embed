@@ -58,6 +58,16 @@ class Library {
     return this.__data.mail_address;
   }
 
+  get email() {
+    return this.__data.email;
+  }
+
+  get phone() {
+    if (this.__data.phone_numbers) {
+      return this.__data.phone_numbers[0];
+    }
+  }
+
   get schedules() {
     return this.__data.schedules || [];
   }
@@ -72,6 +82,14 @@ class Library {
 
   get services() {
     return this.__data.services || [];
+  }
+
+  get phoneNumbers() {
+    return this.__data.phone_numbers || [];
+  }
+
+  get links() {
+    return this.__data.links || [];
   }
 
   get cover() {

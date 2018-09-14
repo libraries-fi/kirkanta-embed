@@ -68,7 +68,7 @@
   const LAUNCHER_SCRIPT = window.location.protocol + "//" + window.location.host + "/widgets/v1/launcher.js";
 
   import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
-  import faClone from "@fortawesome/fontawesome-free-regular/faClone";
+  // import faClone from "@fortawesome/fontawesome-free-regular/faClone";
 
   import kirjastohakemisto from "../launcher";
   import ClipboardJS from "clipboard";
