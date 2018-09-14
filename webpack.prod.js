@@ -18,7 +18,14 @@ module.exports = merge(config, {
           loader: "babel-loader",
           options: {
             cacheDirectory: true,
-            presets: ["env"]
+            presets: [
+              ["env", {
+                modules: false,
+                targets: {
+                  ie: 10
+                }
+              }]
+            ]
           }
         }
       }

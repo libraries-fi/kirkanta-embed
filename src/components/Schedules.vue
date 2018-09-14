@@ -80,14 +80,6 @@
   import { faAngleDoubleLeft, faAngleDoubleRight, faArrowCircleDown, faMinusSquare } from "@fortawesome/free-solid-svg-icons";
   import { faArrowAltCircleRight, faPlusSquare } from "@fortawesome/free-regular-svg-icons";
 
-  // import { faAngleDoubleLeft } from "@fortawesome/free-solid-svg-icons/faAngleDoubleLeft";
-  // import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons/faAngleDoubleRight";
-  // import { faArrowCircleDown } from "@fortawesome/free-solid-svg-icons/faArrowCircleDown";
-  // import { faMinusSquare } from "@fortawesome/free-solid-svg-icons/faMinusSquare";
-  //
-  // import { faArrowAltCircleRight } from "@fortawesome/free-regular-svg-icons/faArrowAltCircleRight";
-  // import { faPlusSquare } from "@fortawesome/free-regular-svg-icons/faPlusSquare";
-
   import DateTime from "./DateTime.vue";
 
   export default {

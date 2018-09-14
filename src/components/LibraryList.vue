@@ -41,18 +41,37 @@
 </template>
 
 <script>
-  import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
-
   import Library from "../entity/library";
   import Collection from "../utils/collection";
   import apiCall from "../utils/api-call";
 
+  import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+  import { faSearch } from "@fortawesome/free-solid-svg-icons";
+
   export default {
     props: ["lang", "form"],
+    components: { FontAwesomeIcon },
     data: () => ({
       result: [],
+      faSearch
     }),
-    created(...foo) {
+    computed: {
+      busy: {
+        get: function() {
+          return this.$el.hasAttribute("data-busy");
+        },
+        set: function(state) {
+          if (this.$el) {
+            if (state) {
+              this.$el.setAttribute("data-busy", "");
+            } else {
+              this.$el.removeAttribute("data-busy");
+            }
+          }
+        }
+      }
+    },
+    mounted(...foo) {
       this.submit();
     },
     methods: {
@@ -82,25 +101,6 @@
         this.busy = false;
       }
     },
-    computed: {
-      faImage: () => faImage,
-      faSearch: () => faSearch,
-      busy: {
-        get: function() {
-          return this.$el.hasAttribute("data-busy");
-        },
-        set: function(state) {
-          if (this.$el) {
-            if (state) {
-              this.$el.setAttribute("data-busy", "");
-            } else {
-              this.$el.removeAttribute("data-busy");
-            }
-          }
-        }
-      }
-    },
-    components: { FontAwesomeIcon }
   };
 </script>
 
