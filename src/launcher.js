@@ -80,6 +80,10 @@ async function kirjastohakemisto(element) {
 
           const scope = sandbox.contentWindow.document;
 
+          let base = scope.createElement("base");
+          base.setAttribute("target", "_top");
+          scope.head.appendChild(base);
+
           scope.documentElement.className = "zxc-sandbox";
           let wrapper = scope.createElement("div");
           wrapper.className = "zxc-safety-layer";
