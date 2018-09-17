@@ -108,9 +108,6 @@
   @import "../../scss/variables";
 
   .zxc-library-list {
-    background-color: $body-bg;
-    color: $body-color;
-
     // Negative margins cause the iframe sandbox to show a scroll bar.
     overflow-x: hidden;
 
