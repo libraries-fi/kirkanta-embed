@@ -4,10 +4,13 @@
       <auto-complete id="o-library" name="x-library" :value-key="'id'" :label-key="'name'" v-model="options.library" :suggestions="librarySuggestions" @input="onLibraryAutoComplete" required/>
     </b-form-group>
 
-    <div class="form-group">
-      <b-form-checkbox id="o-tabbed" v-model="options.tabbed">Tabbed interface</b-form-checkbox>
-      <small class="form-text">Group library page sections in tabs.</small>
-    </div>
+    <b-form-group id="o-expand-mode" label="Expand schedules">
+      <b-form-radio-group v-model="options.expandMode">
+        <b-form-radio :value="null">None</b-form-radio>
+        <b-form-radio value="current">Only current day</b-form-radio>
+        <b-form-radio value="all">All rows</b-form-radio>
+      </b-form-radio-group>
+    </b-form-group>
   </div>
 </template>
 

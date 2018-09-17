@@ -43,26 +43,35 @@
     }),
     computed: {
       columns() {
-        let sorted = this.groups;
+        try {
+          let sorted = this.groups;
 
-        let left = [sorted[0]];
-        let right = sorted.slice(1);
+          let left = [sorted[0]];
+          let right = sorted.slice(1);
 
-        function itemCount(section) {
-          return section.reduce((acc, g) => acc + g.services.length, 0);
-        }
-
-        while (itemCount(left) < itemCount(right) - 5) {
-          if (right.length <= 2) {
-            break;
+          function itemCount(section) {
+            return section.reduce((acc, g) => acc + g.services.length, 0);
           }
-          left.push(right.pop());
-        }
 
-        return [left, right];
+          while (itemCount(left) < itemCount(right) - 5) {
+            if (right.length <= 2) {
+              break;
+            }
+            left.push(right.pop());
+          }
+
+          return [left, right];
+        } catch (e) {
+          // Will throw if services is empty -> just ignore.
+          console.error(e);
+        }
       },
       groups() {
-        let groups = {};
+        if (!this.services || this.services.length == 0) {
+          throw "No services data";
+        }
+
+        const groups = {};
 
         for (let [i, service] of this.services.entries()) {
           if (!groups[service.type]) {

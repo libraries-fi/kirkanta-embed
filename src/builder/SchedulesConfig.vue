@@ -4,7 +4,7 @@
       <auto-complete id="o-library" name="x-library" :value-key="'id'" :label-key="'name'" v-model="options.library" :suggestions="librarySuggestions" @input="onLibraryAutoComplete" required/>
     </b-form-group>
 
-    <b-form-group id="o-expand-mode" label="Expand day rows">
+    <b-form-group id="o-expand-mode" label="Expand schedules">
       <b-form-radio-group v-model="options.expandMode">
         <b-form-radio :value="null">Only current day</b-form-radio>
         <b-form-radio value="all">All rows</b-form-radio>

@@ -37,22 +37,6 @@
         </details>
       </b-form-group>
     </div>
-
-    <div class="form-group">
-      <b-form-checkbox id="o-tabbed" v-model="options.tabbed">Use tabs on library page</b-form-checkbox>
-      <small class="form-text">Group library page sections in tabs.</small>
-    </div>
-    <!--
-    <b-form-group id="option-type" label="Library type" label-for="o-type">
-      <b-form-select id="o-type" name="type" v-model="options.type" :options="typeOptions"/>
-    </b-form-group>
-    -->
-
-    <!--
-    <b-form-group id="option-branch-type" label="Branch type" label-for="o-branch-type">
-      <b-form-checkbox-group id="o-branch-type" name="branch_type" v-model="options.branch_type" :options="branchTypeOptions"/>
-    </b-form-group>
-  -->
   </div>
 </template>
 

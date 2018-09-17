@@ -13,6 +13,12 @@ class LibraryDisplayWidget extends Vue {
       library: null,
       tabbed: false,
       embedded: false,
+
+      /*
+       * Mode for expanding time entry rows.
+       * current|all|none
+       */
+      expandMode: "none",
     }, params);
 
     let router = new Router(Object.assign(routerConfig, {
@@ -42,7 +48,7 @@ class LibraryDisplayWidget extends Vue {
 
     super({
       el: container,
-      template: '<library-info :id="library" :lang="lang" :tabbed="tabbed" :embedded="embedded"/>',
+      template: '<library-info :id="library" :lang="lang" :tabbed="tabbed" :embedded="embedded" :expandMode="expandMode"/>',
       data: () => options,
       components: { LibraryInfo },
       router,

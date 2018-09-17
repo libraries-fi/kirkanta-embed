@@ -1,7 +1,6 @@
 <template>
   <div id="builder">
-    <!-- <div class="row"> -->
-      <div id="factory" class="bg-gradient-cherry text-white">
+      <div id="factory">
         <form @submit="onSubmit">
           <div class="form-group" id="select-widget">
             <b-form-select v-model="widget" :options="availableWidgets"/>
@@ -16,11 +15,11 @@
               <b-form-select id="o-lang" v-model="options.lang" :options="languageOptions"/>
             </b-form-group>
 
-            <div class="form-group">
+            <!-- <div class="form-group">
               <b-form-checkbox id="o-nosandbox" v-model="options.nosandbox">
                 Advanced mode
               </b-form-checkbox>
-            </div>
+            </div> -->
 
             <div class="form-group">
               <button type="submit" class="btn btn-primary">Refresh</button>
@@ -35,16 +34,16 @@
 
           <!-- NOTE: Copying works only when the textarea is actually visible. -->
           <button type="button" class="btn btn-success btn-sm" data-copy-code data-clipboard-target="#output-value">
-            <font-awesome-icon :icon="faCopy"/>
+            <font-awesome-icon :icon="faClone"/>
             Copy
           </button>
 
           <div>
-            <b-textarea id="output-value" v-if="output" v-model="output" rows="6"/>
+            <b-textarea id="output-value" v-if="output" v-model="output" rows="4"/>
           </div>
         </details>
 
-        <div id="preview-container" class="p-lg-4">
+        <div id="preview-container" class="p-lg-3">
           <template v-if="output">
             <span class="badge badge-lg badge-info">Preview</span>
             <div id="preview" v-html="output"/>
@@ -52,22 +51,20 @@
           <template v-else>
             <div id="builder-guide" class="col">
               <h1>Widget builder</h1>
-
               <p>With this utility you can build your own widget and display information about Finnish libraries on your own webpage.</p>
-
-              <p></p>
             </div>
           </template>
         </div>
       </div>
-    <!-- </div> -->
   </div>
 </template>
 
 <script>
   const LAUNCHER_SCRIPT = window.location.protocol + "//" + window.location.host + "/widgets/v1/launcher.js";
 
-  import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
+    import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+    import { faClone } from "@fortawesome/free-regular-svg-icons";
+
   // import faClone from "@fortawesome/fontawesome-free-regular/faClone";
 
   import kirjastohakemisto from "../launcher";
@@ -89,6 +86,7 @@
         { value: "en", text: "English" },
         { value: "sv", text: "Swedish" }
       ],
+      faClone,
     }),
     created() {
       this.options.widget = this.$route.path.substr(1) || null;
@@ -97,7 +95,6 @@
       let clipboard = new ClipboardJS("button[data-copy-code]");
     },
     computed: {
-      faCopy: () => faClone,
       widget: {
         get: function() {
           return this.$route.path.substr(1) || null;
@@ -193,7 +190,7 @@
   @import "../../scss/patterns/_bubbles.scss";
 
   @include media-breakpoint-up("lg") {
-    body, #preview {
+    #preview {
       max-height: 100%;
     }
   }
@@ -201,6 +198,7 @@
   #builder {
     flex-grow: 1;
     flex-direction: column;
+    background-color: whitesmoke;
 
     $group-padding-x: spacing(3);
     $group-padding-y: spacing(3);

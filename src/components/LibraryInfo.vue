@@ -2,7 +2,6 @@
   <article class="zxc zxc-library-info" :data-tabbed="tabbed ? '' : false" v-if="library">
     <div class="header">
       <button v-if="embedded" type="button" class="btn btn-link" @click="returnToList">Return to list</button>
-
       <h1>{{ library.name }}</h1>
     </div>
 
@@ -14,17 +13,20 @@
         </blockquote>
 
         <section class="row">
-          <div class="col-md-2">
+          <div class="col-md-2 cover-photo-cell">
             <div v-if="library.cover" class="pr-md-3">
               <img :src="library.cover.files.small" :alt="library.cover.name" class="cover-photo"/>
             </div>
+            <div v-else class="no-photo">
+              <font-awesome-icon :icon="faImage" size="6x"/>
+            </div>
           </div>
-
           <aside class="col-md-2" v-if="library.schedules">
             <h2 class="sr-only">Service hours</h2>
-            <schedules :schedules="library.schedules" expandMode="none"/>
+            <schedules :schedules="library.schedules" :expandMode="expandMode"/>
           </aside>
         </section>
+
         <section class="row">
           <h2 class="sr-only">Presentation</h2>
           <div class="row" v-if="library.description" v-html="library.description"/>
@@ -120,7 +122,7 @@
         </table>
       </section>
 
-      <section v-if="library.services" class="content-tab" id="tab-services" :data-active-tab="$route.name == 'services'">
+      <section v-if="library.services.length > 0" class="content-tab" id="tab-services" :data-active-tab="$route.name == 'services'">
         <services :services="library.services"/>
       </section>
     </div>
@@ -145,6 +147,8 @@
     faYoutube
   } from "@fortawesome/free-brands-svg-icons";
 
+  import { faImage } from "@fortawesome/free-regular-svg-icons";
+
   const icon_map = new Map([
     [/facebook\.com/, faFacebookSquare],
     [/flickr\.com/, faFlickr],
@@ -156,12 +160,13 @@
   ]);
 
   export default {
-    props: ["id", "lang", "tabbed", "embedded"],
+    props: ["id", "lang", "tabbed", "embedded", "expandMode"],
     components: { FontAwesomeIcon, Services, Schedules },
     data: () => ({
       library: null,
       activeTab: "library",
       faQuoteRight,
+      faImage,
     }),
     computed: {
       sortedLinks() {
@@ -240,6 +245,17 @@
   @import "../../scss/variables";
 
   .zxc-library-info {
+    .cover-photo-cell {
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+    }
+
+    .no-photo {
+      text-align: center;
+      color: #ddd;
+    }
+
     .cover-photo {
       width: 100%;
     }
