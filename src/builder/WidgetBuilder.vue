@@ -23,12 +23,20 @@
 
             <div class="form-group">
               <button type="submit" class="btn btn-primary">Refresh</button>
+              <button type="button" class="btn btn-link pull-right" @click="state.customizeCss = true">Custom style</button>
             </div>
           </fieldset>
         </form>
       </div>
 
       <div id="right-side" class="bg-bubbles">
+        <div id="custom-css-popup" v-if="state.customizeCss">
+          <b-textarea id="custom-css" v-model="customCss" rows="10"/>
+          <div>
+            <button type="button" class="btn btn-primary" @click="acceptCustomCss()">Accept</button>
+          </div>
+        </div>
+
         <details id="output" class="bg-cogs" v-if="output">
           <summary class="bg-gradient-warning">View embed code</summary>
 
@@ -62,10 +70,8 @@
 <script>
   const LAUNCHER_SCRIPT = window.location.protocol + "//" + window.location.host + "/widgets/v1/launcher.js";
 
-    import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-    import { faClone } from "@fortawesome/free-regular-svg-icons";
-
-  // import faClone from "@fortawesome/fontawesome-free-regular/faClone";
+  import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+  import { faClone } from "@fortawesome/free-regular-svg-icons";
 
   import kirjastohakemisto from "../launcher";
   import ClipboardJS from "clipboard";
@@ -74,6 +80,7 @@
     props: ["widgets"],
     data: () => ({
       output: "",
+      customCss: null,
       options: {
         widget: null,
         lang: null,
@@ -86,6 +93,9 @@
         { value: "en", text: "English" },
         { value: "sv", text: "Swedish" }
       ],
+      state: {
+        customizeCss: false
+      },
       faClone,
     }),
     created() {
@@ -143,14 +153,29 @@
           }
 
           let container = document.createElement("div");
-          let script = document.createElement("script");
 
+          let script = document.createElement("script");
           script.src = LAUNCHER_SCRIPT;
+
+          this.options.css = this.customCss ? `#css-${Math.ceil(Math.random() * 999999)}` : undefined;
 
           Object.keys(this.options).forEach((key) => setAttribute(container, key, this.options[key]));
           Object.keys(this.widgetOptions).forEach((key) => setAttribute(container, key, this.widgetOptions[key]));
 
-          this.output = [container.outerHTML.replace(/=""/g, ""), script.outerHTML].join("\n");
+          const output = [container.outerHTML.replace(/=""/g, ""), script.outerHTML];
+
+          if (this.customCss) {
+            let style = document.createElement("script");
+            style.type = "x-kirkanta-css";
+            style.id = this.options.css.substr(1);
+            style.innerText = this.customCss;
+
+            output.push(style.outerHTML);
+          }
+
+          console.log(output);
+
+          this.output = output.join("\n");
         }, 100);
       },
       onWidgetOptions(options) {
@@ -159,6 +184,10 @@
       },
       onSubmit(event) {
         event.preventDefault();
+        this.updateCode();
+      },
+      acceptCustomCss() {
+        this.state.customizeCss = false;
         this.updateCode();
       }
     },
@@ -185,9 +214,7 @@
 </script>
 
 <style lang="scss">
-  @import "../../scss/builder";
-  @import "../../scss/patterns/_cogs.scss";
-  @import "../../scss/patterns/_bubbles.scss";
+  @import "../../scss/builder/builder";
 
   @include media-breakpoint-up("lg") {
     #preview {
@@ -263,7 +290,7 @@
     }
 
     legend {
-      @extend .ml-3;
+      // @extend .ml-3;
     }
 
     .form-group {
@@ -290,8 +317,7 @@
   }
 
   #factory {
-    @extend .d-flex;
-
+    display: flex;
     flex-direction: column;
     flex-shrink: 0;
 
@@ -313,6 +339,8 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    position: relative;
+    background-color: $white;
   }
 
   #output {
@@ -376,9 +404,8 @@
       overflow-y: auto;
 
       .badge {
-        position: fixed;
-        left: unset;
-        right: 1.3rem;
+        position: sticky;
+        float: right;
       }
     }
   }
@@ -390,9 +417,26 @@
   }
 
   #select-widget {
-    @extend .p-3;
-    @extend .mb-0;
     background-color: rgba(100, 100, 100, 0.3);
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding: spacing(3);
+    margin-bottom: 0;
+  }
+
+  #custom-css-popup {
+    background-color: rgba(0, 0, 0, 0.9);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    padding: map-get($spacers, 3);
+    z-index: $zindex-modal + 1;
+    display: flex;
+    flex-flow: column;
+  }
+
+  #custom-css {
+    flex-grow: 1;
   }
 </style>

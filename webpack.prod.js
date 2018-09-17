@@ -3,6 +3,8 @@ const merge = require("webpack-merge");
 const path = require("path");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
+delete config.entry.bootstrap;
+
 module.exports = merge(config, {
   mode: "production",
   output: {

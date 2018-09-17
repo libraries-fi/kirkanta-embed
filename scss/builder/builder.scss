@@ -1,0 +1,24 @@
+@import "variables";
+
+html {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+}
+
+.autocomplete-popup {
+  width: 100%;
+  background-color: $input-bg;
+  color: $input-color;
+
+  li {
+    padding-left: spacing(3);
+  }
+}

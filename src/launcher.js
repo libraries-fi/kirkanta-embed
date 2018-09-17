@@ -62,7 +62,6 @@ async function kirjastohakemisto(element) {
       }
     }
 
-
     return params;
   }
 
@@ -93,6 +92,13 @@ async function kirjastohakemisto(element) {
         });
 
         element.appendChild(sandbox);
+
+        if (element.dataset.css) {
+          const css = document.querySelector(element.dataset.css).innerText;
+          const style = sandbox.contentWindow.document.createElement("style");
+          style.innerText = css;
+          sandbox.contentWindow.document.body.appendChild(style);
+        }
       });
     } else {
       return Promise.resolve([window, element]);

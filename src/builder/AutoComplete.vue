@@ -132,7 +132,7 @@
 </script>
 
 <style lang="scss">
-  @import "../../scss/bootstrap/bootstrap";
+  @import "../../scss/builder/variables";
 
   $zindex-modal: 1050 !default;
 
