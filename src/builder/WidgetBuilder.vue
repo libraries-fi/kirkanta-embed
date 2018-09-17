@@ -32,7 +32,7 @@
       <div id="right-side" class="bg-bubbles">
         <div id="custom-css-popup" v-if="state.customizeCss">
           <b-textarea id="custom-css" v-model="customCss" rows="10"/>
-          <div>
+          <div class="mt-3">
             <button type="button" class="btn btn-primary" @click="acceptCustomCss()">Accept</button>
           </div>
         </div>
@@ -290,7 +290,7 @@
     }
 
     legend {
-      // @extend .ml-3;
+      margin-left: spacing(3);
     }
 
     .form-group {
@@ -424,7 +424,7 @@
   }
 
   #custom-css-popup {
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.75);
     position: absolute;
     top: 0;
     bottom: 0;

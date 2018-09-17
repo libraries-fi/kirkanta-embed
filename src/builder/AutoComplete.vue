@@ -139,13 +139,12 @@
   .has-autocomplete {
     position: relative;
 
-
     .badge {
       button {
         background: none;
         border: none;
-        // margin-right: -1 * $badge-pill-padding-x;
-        margin-right: -3px;
+        margin-left: 0.3rem;
+        margin-right: 0.1rem;
         color: white;
       }
     }
