@@ -139,11 +139,7 @@ class SchedulesV3Adapter {
         return 0;
       });
 
-      for (let i = 0; i < times.length; i++) {
-        if (i == 0) {
-          continue;
-        }
-
+      for (let i = 1; i < times.length; i++) {
         let time = times[i];
         let prev = times[i - 1];
 
@@ -172,11 +168,7 @@ class SchedulesV3Adapter {
       }
     }
 
-    for (let i = 0; i < times.length; i++) {
-      if (i == 0) {
-        continue;
-      }
-
+    for (let i = 1; i < times.length; i++) {
       let time = times[i];
       let prev = times[i - 1];
 
