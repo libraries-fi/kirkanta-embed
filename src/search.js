@@ -58,8 +58,8 @@ class SearchWidget extends Vue {
     }));
 
     const i18n = new VueI18n({
-      locale: options.lang,
-      messages: { fi, sv},
+      locale: params.lang,
+      messages: { fi, sv },
     });
 
     super({

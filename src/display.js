@@ -27,7 +27,7 @@ class LibraryDisplayWidget extends Vue {
 
     const i18n = new VueI18n({
       locale: options.lang,
-      messages: { fi, sv},
+      messages: { fi, sv },
     });
 
     let router = new Router(Object.assign(routerConfig, {

@@ -33,7 +33,7 @@ class SchedulesWidget extends Vue {
 
     const i18n = new VueI18n({
       locale: options.lang,
-      messages: { fi, sv},
+      messages: { fi, sv },
     });
 
     super({
