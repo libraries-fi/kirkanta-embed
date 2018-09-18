@@ -1,11 +1,15 @@
 import Vue from "vue";
+import VueI18n from "vue-i18n";
 import Router from "vue-router";
 import LibraryList from "./components/LibraryList.vue";
 import LibraryInfo from "./components/LibraryInfo.vue";
 
+import fi from "messages.fi.json";
+import sv from "messages.sv.json";
 import routerConfig from "./init.router";
 
 Vue.use(Router);
+Vue.use(VueI18n);
 
 class SearchWidget extends Vue {
   constructor(container, params) {
@@ -53,15 +57,21 @@ class SearchWidget extends Vue {
       ]
     }));
 
+    const i18n = new VueI18n({
+      locale: options.lang,
+      messages: { fi, sv},
+    });
+
     super({
       el: container,
       template: '<router-view @return-to-main="returnToSearch"/>',
-      router,
       methods: {
         returnToSearch() {
           this.$router.push({name: "search"});
         }
-      }
+      },
+      router,
+      i18n
     });
 
     // router.push({name: "library", params: {id: 84787, lang: "fi"}});

@@ -157,7 +157,7 @@
           let script = document.createElement("script");
           script.src = LAUNCHER_SCRIPT;
 
-          this.options.css = this.customCss ? `#css-${Math.ceil(Math.random() * 999999)}` : undefined;
+          this.options.css = this.customCss ? `#css-${Math.ceil(Math.random() * 999)}` : undefined;
 
           Object.keys(this.options).forEach((key) => setAttribute(container, key, this.options[key]));
           Object.keys(this.widgetOptions).forEach((key) => setAttribute(container, key, this.widgetOptions[key]));
@@ -166,14 +166,12 @@
 
           if (this.customCss) {
             let style = document.createElement("script");
-            style.type = "x-kirkanta-css";
+            style.type = "text/x-kirkanta-css";
             style.id = this.options.css.substr(1);
             style.innerText = this.customCss;
 
             output.push(style.outerHTML);
           }
-
-          console.log(output);
 
           this.output = output.join("\n");
         }, 100);

@@ -1,7 +1,10 @@
 <template>
   <article class="zxc zxc-library-info" :data-tabbed="tabbed ? '' : false" v-if="library">
     <div class="header">
-      <button v-if="embedded" type="button" class="btn btn-link" @click="returnToList">Return to list</button>
+      <button v-if="embedded" type="button" class="btn btn-link pl-0" @click="returnToList">
+        <font-awesome-icon :icon="faLongArrowAltLeft"/>
+        {{ $t("Return to list") }}
+      </button>
       <h1>{{ library.name }}</h1>
     </div>
 
@@ -22,23 +25,23 @@
             </div>
           </div>
           <aside class="col-md-2" v-if="library.schedules">
-            <h2 class="sr-only">Service hours</h2>
+            <h2 class="sr-only">{{ $t("Service hours") }}</h2>
             <schedules :schedules="library.schedules" :expandMode="expandMode"/>
           </aside>
         </section>
 
         <section class="row">
-          <h2 class="sr-only">Presentation</h2>
+          <h2 class="sr-only">{{ $t("Introduction") }}</h2>
           <div class="row" v-if="library.description" v-html="library.description"/>
         </section>
       </div>
 
       <div class="content-tab" id="tab-contact" :data-active-tab="$route.name == 'contact'">
         <section v-if="library.address" class="row">
-          <h2 class="sr-only">Contact details</h2>
+          <h2 class="sr-only">{{ $t("Contact details") }}</h2>
 
           <div class="col-md-2">
-            <h3>Location</h3>
+            <h3>{{ $t("Location") }}</h3>
             <address>
               <p class="mb-1">
                 {{ library.address.street }}, {{ library.address.zipcode }} {{ library.address.city }} <template v-if="library.address.area">({{ library.address.area }})</template><br/>
@@ -46,7 +49,7 @@
               </p>
 
               <p v-if="library.email" class="mb-1">
-                <b>Email</b><br/>
+                <b>{{ $t("Email") }}</b><br/>
                 <a :href="'mailto:' + library.email">{{ library.email }}</a><br/>
               </p>
 
@@ -59,7 +62,7 @@
 
           <div class="col-md-2">
             <div v-if="library.mailAddress">
-              <h3>Mail Address</h3>
+              <h3>{{ $t("Mail address") }}</h3>
               <p>
                 {{ library.name }}<br/>
                 <template v-if="library.mailAddress.street">{{ library.mailAddress.street }}<br/></template>
@@ -71,7 +74,7 @@
         </section>
 
         <div v-if="library.links" class="mb-3 resource-links">
-          <h2 class="sr-only">Links to other websites</h2>
+          <h2 class="sr-only">{{ $t("Links to other websites") }}</h2>
           <a v-for="link in sortedLinks" :href="link.url" class="mr-3 resource-link">
             <font-awesome-icon v-if="linkIcon(link)" :icon="linkIcon(link)"/>
             {{ link.name }}
@@ -79,38 +82,38 @@
         </div>
 
         <section v-if="hasPublicTransportation()" class="mb-3">
-          <h2 class="sr-only">Transit directions</h2>
-          <h3>Public transportation</h3>
+          <h2 class="sr-only">{{ $t("Transit directions") }}</h2>
+          <h3>{{ $t("Public transportation") }}</h3>
 
           <dl>
             <template v-if="library.transit.buses">
-              <dt>Buses</dt>
+              <dt>{{ $t("Buses") }}</dt>
               <dd>{{ library.transit.buses }}</dd>
             </template>
             <template v-if="library.transit.trams">
-              <dt>Trams</dt>
+              <dt>{{ $t("Trams") }}</dt>
               <dd>{{ library.transit.trams }}</dd>
             </template>
             <template v-if="library.transit.trains">
-              <dt>Trains</dt>
+              <dt>{{ $t("Trains") }}</dt>
               <dd>{{ library.transit.trains }}</dd>
             </template>
           </dl>
 
           <div v-if="library.transit.parking">
-            <h3>Parking instructions</h3>
+            <h3>{{ $t("Parking instructions") }}</h3>
             {{ library.transit.parking }}
           </div>
         </section>
       </div>
 
       <section v-if="library.phoneNumbers" class="content-tab" id="tab-phones" :data-active-tab="$route.name == 'phones'">
-        <h2>Phone numbers</h2>
+        <h2>{{ $t("Phone numbers") }}</h2>
         <table class="table table-sm">
           <thead>
             <tr>
-              <th>Number</th>
-              <th>Department</th>
+              <th>{{ $t("Number") }}</th>
+              <th>{{ $t("Department") }}</th>
             </tr>
           </thead>
           <tbody>
@@ -136,7 +139,7 @@
   import Schedules from "./Schedules.vue";
 
   import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-  import { faQuoteRight, faLink } from "@fortawesome/free-solid-svg-icons";
+  import { faQuoteRight, faLink, faLongArrowAltLeft } from "@fortawesome/free-solid-svg-icons";
   import {
     faFacebookSquare,
     faFlickr,
@@ -167,6 +170,7 @@
       activeTab: "library",
       faQuoteRight,
       faImage,
+      faLongArrowAltLeft,
     }),
     computed: {
       sortedLinks() {

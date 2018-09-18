@@ -1,18 +1,14 @@
 import Vue from "vue";
 import VueI18n from "vue-i18n";
-
 import Schedules from "./components/Schedules.vue";
 import Library from "./entity/library";
 import apiCall from "./utils/api-call";
 
+import fi from "messages.fi.json";
+import sv from "messages.sv.json";
+
 Vue.use(VueI18n);
 
-const i18n = new VueI18n;
-
-/**
- * Options:
- *    expandMode: NULL|all|none
- */
 class SchedulesWidget extends Vue {
   constructor(container, params) {
     const options = Object.assign({
@@ -34,6 +30,11 @@ class SchedulesWidget extends Vue {
       expandMode: "current",
 
     }, params);
+
+    const i18n = new VueI18n({
+      locale: options.lang,
+      messages: { fi, sv},
+    });
 
     super({
       el: container,

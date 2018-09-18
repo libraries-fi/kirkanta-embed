@@ -4,7 +4,7 @@
       <button type="button" v-on:click="previousWeek" class="btn btn-link btn-sm">
         <font-awesome-icon :icon="faWeekPrev"/>
       </button>
-      <h2 class="week-label h3 text-center m-0">Week {{ week }}</h2>
+      <h2 class="week-label h3 text-center m-0">{{ $t("Week") }} {{ week }}</h2>
       <button type="button" v-on:click="nextWeek" class="btn btn-link btn-sm">
         <font-awesome-icon :icon="faWeekNext"/>
       </button>
@@ -13,9 +13,9 @@
     <table class="table table-sm table-borderless schedules">
       <thead class="sr-only">
         <tr>
-          <th class="col-date">Date</th>
-          <th class="col-weekday">Day</th>
-          <th class="col-time">Times</th>
+          <th class="col-date">{{ $t("Date") }}</th>
+          <th class="col-weekday">{{ $t("Day") }}</th>
+          <th class="col-time">{{ $t("Times") }}</th>
         </tr>
       </thead>
 
@@ -39,9 +39,9 @@
           </td>
         </tr>
         <tr v-for="time of day.times" class="time-entry" :class="['closed', 'regular', 'self-service'][time.status]">
-          <td v-if="time.status == 0" class="col-status">Library closed</td>
-          <td v-if="time.status == 1" class="col-status">Staff present</td>
-          <td v-if="time.status == 2" class="col-status">Self-service</td>
+          <td v-if="time.status == 0" class="col-status">{{ $t("Library closed") }}</td>
+          <td v-if="time.status == 1" class="col-status">{{ $t("Staff present") }}</td>
+          <td v-if="time.status == 2" class="col-status">{{ $t("Self-service") }}</td>
 
           <td class="col-time">
             <date-time :time="time.from" format="p"/>

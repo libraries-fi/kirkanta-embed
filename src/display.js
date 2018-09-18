@@ -1,10 +1,14 @@
 import Vue from "vue";
+import VueI18n from "vue-i18n";
 import Router from "vue-router";
 import LibraryInfo from "./components/LibraryInfo.vue";
 
+import fi from "messages.fi.json";
+import sv from "messages.sv.json";
 import routerConfig from "./init.router";
 
 Vue.use(Router);
+Vue.use(VueI18n);
 
 class LibraryDisplayWidget extends Vue {
   constructor(container, params) {
@@ -20,6 +24,11 @@ class LibraryDisplayWidget extends Vue {
        */
       expandMode: "none",
     }, params);
+
+    const i18n = new VueI18n({
+      locale: options.lang,
+      messages: { fi, sv},
+    });
 
     let router = new Router(Object.assign(routerConfig, {
       routes: [
@@ -52,6 +61,7 @@ class LibraryDisplayWidget extends Vue {
       data: () => options,
       components: { LibraryInfo },
       router,
+      i18n
     });
   }
 }

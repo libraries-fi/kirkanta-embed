@@ -28,8 +28,8 @@ module.exports = {
     "bootstrap": "./node_modules/bootstrap/dist/css/bootstrap.min.css"
   },
   output: {
-    path: path.resolve(__dirname, "public"),
-    filename: "dev/[name].js"
+    path: path.resolve(__dirname, "public/dev"),
+    filename: "[name].js"
   },
   module: {
     rules: [
@@ -49,12 +49,28 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: "style-loader!css-loader",
+        // loader: "style-loader!css-loader",
+        use: ["style-loader", "css-loader"],
       },
       {
         test: /\.vue$/,
         loader: "vue-loader",
-      }
+      },
+      {
+        test: /\.yaml$/,
+        use: [
+          // {
+          //   loader: "file-loader",
+          //   options: {
+          //     name: "[name].json",
+          //     context: path.resolve("translations")
+          //   }
+          // },
+          {
+            loader: "js-yaml-loader"
+          }
+        ]
+      },
     ]
   },
   plugins: [
@@ -66,6 +82,8 @@ module.exports = {
       "vue$": "vue/dist/vue.esm.js",
       "vuex$": "vuex/dist/vuex.esm.js",
       "clipboard": "clipboard/dist/clipboard.min.js",
+      "messages.fi.json": path.resolve("translations/messages.fi.yaml"),
+      "messages.sv.json": path.resolve("translations/messages.sv.yaml"),
     }
   }
 };

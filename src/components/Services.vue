@@ -1,6 +1,6 @@
 <template>
   <div @click="popupClose" class="row services-list">
-    <h2 class="sr-only">Services</h2>
+    <h2 class="sr-only">{{ $t("Services") }}</h2>
 
     <div class="col-md-2" v-for="column of columns">
       <div class="services-list-group" v-for="group of column">
@@ -24,14 +24,6 @@
   import Popper from "popper.js";
   import bPopover from "bootstrap-vue/es/directives/popover/popover";
 
-  const service_group_labels = new Map([
-    ["service", "Services"],
-    ["room", "Rooms"],
-    ["hardware", "Hardware"],
-    ["collection", "Collections"],
-    ["web_service", "Web services"],
-  ]);
-
   export default {
     props: ["services"],
     directives: {
@@ -39,7 +31,8 @@
     },
     data: () => ({
       expandedService: null,
-      activePopups: []
+      activePopups: [],
+      // groupLabels: new Map,
     }),
     computed: {
       columns() {
@@ -76,7 +69,7 @@
         for (let [i, service] of this.services.entries()) {
           if (!groups[service.type]) {
             groups[service.type] = {
-              title: service_group_labels.get(service.type),
+              title: this.groupLabels.get(service.type),
               services: [service]
             };
           } else {
@@ -116,7 +109,15 @@
         };
       },
     },
-    mounted() {
+    created() {
+      this.groupLabels = new Map([
+        ["service", this.$t("Services")],
+        ["room", this.$t("Rooms")],
+        ["hardware", this.$t("Hardware")],
+        ["collection", this.$t("Collections")],
+        ["web_service", this.$t("Web services")],
+      ]);
+
       this.$root.$on("bv::popover::show", (event) => {
         if (!event.target.id) {
           let id = Math.ceil(Math.random() * 999999);
