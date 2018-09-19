@@ -1,14 +1,14 @@
 # Schedules
 "Staff present": "Personal på plats"
-"Library closed": "Kirjasto suljettu"
+"Library closed": "Biblioteket är stängt"
 "Self-service": "Meröppet"
-"Date": "Pvm"
-"Day": "Päivä"
-"Times": "Ajat"
+"Date": "Datum"
+"Day": "Dag"
+"Times": "Tider"
 "Week": "Vecka"
 
 # Display
-"Location": "Sijainti"
+"Location": "Plats"
 "Email": "E-post"
 "Mail address": "Postadress"
 "Public transportation": "Kollektivtrafik"
@@ -18,12 +18,12 @@
 "Phone numbers": "Telefonnummer"
 "Number": "Nummer"
 "Department": "Avdelning"
-"Return to list": "Palaa listaan"
+"Return to list": "Gå tillbaka till listan"
 "Introduction": "Presentation"
 "Contact details": "Kontaktuppgifter"
-"Service hours": "Aukioloajat"
-"Links to other websites": "Linkkejä muualle verkossa"
-"Transit directions": "Saapumisohjeet"
+"Service hours": "Öppettider"
+"Links to other websites": "Länkar till andra webbplatser"
+"Transit directions": "Hitta hit"
 "Parking instructions": "Parkering"
 
 # Services
@@ -34,5 +34,5 @@
 "Collections": "Samling"
 
 # Search
-"Library search": "Kirjastohaku"
+"Library search": "Sök bibliotek"
 "Search by name or municipality": "Sök bibliotek eller ort"
