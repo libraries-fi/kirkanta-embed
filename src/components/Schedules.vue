@@ -1,10 +1,10 @@
 <template>
   <div class="zxc zxc-weekly-schedules" :data-expand-mode="expandMode" v-if="schedules">
-    <div class="toolbar d-flex">
+    <div class="toolbar">
       <button type="button" v-on:click="previousWeek" class="btn btn-link btn-sm">
         <font-awesome-icon :icon="faWeekPrev"/>
       </button>
-      <h2 class="week-label h3 text-center">{{ $t("Week") }} {{ week }}</h2>
+      <h2 class="week-label h3">{{ $t("Week") }} {{ week }}</h2>
       <button type="button" v-on:click="nextWeek" class="btn btn-link btn-sm">
         <font-awesome-icon :icon="faWeekNext"/>
       </button>
@@ -133,7 +133,9 @@
     }
 
     .toolbar {
-      button {
+      display: flex;
+
+      button { 
         color: unset;
       }
 
@@ -143,6 +145,7 @@
     }
 
     .week-label {
+      text-align: center;
       flex-grow: 1;
       margin: 0;
     }

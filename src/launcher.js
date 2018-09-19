@@ -1,6 +1,8 @@
 import config from "./init.config";
 import ResizeSensor from "css-element-queries/src/ResizeSensor";
 
+import kifiLogo from "../images/kirjastot-fi.svg";
+
 async function kirjastohakemisto(element) {
   if (!element) {
     throw "Passed null element to kirjastohakemisto()";
@@ -23,6 +25,8 @@ async function kirjastohakemisto(element) {
     if (enable_sandbox && sandbox_height == "auto") {
       resize_sandbox(window.frameElement, viewport);
     }
+
+    add_attribution(viewport);
 
     /*
      * MUST load the script sandboxed, otherwise Vue.js injects the styles from the app
@@ -131,6 +135,21 @@ async function kirjastohakemisto(element) {
     } else {
       let observer = new ResizeSensor(widget, on_resize);
     }
+  }
+
+  function add_attribution(container) {
+    const logo = document.createElement("img");
+    logo.width = "80";
+    logo.src = `data:image/svg+xml;utf8,${encodeURIComponent(kifiLogo)}`;
+
+    const link = document.createElement("a");
+    link.href = "https://hakemisto.kirjastot.fi";
+    link.className = "attribution";
+    link.style.position = "relative";
+    // link.style.left = "calc(100% - 80px)";
+    link.appendChild(logo);
+
+    container.appendChild(link);
   }
 }
 

@@ -1,52 +1,51 @@
-Widget builder: Upoketyökalu
-View embed code: Näytä upokekoodi
-None: Ei mitään
+Widget builder: Verktyg för gränssnittskomponenter
+View embed code: Visa koden för gränssnittskomponenten
+None: Ingenting
 Expand schedules: Aukiolojen laajentaminen
-Current day only: Vain kuluva päivä
-All days: Kaikki päivät
-Options: Asetukset
-Schedules: Aukioloajat
-Basic settings: Yleiset asetukset
-Refresh: Päivitä
-Custom style: Muokkaa tyyliä
-Library: Kirjasto
-Language: Kieli
-"- Select widget -": "- Valitse upoke -"
-"- Automatic -": "- Automaattinen -"
-Finnish: Suomi
-English: Englanti
-Swedish: Ruotsi
+Current day only: Bara innevarande dag
+All days: Alla dagar
+Options: Inställningars
+Schedules: Öppettider
+Basic settings: Allmänna inställningar
+Refresh: Uppdatera
+Custom style: Redigera stilen
+Library: Bibliotek
+Language: Språk
+"- Select widget -": "- Välj gränssnittskomponent -"
+"- Automatic -": "- Automatiskt -"
+Finnish: Finska
+English: Svenska
+Swedish: Engelska
+Preview: Förhandsvisning
 
-Save: Tallenna
-Copy: Kopioi
+Save: Spara
+Copy: Kopiera
 
-Choose municipalities: Valitse kunnat
-Choose consortiums: Valitse kirjastokimpat
-Choose libraries: Valitse kirjastot
-Choose library types: Valitse kirjastotyypit
+Choose municipalities: Välj kommuner
+Choose consortiums: Välj biblioteksnätverk
+Choose libraries: Välj bibliotek
+Choose library types: Välj bibliotekstyper
 
-Restrict available libraries.: Rajoita haku kirjastoihin.
-Restrict search to selected consortiums.: Rajoita haku valittuihin kimppoihin.
-Restrict search to selected municipalities.: Hae vain valituista kunnista.
+Restrict available libraries.: Begränsa sökningnen till bibliotek.
+Restrict search to selected consortiums.: Begränsa sökningnen till de valda biblioteksnätverken.
+Restrict search to selected municipalities.: Begränsa sökningnen till de valda kommunerna.
 
-Municipal libraries: Kunnankirjastot
-Mobile libraries: Kirjastoautot
-Polytechnic libraries: Ammattikorkeakoulukirjastot
-University libraries: Yliopistokirjastot
-Special libraries: Erikoiskirjastot
+Municipal libraries: Kommunbibliotek
+Mobile libraries: Biblioteksbussar
+Polytechnic libraries: Yrkeshögskolebibliotek
+University libraries: Universitetsbibliotek
+Special libraries: Specialbibliotek
 Other: Muut
 
-Library Introduction: Kirjaston esittely
-Library Search: Kirjastohaku
+Library Introduction: Presentation av biblioteket
+Library Search: Sök bibliotek
 
 help:
-  intro: Tällä työkalulla voit rakentaa omille sivuillesi liitettävän upokkeen.
+  intro: Med hjäp av det här verktyget kan du bygga en gränssnittskomponent för dina egna sidor.
   bulletins:
-    p1: Valitse valikosta haluamasi upoketyyppi.
-    p2: Syötä asetukset.
-    p3: Upokekoodi löytyy esikatselun alapuolelta kohdasta "Näytä upokekoodi".
-    p4: Leikkaa ja liitä koodi sivuillesi siihen kohtaan, mihin haluat luoda upokkeen.
+    p1: Välj i menyn vilken typ av gränssnittskomponent du vill ha.
+    p2: Mata in inställningarna.
+    p3: Koden för gränssnittskomponenten hittar du under förhandsvisningen vid "Visa koden för gränssnittskomponenten"
+    p4: Klipp ut koden och klistra in den på din sida på den plats där du vill att gränssnittskomponenten ska synas.
   advanced: >
-    <b>Kehittyneet käyttäjät</b>: työkalu sallii upokkeen ulkoasun muuttamisen css:ää käyttäen.
-    Voit kirjoittaa css-tyylit suoraan tarjottuun tekstikenttään tai linkittää ulkoiseen
-    tyylitiedostoon.
+    <b>Avancerade användare</b>: Verktyget tillåter att ändra på gränssnittskomponentens utseende med hjälp av css. Du kan skriva in css-stilarna direkt i det erbjudna textfältet eller länka till en utomstående dokumentmall.

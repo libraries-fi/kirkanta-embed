@@ -59,6 +59,10 @@ module.exports = {
         test: /\.yaml$/,
         use: ["js-yaml-loader"]
       },
+      {
+        test: /\.svg$/,
+        use: ["svg-inline-loader"]
+      }
     ]
   },
   plugins: [
