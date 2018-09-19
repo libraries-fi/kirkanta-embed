@@ -27,7 +27,7 @@ class SchedulesWidget extends Vue {
        * Mode for expanding time entry rows.
        * current|all|none
        */
-      expandMode: "current",
+      expandMode: "none",
 
     }, params);
 

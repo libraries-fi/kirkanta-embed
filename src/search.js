@@ -42,6 +42,7 @@ class SearchWidget extends Vue {
             lang: params.lang,
             tabbed: params.tabbed,
             embedded: true,
+            expandMode: params.expandMode || "none"
           }),
           children: [
             {
