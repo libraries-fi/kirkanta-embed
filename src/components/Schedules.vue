@@ -4,7 +4,7 @@
       <button type="button" v-on:click="previousWeek" class="btn btn-link btn-sm">
         <font-awesome-icon :icon="faWeekPrev"/>
       </button>
-      <h2 class="week-label h3 text-center m-0">{{ $t("Week") }} {{ week }}</h2>
+      <h2 class="week-label h3 text-center">{{ $t("Week") }} {{ week }}</h2>
       <button type="button" v-on:click="nextWeek" class="btn btn-link btn-sm">
         <font-awesome-icon :icon="faWeekNext"/>
       </button>
@@ -55,7 +55,7 @@
 
     </table>
 
-    <div class="period-info p-1" v-if="periodInfo.length">
+    <div class="period-info" v-if="periodInfo.length">
       <template v-for="period of periodInfo">
         <p v-if="period.description">
           <b v-if="period.valid_until">
@@ -144,6 +144,7 @@
 
     .week-label {
       flex-grow: 1;
+      margin: 0;
     }
 
     .col-date {
@@ -200,6 +201,7 @@
 
     .period-info {
       border-top: 3px dashed $table-border-color;
+      padding: spacing(1);
 
       span {
         white-space: pre-line;

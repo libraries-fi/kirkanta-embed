@@ -22,8 +22,8 @@
             </div> -->
 
             <div class="form-group">
-              <button type="submit" class="btn btn-primary">{{ $t("Refresh") }}</button>
-              <button type="button" class="btn btn-link float-right" @click="state.customizeCss = true">{{ $t("Custom style") }}</button>
+              <!-- <button type="submit" class="btn btn-primary">{{ $t("Refresh") }}</button> -->
+              <button type="button" class="btn btn-link" @click="state.customizeCss = true">{{ $t("Custom style") }}</button>
             </div>
           </fieldset>
         </form>
@@ -53,7 +53,7 @@
 
         <div id="preview-container" class="p-lg-3">
           <template v-if="output">
-            <span class="badge badge-lg badge-info">Preview</span>
+            <span class="badge badge-lg badge-info">{{ $t("Preview") }}</span>
             <div id="preview" v-html="output"/>
           </template>
           <template v-else>

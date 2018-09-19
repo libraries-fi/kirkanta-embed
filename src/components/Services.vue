@@ -127,7 +127,7 @@
 
         let close = document.createElement("button");
         close.type = "button";
-        close.className = "close ml-2";
+        close.className = "close";
         close.setAttribute("aria-label", "Close");
         close.innerHTML = '<span aria-hidden="true">&times;</span>';
 
@@ -151,5 +151,9 @@
 
   .popover-body {
     white-space: pre-line;
+  }
+
+  .close {
+    margin-left: spacing(2);
   }
 </style>

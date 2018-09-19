@@ -27,7 +27,7 @@
           <div class="icon">
             <img v-if="library.cover" :src="library.cover.files.small" alt=""/>
           </div>
-          <div class="info px-2">
+          <div class="info">
             <a :href="`${$t('base_url')}/${library.slug}`" @click="onClickLibrary" :data-id="library.id">{{ library.name }}</a>
             <p v-if="library.address">
               {{ library.address.street }},
@@ -133,30 +133,34 @@
       border: 1px solid #ccc;
       display: flex;
       overflow: hidden;
-      margin: spacing(1);
+      // margin: spacing(1);
+      margin-bottom: $grid-gutter-width / 2;
 
       .icon {
-        width: 120px;
-        flex: 0 0 120px;
+        width: 100px;
+        flex: 0 0 100px;
         background-color: #eee;
         flex-direction: column;
         display: flex;
+        overflow: hidden;
 
         .icon-bg {
         }
 
         img {
-          width: 100%;
+          width: calc(100% + 40px);
           height: auto;
         }
       }
 
       .info {
+        padding-left: spacing(2);
+        padding-right: spacing(2);
         flex: 1 0 100%;
 
         a {
-          font-size: larger;
-          line-height: 2;
+          // font-size: larger;
+          line-height: 2.5;
         }
       }
     }

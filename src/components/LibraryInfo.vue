@@ -1,7 +1,7 @@
 <template>
   <article class="zxc zxc-library-info" :data-tabbed="tabbed ? '' : false" v-if="library">
     <div class="header">
-      <button v-if="embedded" type="button" class="btn btn-link pl-0" @click="returnToList">
+      <button v-if="embedded" type="button" class="btn btn-link" @click="returnToList">
         <font-awesome-icon :icon="faLongArrowAltLeft"/>
         {{ $t("Return to list") }}
       </button>
@@ -17,7 +17,7 @@
 
         <section class="row">
           <div class="col-md-2 cover-photo-cell">
-            <div v-if="library.cover" class="pr-md-3">
+            <div v-if="library.cover" class="cover-photo-frame">
               <img :src="library.cover.files.small" :alt="library.cover.name" class="cover-photo"/>
             </div>
             <div v-else class="no-photo">
@@ -32,8 +32,16 @@
 
         <section class="row">
           <h2 class="sr-only">{{ $t("Introduction") }}</h2>
-          <div class="row" v-if="library.description" v-html="library.description"/>
+          <div v-if="library.description" v-html="library.description"/>
         </section>
+
+        <div v-if="library.links" class="info-links">
+          <h2 class="sr-only">{{ $t("Links to other websites") }}</h2>
+          <a v-for="link in sortedLinks" :href="link.url" class="info-link">
+            <font-awesome-icon v-if="linkIcon(link)" :icon="linkIcon(link)"/>
+            {{ link.name }}
+          </a>
+        </div>
       </div>
 
       <div class="content-tab" id="tab-contact" :data-active-tab="$route.name == 'contact'">
@@ -43,17 +51,17 @@
           <div class="col-md-2">
             <h3>{{ $t("Location") }}</h3>
             <address>
-              <p class="mb-1">
+              <p>
                 {{ library.address.street }}, {{ library.address.zipcode }} {{ library.address.city }} <template v-if="library.address.area">({{ library.address.area }})</template><br/>
                 <template v-if="library.address.info">{{ library.address.info }}</template>
               </p>
 
-              <p v-if="library.email" class="mb-1">
+              <p v-if="library.email">
                 <b>{{ $t("Email") }}</b><br/>
                 <a :href="'mailto:' + library.email">{{ library.email }}</a><br/>
               </p>
 
-              <p v-if="library.phone" class="mb-1">
+              <p v-if="library.phone">
                 <b>{{ library.phone.name }}</b><br/>
                 <a :href="'tel:+358' + library.phone.number.replace(/\D/g, '').substr(1)">{{ library.phone.number }}</a>
               </p>
@@ -73,32 +81,24 @@
           </div>
         </section>
 
-        <div v-if="library.links" class="mb-3 resource-links">
-          <h2 class="sr-only">{{ $t("Links to other websites") }}</h2>
-          <a v-for="link in sortedLinks" :href="link.url" class="mr-3 resource-link">
-            <font-awesome-icon v-if="linkIcon(link)" :icon="linkIcon(link)"/>
-            {{ link.name }}
-          </a>
-        </div>
-
-        <section v-if="hasPublicTransportation()" class="mb-3">
+        <section v-if="hasPublicTransportation()">
           <h2 class="sr-only">{{ $t("Transit directions") }}</h2>
           <h3>{{ $t("Public transportation") }}</h3>
 
-          <dl>
-            <template v-if="library.transit.buses">
-              <dt>{{ $t("Buses") }}</dt>
-              <dd>{{ library.transit.buses }}</dd>
-            </template>
-            <template v-if="library.transit.trams">
-              <dt>{{ $t("Trams") }}</dt>
-              <dd>{{ library.transit.trams }}</dd>
-            </template>
-            <template v-if="library.transit.trains">
-              <dt>{{ $t("Trains") }}</dt>
-              <dd>{{ library.transit.trains }}</dd>
-            </template>
-          </dl>
+          <div class="row">
+            <div v-if="library.transit.buses" class="col-md-2">
+              <h4>{{ $t("Buses") }}</h4>
+              <p>{{ library.transit.buses }}</p>
+            </div>
+            <div v-if="library.transit.trams" class="col-md-2">
+              <h4>{{ $t("Trams") }}</h4>
+              <p>{{ library.transit.trams }}</p>
+            </div>
+            <div v-if="library.transit.trains" class="col-md-2">
+              <h4>{{ $t("Trains") }}</h4>
+              <p>{{ library.transit.trains }}</p>
+            </div>
+          </div>
 
           <div v-if="library.transit.parking">
             <h3>{{ $t("Parking instructions") }}</h3>
@@ -255,6 +255,10 @@
       justify-content: center;
     }
 
+    .cover-photo-frame {
+      margin-bottom: spacing(3);
+    }
+
     .no-photo {
       text-align: center;
       color: #ddd;
@@ -268,7 +272,8 @@
       margin-bottom: spacing(3);
     }
 
-    .resource-link {
+    .info-link {
+      margin-right: spacing(3);
       display: inline-block;
       line-height: 2;
     }
