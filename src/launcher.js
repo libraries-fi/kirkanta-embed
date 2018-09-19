@@ -78,7 +78,7 @@ async function kirjastohakemisto(element) {
           /*
            * NOTE: Additional wrapper is required to ensure that widgets with multiple views
            * will also work with ResizeObserver. Vue replaces the parent node with its own for each view,
-           * so we need to what that parent inside another element that is used as the observed element.
+           * so we need to wrap that parent inside another element that is used as the observed element.
            */
 
           const scope = sandbox.contentWindow.document;
@@ -93,16 +93,16 @@ async function kirjastohakemisto(element) {
 
           scope.body.appendChild(wrapper);
           resolve([sandbox.contentWindow, wrapper]);
+
+          if (element.dataset.css) {
+            const css = document.querySelector(element.dataset.css).innerText;
+            const style = sandbox.contentWindow.document.createElement("style");
+            style.textContent = css;
+            sandbox.contentWindow.document.body.appendChild(style);
+          }
         });
 
         element.appendChild(sandbox);
-
-        if (element.dataset.css) {
-          const css = document.querySelector(element.dataset.css).innerText;
-          const style = sandbox.contentWindow.document.createElement("style");
-          style.innerText = css;
-          sandbox.contentWindow.document.body.appendChild(style);
-        }
       });
     } else {
       return Promise.resolve([window, element]);
