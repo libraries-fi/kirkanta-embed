@@ -1,16 +1,26 @@
 <template>
   <div class="custom-options">
-    <b-form-group id="option-library" label="Library" label-for="o-library">
-      <auto-complete id="o-library" name="x-library" :value-key="'id'" :label-key="'name'" v-model="options.library" :suggestions="librarySuggestions" @input="onLibraryAutoComplete" required/>
-    </b-form-group>
+    <div class="details-group">
+      <b-form-group id="option-library">
+        <details>
+          <summary>{{ $t("Basic settings") }}</summary>
+          <label for="o-library">{{ $t("Library") }}</label>
+          <auto-complete id="o-library" name="x-library" :value-key="'id'" :label-key="'name'" v-model="options.library" :suggestions="librarySuggestions" @input="onLibraryAutoComplete" required/>
+        </details>
+      </b-form-group>
 
-    <b-form-group id="o-expand-mode" label="Expand schedules">
-      <b-form-radio-group v-model="options.expandMode">
-        <b-form-radio :value="null">None</b-form-radio>
-        <b-form-radio value="current">Only current day</b-form-radio>
-        <b-form-radio value="all">All rows</b-form-radio>
-      </b-form-radio-group>
-    </b-form-group>
+      <b-form-group id="o-expand-mode">
+        <details>
+          <summary>{{ $t("Schedules") }}</summary>
+          <span class="section-label">{{ $t("Expand schedules") }}</span>
+          <b-form-radio-group v-model="options.expandMode">
+            <b-form-radio :value="null">{{ $t("None") }}</b-form-radio>
+            <b-form-radio value="current">{{ $t("Current day only") }}</b-form-radio>
+            <b-form-radio value="all">{{ $t("All days") }}</b-form-radio>
+          </b-form-radio-group>
+        </details>
+      </b-form-group>
+    </div>
   </div>
 </template>
 

@@ -7,11 +7,11 @@
           </div>
 
           <fieldset class="options" v-if="widget">
-            <legend>Options</legend>
+            <legend>{{ $t("Options") }}</legend>
 
             <router-view @options="onWidgetOptions"/>
 
-            <b-form-group id="option-lang" label="Language" label-for="o-lang">
+            <b-form-group id="option-lang" :label="$t('Language')" label-for="o-lang">
               <b-form-select id="o-lang" v-model="options.lang" :options="languageOptions"/>
             </b-form-group>
 
@@ -22,8 +22,8 @@
             </div> -->
 
             <div class="form-group">
-              <button type="submit" class="btn btn-primary">Refresh</button>
-              <button type="button" class="btn btn-link pull-right" @click="state.customizeCss = true">Custom style</button>
+              <button type="submit" class="btn btn-primary">{{ $t("Refresh") }}</button>
+              <button type="button" class="btn btn-link float-right" @click="state.customizeCss = true">{{ $t("Custom style") }}</button>
             </div>
           </fieldset>
         </form>
@@ -33,17 +33,17 @@
         <div id="custom-css-popup" v-if="state.customizeCss">
           <b-textarea id="custom-css" v-model="customCss" rows="10"/>
           <div class="mt-3">
-            <button type="button" class="btn btn-primary" @click="acceptCustomCss()">Accept</button>
+            <button type="button" class="btn btn-primary" @click="acceptCustomCss()">{{ $t("Save") }}</button>
           </div>
         </div>
 
         <details id="output" class="bg-cogs" v-if="output">
-          <summary class="bg-gradient-warning">View embed code</summary>
+          <summary class="bg-gradient-warning">{{ $t("View embed code") }}</summary>
 
           <!-- NOTE: Copying works only when the textarea is actually visible. -->
           <button type="button" class="btn btn-success btn-sm" data-copy-code data-clipboard-target="#output-value">
             <font-awesome-icon :icon="faClone"/>
-            Copy
+            {{ $t("Copy") }}
           </button>
 
           <div>
@@ -58,8 +58,15 @@
           </template>
           <template v-else>
             <div id="builder-guide" class="col">
-              <h1>Widget builder</h1>
-              <p>With this utility you can build your own widget and display information about Finnish libraries on your own webpage.</p>
+              <h1>{{ $t("Widget builder") }}</h1>
+              <p>{{ $t("help.intro") }}</p>
+              <ol>
+                <li>{{ $t("help.bulletins.p1") }}</li>
+                <li>{{ $t("help.bulletins.p2") }}</li>
+                <li>{{ $t("help.bulletins.p3") }}</li>
+                <li>{{ $t("help.bulletins.p4") }}</li>
+              </ol>
+              <p v-html="$t('help.advanced')"/>
             </div>
           </template>
         </div>
@@ -87,18 +94,20 @@
         nosandbox: false,
       },
       widgetOptions: {},
-      languageOptions: [
-        { value: null, text: "- Automatic -" },
-        { value: "fi", text: "Finnish" },
-        { value: "en", text: "English" },
-        { value: "sv", text: "Swedish" }
-      ],
+      languageOptions: null,
       state: {
         customizeCss: false
       },
       faClone,
     }),
     created() {
+      this.languageOptions = [
+        { value: null, text: this.$t("- Automatic -") },
+        { value: "fi", text: this.$t("Finnish") },
+        { value: "en", text: this.$t("English") },
+        { value: "sv", text: this.$t("Swedish") }
+      ];
+
       this.options.widget = this.$route.path.substr(1) || null;
       this.updateCode();
 
@@ -121,11 +130,11 @@
       },
       availableWidgets: function() {
         let options =  Object.keys(this.widgets).map((wid) => {
-          return { value: wid, text: this.widgets[wid].name };
+          return { value: wid, text: this.$t(this.widgets[wid].name) };
         });
 
         options.sort((a, b) => a.text.localeCompare(b.text));
-        options.unshift({ value: null, text: "- Select widget -"});
+        options.unshift({ value: null, text: this.$t("- Select widget -")});
 
         return options;
       },
@@ -251,7 +260,7 @@
 
       .options,
       #output {
-        legend, label, input, textarea, button, select, summary {
+        legend, label, input, textarea, button, select, summary, .section-label {
           font-size: 92%;
         }
       }
@@ -402,6 +411,8 @@
       overflow-y: auto;
 
       .badge {
+        width: 6rem;
+        margin-left: -6rem;
         position: sticky;
         float: right;
       }

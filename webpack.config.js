@@ -49,7 +49,6 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        // loader: "style-loader!css-loader",
         use: ["style-loader", "css-loader"],
       },
       {
@@ -58,18 +57,7 @@ module.exports = {
       },
       {
         test: /\.yaml$/,
-        use: [
-          // {
-          //   loader: "file-loader",
-          //   options: {
-          //     name: "[name].json",
-          //     context: path.resolve("translations")
-          //   }
-          // },
-          {
-            loader: "js-yaml-loader"
-          }
-        ]
+        use: ["js-yaml-loader"]
       },
     ]
   },
@@ -84,6 +72,9 @@ module.exports = {
       "clipboard": "clipboard/dist/clipboard.min.js",
       "messages.fi.json": path.resolve("translations/messages.fi.yaml"),
       "messages.sv.json": path.resolve("translations/messages.sv.yaml"),
+      "builder.fi.json": path.resolve("translations/builder.fi.yaml"),
+      "builder.sv.json": path.resolve("translations/builder.sv.yaml"),
+      "builder.en.json": path.resolve("translations/builder.en.yaml"),
     }
   }
 };

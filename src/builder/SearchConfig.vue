@@ -3,37 +3,46 @@
     <div class="details-group">
       <b-form-group id="option-city" label-for="o-city">
         <details>
-          <summary>Choose municipalities</summary>
-          <small class="form-text">Restrict search to selected municipalities.</small>
+          <summary>{{ $t("Choose municipalities") }}</summary>
+          <small class="form-text">{{ $t("Restrict search to selected municipalities.") }}</small>
           <auto-complete id="o-city" name="x-city" :value-key="'id'" :label-key="'name'" v-model="options.city" :suggestions="citySuggestions" @input="onCityAutoComplete" :multiple="true"/>
-
-          <!-- <span class="badge badge-info" v-for="city in cityValues">{{ city.name }}</span> -->
         </details>
       </b-form-group>
 
       <b-form-group id="option-consortium" label-for="o-consortium">
         <details>
-          <summary>Choose consortiums</summary>
-          <small class="form-text">Restrict search to selected consortiums.</small>
+          <summary>{{ $t("Choose consortiums") }}</summary>
+          <small class="form-text">{{ $t("Restrict search to selected consortiums.") }}</small>
           <auto-complete id="o-consortium" name="x-consortium" :value-key="'id'" :label-key="'name'" v-model="options.consortium" :suggestions="consortiumSuggestions" @input="onConsortiumAutoComplete" :multiple="true"/>
-
-          <!-- <span class="badge badge-info" v-for="consortium in consortiumValues">{{ consortium.name }}</span> -->
         </details>
       </b-form-group>
 
       <b-form-group id="option-library" label-for="o-library">
         <details>
-          <summary>Choose libraries</summary>
-          <small class="form-text">Restrict available libraries.</small>
+          <summary>{{ $t("Choose libraries") }}</summary>
+          <small class="form-text">{{ $t("Restrict available libraries.") }}</small>
           <auto-complete id="o-library" name="x-library" :value-key="'id'" :label-key="'name'" v-model="options.library" :suggestions="librarySuggestions" @input="onLibraryAutoComplete" :multiple="true"/>
         </details>
       </b-form-group>
 
       <b-form-group id="option-branch-type" label-for="o-branch-type">
-        <!-- <b-form-select id="o-branch-type" name="branch_type" v-model="options.branch_type" :options="branchTypeOptions"/> -->
         <details>
-          <summary>Choose branch types</summary>
+          <summary>{{ $t("Choose library types") }}</summary>
           <b-form-checkbox-group id="o-branch-type" name="branch_type" v-model="options.branch_type" :options="branchTypeOptions"/>
+        </details>
+      </b-form-group>
+    </div>
+
+    <div class="details-group">
+      <b-form-group id="o-expand-mode">
+        <details>
+          <summary>{{ $t("Schedules") }}</summary>
+          <span class="section-label">{{ $t("Expand schedules") }}</span>
+          <b-form-radio-group v-model="options.expandMode">
+            <b-form-radio :value="null">{{ $t("None") }}</b-form-radio>
+            <b-form-radio value="current">{{ $t("Current day only") }}</b-form-radio>
+            <b-form-radio value="all">{{ $t("All days") }}</b-form-radio>
+          </b-form-radio-group>
         </details>
       </b-form-group>
     </div>
@@ -61,34 +70,19 @@
       //   { value: "library", text: "Library" },
       //   { value: "main_library", text: "Main library" },
       // ],
-      branchTypeOptions: [
-        // { value: null, text: "- Any -" },
-        // { value: "library", text: "Library" },
-        // { value: "main_library", text: "Main library" },
-        // { value: "regional", text: "Regional library" },
-        // { value: "mobile", text: "Mobile library" },
-        // { value: "home_service", text: "Home service" },
-        // { value: "institutional", text: "Institutional library" },
-        // { value: "children", text: "Children's library" },
-        // { value: "music", text: "Music library" },
-        // { value: "special", text: "Special library" },
-        // { value: "vocational_college", text: "Vocational college library" },
-        // { value: "school", text: "School library" },
-        // { value: "polytechnic", text: "Polytechnic library" },
-        // { value: "university", text: "University library" },
-        // { value: "other", text: "Other library organisation" },
-
-
-
-        { value: "library main_library", text: "Regular libraries" },
-        { value: "mobile", text: "Mobile libraries" },
-        // { value: "vocational_college", text: "Vocational college library" },
-        { value: "polytechnic", text: "Polytechnic libraries" },
-        { value: "university", text: "University libraries" },
-        { value: "special", text: "Special libraries" },
-        { value: "regional home_service institutional children school vocational_college", text: "Other" },
-      ]
+      branchTypeOptions: null
     }),
+    created() {
+      this.branchTypeOptions = [
+        { value: "library main_library", text: this.$t("Municipal libraries") },
+        { value: "mobile", text: this.$t("Mobile libraries") },
+        // { value: "vocational_college", text: this.$t("Vocational college library") },
+        { value: "polytechnic", text: this.$t("Polytechnic libraries") },
+        { value: "university", text: this.$t("University libraries") },
+        { value: "special", text: this.$t("Special libraries") },
+        { value: "regional home_service institutional children school vocational_college", text: this.$t("Other") },
+      ];
+    },
     methods: {
       async onLibraryAutoComplete(name) {
         this.librarySuggestions = await libraryAutoComplete(name);

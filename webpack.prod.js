@@ -24,7 +24,7 @@ module.exports = merge(config, {
               ["env", {
                 modules: false,
                 targets: {
-                  ie: 10
+                  ie: 11
                 }
               }]
             ]

@@ -1,0 +1,52 @@
+Widget builder: Upoketyökalu
+View embed code: Näytä upokekoodi
+None: Ei mitään
+Expand schedules: Aukiolojen laajentaminen
+Current day only: Vain kuluva päivä
+All days: Kaikki päivät
+Options: Asetukset
+Schedules: Aukioloajat
+Basic settings: Yleiset asetukset
+Refresh: Päivitä
+Custom style: Muokkaa tyyliä
+Library: Kirjasto
+Language: Kieli
+"- Select widget -": "- Valitse upoke -"
+"- Automatic -": "- Automaattinen -"
+Finnish: Suomi
+English: Englanti
+Swedish: Ruotsi
+
+Save: Tallenna
+Copy: Kopioi
+
+Choose municipalities: Valitse kunnat
+Choose consortiums: Valitse kirjastokimpat
+Choose libraries: Valitse kirjastot
+Choose library types: Valitse kirjastotyypit
+
+Restrict available libraries.: Rajoita haku kirjastoihin.
+Restrict search to selected consortiums.: Rajoita haku valittuihin kimppoihin.
+Restrict search to selected municipalities.: Hae vain valituista kunnista.
+
+Municipal libraries: Kunnankirjastot
+Mobile libraries: Kirjastoautot
+Polytechnic libraries: Ammattikorkeakoulukirjastot
+University libraries: Yliopistokirjastot
+Special libraries: Erikoiskirjastot
+Other: Muut
+
+Library Introduction: Kirjaston esittely
+Library Search: Kirjastohaku
+
+help:
+  intro: Tällä työkalulla voit rakentaa omille sivuillesi liitettävän upokkeen.
+  bulletins:
+    p1: Valitse valikosta haluamasi upoketyyppi.
+    p2: Syötä asetukset.
+    p3: Upokekoodi löytyy esikatselun alapuolelta kohdasta "Näytä upokekoodi".
+    p4: Leikkaa ja liitä koodi sivuillesi siihen kohtaan, mihin haluat luoda upokkeen.
+  advanced: >
+    <b>Kehittyneet käyttäjät</b>: työkalu sallii upokkeen ulkoasun muuttamisen css:ää käyttäen.
+    Voit kirjoittaa css-tyylit suoraan tarjottuun tekstikenttään tai linkittää ulkoiseen
+    tyylitiedostoon.
