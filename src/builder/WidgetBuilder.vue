@@ -177,7 +177,7 @@
             let style = document.createElement("script");
             style.type = "text/x-kirkanta-css";
             style.id = this.options.css.substr(1);
-            style.innerText = this.customCss;
+            style.textContent = this.customCss;
 
             output.push(style.outerHTML);
           }
