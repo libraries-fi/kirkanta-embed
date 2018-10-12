@@ -6,6 +6,6 @@ help:
     p3: Embed code is available below the preview.
     p4: Copy and paste the code to your web page to the place you want to add the widget.
   advanced: >
-    <b>Advanced users</b>: This too allows for configuring the widget appearance using CSS.
+    <b>Advanced users</b>: This tool allows for configuring the widget appearance using CSS.
     It is possible to write the CSS straight into the text box or use it to link to an
     external stylesheet.
