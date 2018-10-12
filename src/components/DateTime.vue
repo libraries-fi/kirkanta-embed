@@ -9,9 +9,10 @@
   import toDate from "date-fns/toDate";
 
   import fi from "date-fns/esm/locale/fi";
-  import sv from "date-fns/esm/locale/fi";
+  import sv from "date-fns/esm/locale/sv";
+  import en from "date-fns/esm/locale/en-US";
 
-  const locales = { fi, sv };
+  const locales = { fi, sv, en };
 
   export default {
     props: ["date", "time", "format", "formal", "short"],
@@ -20,7 +21,7 @@
         let p = this.$parent;
         while (p.$parent) { p = p.$parent; }
 
-        if (p.ptions && p.options.lang) {
+        if (p.options && p.options.lang) {
           return locales[p.options.lang];
         } else {
           return fi;
