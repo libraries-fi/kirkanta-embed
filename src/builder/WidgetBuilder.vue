@@ -75,7 +75,7 @@
 </template>
 
 <script>
-  const LAUNCHER_SCRIPT = window.location.protocol + "//" + window.location.host + "/widgets/v1/launcher.js";
+  const LAUNCHER_SCRIPT = window.location.protocol + "//" + window.location.host + "/embed/v1/launcher.js";
 
   import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
   import { faClone } from "@fortawesome/free-regular-svg-icons";
