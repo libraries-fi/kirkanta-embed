@@ -6,11 +6,11 @@ module.exports = {
   mode: "development",
   entry: {
     "builder": [
-      "babel-polyfill",
+      "@babel/polyfill",
       "./src/builder.js"
     ],
     "launcher": [
-      "babel-polyfill",
+      "@babel/polyfill",
       "./src/launcher.js",
     ],
     "display": [

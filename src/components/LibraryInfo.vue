@@ -287,41 +287,6 @@
         display: initial;
       }
     }
-
-    .fa-facebook-square {
-      color: #3b5998;
-    }
-
-    .fa-twitter-square {
-      color: #1da1f2;
-    }
-
-    .fa-instagram {
-      background-color: #904ac6;
-      color: white;
-      padding: 0 1px;
-      box-sizing: content-box;
-    }
-
-    .fa-pinterest-square {
-      color: #d63633;
-    }
-
-    .fa-youtube {
-      color: red;
-    }
-
-    .fa-vimeo {
-      color: #1ab7ea;
-    }
-
-    .fa-flickr {
-      color: #e62683;
-    }
-
-    .fa-link {
-      color: #444;
-    }
   }
 
 </style>
