@@ -73,7 +73,6 @@ class Builder extends Vue {
 }
 
 document.querySelectorAll("#widget-builder").forEach((container) => {
-  console.log(document.documentElement.lang);
   let builder = new Builder(container, {
     lang: document.documentElement.lang
   });
