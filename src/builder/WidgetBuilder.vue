@@ -108,7 +108,7 @@
         { value: "sv", text: this.$t("Swedish") }
       ];
 
-      this.options.widget = this.$route.path.substr(1) || null;
+      this.options.hakemistoWidget = this.$route.path.substr(1) || null;
       this.updateCode();
 
       let clipboard = new ClipboardJS("button[data-copy-code]");
@@ -119,7 +119,7 @@
           return this.$route.path.substr(1) || null;
         },
         set: function(wid) {
-          this.options.widget = wid;
+          this.options.hakemistoWidget = wid;
 
           if (wid) {
             this.$router.push({ name: wid, params: {widget: wid} });
@@ -156,7 +156,7 @@
         };
 
         setTimeout(() => {
-          if (!this.options.widget) {
+          if (!this.options.hakemistoWidget) {
             this.output = "";
             return;
           }
@@ -211,7 +211,7 @@
       output() {
         setTimeout(() => {
           if (this.output) {
-            kirjastohakemisto(document.querySelector("#preview [data-widget]"));
+            kirjastohakemisto(document.querySelector("#preview [data-hakemisto-widget]"));
           }
         }, 100);
       }
