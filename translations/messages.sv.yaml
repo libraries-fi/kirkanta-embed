@@ -1,38 +1,39 @@
 # Schedules
-"Staff present": "Personal på plats"
-"Library closed": "Biblioteket är stängt"
-"Self-service": "Meröppet"
-"Date": "Datum"
-"Day": "Dag"
-"Times": "Tider"
-"Week": "Vecka"
+Staff present: Personal på plats
+Library closed: Biblioteket är stängt
+Self-service: Meröppet
+Date: Datum
+Day: Dag
+Times: Tider
+Week: Vecka
+Closed: Stängt
 
 # Display
-"Location": "Plats"
-"Email": "E-post"
-"Mail address": "Postadress"
-"Public transportation": "Kollektivtrafik"
-"Buses": "Bussar"
-"Trains": "Tåg"
-"Trams": "Spårvagnar"
-"Phone numbers": "Telefonnummer"
-"Number": "Nummer"
-"Department": "Avdelning"
-"Return to list": "Gå tillbaka till listan"
-"Introduction": "Presentation"
-"Contact details": "Kontaktuppgifter"
-"Service hours": "Öppettider"
-"Links to other websites": "Länkar till andra webbplatser"
-"Transit directions": "Hitta hit"
-"Parking instructions": "Parkering"
+Location: Plats
+Email: E-post
+Mail address: Postadress
+Public transportation: Kollektivtrafik
+Buses: Bussar
+Trains: Tåg
+Trams: Spårvagnar
+Phone numbers: Telefonnummer
+Number: Nummer
+Department: Avdelning
+Return to list: Gå tillbaka till listan
+Introduction: Presentation
+Contact details: Kontaktuppgifter
+Service hours: Öppettider
+Links to other websites: Länkar till andra webbplatser
+Transit directions: Hitta hit
+Parking instructions: Parkering
 
 # Services
-"Web services": "Nättjänst"
-"Services": "Tjänst"
-"Rooms": "Rum"
-"Hardware": "Apparat"
-"Collections": "Samling"
+Web services: Nättjänst
+Services: Tjänst
+Rooms: Rum
+Hardware: Apparat
+Collections: Samling
 
 # Search
-"Library search": "Sök bibliotek"
-"Search by name or municipality": "Sök bibliotek eller ort"
+Library search: Sök bibliotek
+Search by name or municipality: Sök bibliotek eller ort

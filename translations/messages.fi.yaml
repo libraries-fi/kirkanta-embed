@@ -1,40 +1,41 @@
-"base_url": "https://hakemisto.kirjastot.fi"
+base_url: https://hakemisto.kirjastot.fi
 
 # Schedules
-"Staff present": "Henkilökunta paikalla"
-"Library closed": "Kirjasto suljettu"
-"Self-service": "Omatoimiaika"
-"Date": "Pvm"
-"Day": "Päivä"
-"Times": "Ajat"
-"Week": "Viikko"
+Staff present: Henkilökunta paikalla
+Library closed: Kirjasto suljettu
+Self-service: Omatoimiaika
+Date: Pvm
+Day: Päivä
+Times: Ajat
+Week: Viikko
+Closed: Kiinni
 
 # Display
-"Location": "Sijainti"
-"Email": "Sähköposti"
-"Mail address": "Postiosoite"
-"Public transportation": "Julkinen liikenne"
-"Buses": "Linja-autot"
-"Trains": "Junat"
-"Trams": "Raitiovaunut"
-"Phone numbers": "Puhelinnumerot"
-"Number": "Numero"
-"Department": "Osasto"
-"Return to list": "Palaa listaan"
-"Introduction": "Esittely"
-"Contact details": "Yhteystiedot"
-"Service hours": "Aukioloajat"
-"Links to other websites": "Linkkejä muualle verkossa"
-"Transit directions": "Saapumisohjeet"
-"Parking instructions": "Pysäköinti"
+Location: Sijainti
+Email: Sähköposti
+Mail address: Postiosoite
+Public transportation: Julkinen liikenne
+Buses: Linja-autot
+Trains: Junat
+Trams: Raitiovaunut
+Phone numbers: Puhelinnumerot
+Number: Numero
+Department: Osasto
+Return to list: Palaa listaan
+Introduction: Esittely
+Contact details: Yhteystiedot
+Service hours: Aukioloajat
+Links to other websites: Linkkejä muualle verkossa
+Transit directions: Saapumisohjeet
+Parking instructions: Pysäköinti
 
 # Services
-"Web services": "Verkkopalvelut"
-"Services": "Palvelut"
-"Rooms": "Tilat"
-"Hardware": "Laitteet"
-"Collections": "Kokoelmat"
+Web services: Verkkopalvelut
+Services: Palvelut
+Rooms: Tilat
+Hardware: Laitteet
+Collections: Kokoelmat
 
 # Search
-"Library search": "Kirjastohaku"
-"Search by name or municipality": "Hae kirjastoa tai kuntaa"
+Library search: Kirjastohaku
+Search by name or municipality: Hae kirjastoa tai kuntaa
