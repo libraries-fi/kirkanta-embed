@@ -32,7 +32,7 @@
               <font-awesome-icon :icon="faExpand" v-else/>
             </button>
           </td>
-          <td v-if="day.closed" class="col-time closed">{{ $t("Closed") }} LOL</td>
+          <td v-if="day.closed" class="col-time closed">{{ $t("Closed") }}</td>
           <td v-else class="col-time">
             <date-time :time="day.opens" format="p" formal/>
             <date-time :time="day.closes" format="p" formal/>
