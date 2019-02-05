@@ -1,0 +1,22 @@
+const config = ((build_mode) => {
+  switch (build_mode) {
+    case "production":
+      return {
+        path: "https://hakemisto.kirjastot.fi/embed/v1",
+        api: "https://api.kirjastot.fi/v3",
+        lang: "fi",
+      };
+
+    case "development":
+      return {
+        path: "/embed/dev",
+        api: "https://api.kirjastot.fi.local/v4",
+        lang: "fi",
+      };
+
+    default:
+      throw new Error(`No configuration for build mode $(build_mode)`);
+  }
+});
+
+export default config;
