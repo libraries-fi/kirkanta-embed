@@ -3,7 +3,7 @@
     <div class="header">
       <button v-if="embedded" type="button" class="btn btn-link" @click="returnToList">
         <font-awesome-icon :icon="faLongArrowAltLeft"/>
-        {{ $t("Return to list") }}
+        {{ $t('library.return-to-list') }}
       </button>
       <h1>{{ library.name }}</h1>
     </div>
@@ -25,18 +25,18 @@
             </div>
           </div>
           <aside class="col-md-2" v-if="library.schedules">
-            <h2 class="sr-only">{{ $t("Service hours") }}</h2>
+            <h2 class="sr-only">{{ $t('schedules.service-hours') }}</h2>
             <schedules :schedules="library.schedules" :expandMode="expandMode"/>
           </aside>
         </section>
 
         <section class="row">
-          <h2 class="sr-only">{{ $t("Introduction") }}</h2>
+          <h2 class="sr-only">{{ $t('library.introduction') }}</h2>
           <div v-if="library.description" v-html="library.description"/>
         </section>
 
         <div v-if="library.links" class="info-links">
-          <h2 class="sr-only">{{ $t("Links to other websites") }}</h2>
+          <h2 class="sr-only">{{ $t('library.remote-links') }}</h2>
           <a v-for="link in sortedLinks" :href="link.url" class="info-link">
             <font-awesome-icon v-if="linkIcon(link)" :icon="linkIcon(link)"/>
             {{ link.name }}
@@ -46,10 +46,10 @@
 
       <div class="content-tab" id="tab-contact" :data-active-tab="$route.name == 'contact'">
         <section v-if="library.address" class="row">
-          <h2 class="sr-only">{{ $t("Contact details") }}</h2>
+          <h2 class="sr-only">{{ $t('library.contact-details') }}</h2>
 
           <div class="col-md-2">
-            <h3>{{ $t("Location") }}</h3>
+            <h3>{{ $t('library.location') }}</h3>
             <address>
               <p>
                 {{ library.address.street }}, {{ library.address.zipcode }} {{ library.address.city }} <template v-if="library.address.area">({{ library.address.area }})</template><br/>
@@ -57,7 +57,7 @@
               </p>
 
               <p v-if="library.email">
-                <b>{{ $t("Email") }}</b><br/>
+                <b>{{ $t('library.email') }}</b><br/>
                 <a :href="'mailto:' + library.email">{{ library.email }}</a><br/>
               </p>
 
@@ -70,11 +70,11 @@
 
           <div class="col-md-2">
             <div v-if="library.mailAddress">
-              <h3>{{ $t("Mail address") }}</h3>
+              <h3>{{ $t('library.mail-address') }}</h3>
               <p>
                 {{ library.name }}<br/>
                 <template v-if="library.mailAddress.street">{{ library.mailAddress.street }}<br/></template>
-                <template v-if="library.mailAddress.boxNumber">{{ $t('P.O. Box') }} {{ library.mailAddress.boxNumber}}<br/></template>
+                <template v-if="library.mailAddress.boxNumber">{{ $t('library.po-box') }} {{ library.mailAddress.boxNumber}}<br/></template>
                 <template>{{ library.mailAddress.zipcode }} {{ library.mailAddress.area.toUpperCase() }}<br/></template>
               </p>
             </div>
@@ -82,26 +82,26 @@
         </section>
 
         <section v-if="hasPublicTransportation()">
-          <h2 class="sr-only">{{ $t("Transit directions") }}</h2>
-          <h3>{{ $t("Public transportation") }}</h3>
+          <h2 class="sr-only">{{ $t('library.transit-directions') }}</h2>
+          <h3>{{ $t('public-transportation') }}</h3>
 
           <div class="row">
             <div v-if="library.transit.buses" class="col-md-2">
-              <h4>{{ $t("Buses") }}</h4>
+              <h4>{{ $t('library.buses') }}</h4>
               <p>{{ library.transit.buses }}</p>
             </div>
             <div v-if="library.transit.trams" class="col-md-2">
-              <h4>{{ $t("Trams") }}</h4>
+              <h4>{{ $t('library.trams') }}</h4>
               <p>{{ library.transit.trams }}</p>
             </div>
             <div v-if="library.transit.trains" class="col-md-2">
-              <h4>{{ $t("Trains") }}</h4>
+              <h4>{{ $t('library.train') }}</h4>
               <p>{{ library.transit.trains }}</p>
             </div>
           </div>
 
           <div v-if="library.transit.parking">
-            <h3>{{ $t("Parking instructions") }}</h3>
+            <h3>{{ $t('library.parking') }}</h3>
             {{ library.transit.parking }}
           </div>
         </section>
@@ -124,8 +124,8 @@
 
 <script>
   import apiCall from '../mixins/api-call'
-  import Services from './Services.vue'
-  import Schedules from './Schedules.vue'
+  import Services from './Services'
+  import Schedules from './Schedules'
   import ContactInfo from './ContactInfo'
 
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'

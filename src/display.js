@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import Router from 'vue-router'
-import LibraryInfo from './components/LibraryInfo.vue'
+import LibraryInfo from '@/components/LibraryInfo'
 
 import fi from 'messages.fi.json'
 import sv from 'messages.sv.json'
-import routerConfig from './init.router'
+import routerConfig from '@/init.router'
 
 Vue.use(Router)
 Vue.use(VueI18n)

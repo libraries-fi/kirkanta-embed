@@ -81,7 +81,7 @@
   import { faAngleDoubleLeft, faAngleDoubleRight, faArrowCircleDown, faMinusSquare } from '@fortawesome/free-solid-svg-icons'
   import { faArrowAltCircleRight, faPlusSquare } from '@fortawesome/free-regular-svg-icons'
 
-  import DateTime from './DateTime.vue'
+  import DateTime from './DateTime'
 
   export default {
     props: ['schedules', 'periods', 'expandMode'],
@@ -104,7 +104,6 @@
           }
         }
 
-        console.log('F', filtered)
         return filtered
       },
       faWeekPrev: () => faAngleDoubleLeft,

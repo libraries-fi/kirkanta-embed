@@ -49,3 +49,22 @@ contact-info:
   common: Yleiset
   department: Osasto
   contact-details: Yhteystiedot
+
+schedules:
+  service-hours: Aukioloajat
+
+library:
+  return-to-list: Palaa listaan
+  remote-links: Linkkejä muualle verkossa
+  introduction: Esittely
+  contact-details: Yhteystiedot
+  location: Sijainti
+  email: Email
+  mail-address: Postiosoite
+  po-box: PL
+  transit-directions: Saapumisohjeet
+  buses: Linja-autot
+  trams: Raitiovaunut
+  trains: Junat
+  parking: Pysäköinti
+  public-transportation: Julkinen liikenne

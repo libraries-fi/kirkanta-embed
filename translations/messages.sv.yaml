@@ -1,3 +1,5 @@
+base_url: 'https://registret.biblioteken.fi'
+
 # Schedules
 Staff present: Personal på plats
 Library closed: Biblioteket är stängt
@@ -37,3 +39,30 @@ Collections: Samling
 # Search
 Library search: Sök bibliotek
 Search by name or municipality: Sök bibliotek eller ort
+
+
+contact-info:
+  email: Sähköpostiosoite
+  phone: Puhelinnumero
+  link: Verkkosivu
+  common: Yleiset
+  department: Osasto
+  contact-details: Yhteystiedot
+
+schedules:
+  service-hours: Aukioloajat
+
+library:
+  remote-links: Länkar till andra webbplatser
+  introduction: Presentation
+  contact-details: Kontaktuppgifter
+  return-to-list: Gå tillbaka till listan
+  location: Plats
+  email: E-post
+  mail-address: Postadress
+  po-box: PB
+  transit-directions: Hitta hit
+  buses: Bussar
+  trams: Spårvagnar
+  trains: Tåg
+  parking: Parkering

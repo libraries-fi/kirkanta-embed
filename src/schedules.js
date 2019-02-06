@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
-import Schedules from './components/Schedules.vue'
-import apiCall from './mixins/api-call'
+import Schedules from '@/components/Schedules'
+import apiCall from '@/mixins/api-call'
 
 import fi from 'messages.fi.json'
 import sv from 'messages.sv.json'

@@ -1,2 +1,20 @@
 "base_url": "https://directory.libraries.fi"
-  
+
+schedules:
+  service-hours: Service hours
+
+library:
+  remote-links: Links to other websites
+  introduction: Introduction
+  contact-details: Contact details
+  return-to-list: Return to list
+  location: Location
+  email: Email
+  mail-address: Mail address
+  po-box: P.O. Box
+  transit-directions: Transit directions
+  buses: Buses
+  trams: Trams
+  trains: Trains
+  parking: Parking instructions
+  public-transportation: Public transportation

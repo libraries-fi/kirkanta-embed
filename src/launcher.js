@@ -1,4 +1,4 @@
-import config from './init.config'
+import config from '@/init.config'
 import ResizeSensor from 'css-element-queries/src/ResizeSensor'
 
 import kifiLogo from '../images/kirjastot-fi.svg'
