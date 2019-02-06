@@ -1,17 +1,17 @@
-import Vue from "vue";
-import VueI18n from "vue-i18n";
-import Router from "vue-router";
-import LibraryInfo from "./components/LibraryInfo.vue";
+import Vue from 'vue'
+import VueI18n from 'vue-i18n'
+import Router from 'vue-router'
+import LibraryInfo from './components/LibraryInfo.vue'
 
-import fi from "messages.fi.json";
-import sv from "messages.sv.json";
-import routerConfig from "./init.router";
+import fi from 'messages.fi.json'
+import sv from 'messages.sv.json'
+import routerConfig from './init.router'
 
-Vue.use(Router);
-Vue.use(VueI18n);
+Vue.use(Router)
+Vue.use(VueI18n)
 
 class LibraryDisplayWidget extends Vue {
-  constructor(container, params) {
+  constructor (container, params) {
     let options = Object.assign({
       lang: null,
       library: null,
@@ -22,38 +22,38 @@ class LibraryDisplayWidget extends Vue {
        * Mode for expanding time entry rows.
        * current|all|none
        */
-      expandMode: "none",
-    }, params);
+      expandMode: 'none'
+    }, params)
 
     const i18n = new VueI18n({
       locale: options.lang,
-      messages: { fi, sv },
-    });
+      messages: { fi, sv }
+    })
 
     let router = new Router(Object.assign(routerConfig, {
       routes: [
         {
-          path: "/:id".replace(/:id/, options.library),
-          name: "library",
+          path: '/:id'.replace(/:id/, options.library),
+          name: 'library',
           props: (route) => ({
             id: options.library,
             lang: options.lang
           }),
           children: [
             {
-              path: "contact",
-              name: "contact",
+              path: 'contact',
+              name: 'contact'
             },
             {
-              path: "services",
-              name: "services",
+              path: 'services',
+              name: 'services'
             }
           ]
-        },
+        }
       ]
-    }));
+    }))
 
-    router.replace({name: "library", params: {library: options.library}});
+    router.replace({ name: 'library', params: { library: options.library } })
 
     super({
       el: container,
@@ -62,8 +62,8 @@ class LibraryDisplayWidget extends Vue {
       components: { LibraryInfo },
       router,
       i18n
-    });
+    })
   }
 }
 
-window["kirjastot.fi.display"] = LibraryDisplayWidget;
+window['kirjastot.fi.display'] = LibraryDisplayWidget

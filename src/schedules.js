@@ -1,15 +1,15 @@
-import Vue from "vue";
-import VueI18n from "vue-i18n";
-import Schedules from "./components/Schedules.vue";
-import apiCall from "./mixins/api-call";
+import Vue from 'vue'
+import VueI18n from 'vue-i18n'
+import Schedules from './components/Schedules.vue'
+import apiCall from './mixins/api-call'
 
-import fi from "messages.fi.json";
-import sv from "messages.sv.json";
+import fi from 'messages.fi.json'
+import sv from 'messages.sv.json'
 
-Vue.use(VueI18n);
+Vue.use(VueI18n)
 
 class SchedulesWidget extends Vue {
-  constructor(container, params) {
+  constructor (container, params) {
     const options = Object.assign({
 
       /*
@@ -26,14 +26,14 @@ class SchedulesWidget extends Vue {
        * Mode for expanding time entry rows.
        * current|all|none
        */
-      expandMode: "none",
+      expandMode: 'none'
 
-    }, params);
+    }, params)
 
     const i18n = new VueI18n({
       locale: options.lang,
-      messages: { fi, sv },
-    });
+      messages: { fi, sv }
+    })
 
     super({
       el: container,
@@ -49,23 +49,23 @@ class SchedulesWidget extends Vue {
         schedules: null,
         periods: null
       }),
-      async mounted() {
+      async mounted () {
         let query = {
-          with: "schedules",
-          refs: "period",
-          "period.start": "0w",
-          "period.end": "8w",
-        };
+          with: 'schedules',
+          refs: 'period',
+          'period.start': '0w',
+          'period.end': '8w'
+        }
 
-        let response = await apiCall(`/library/${options.library}`, options.lang, query);
-        this.library = response.data.data;
-        this.schedules = this.library.schedules;
-        this.periods = response.data.refs.period;
+        let response = await apiCall(`/library/${options.library}`, options.lang, query)
+        this.library = response.data.data
+        this.schedules = this.library.schedules
+        this.periods = response.data.refs.period
       },
       components: { Schedules },
-      i18n,
-    });
+      i18n
+    })
   }
 }
 
-window["kirjastot.fi.schedules"] = SchedulesWidget;
+window['kirjastot.fi.schedules'] = SchedulesWidget

@@ -1,7 +1,7 @@
 const config = {
-  linkActiveClass: "trail",
-  linkExactActiveClass: "active",
-  routes: [],
-};
+  linkActiveClass: 'trail',
+  linkExactActiveClass: 'active',
+  routes: []
+}
 
-export default config;
+export default config

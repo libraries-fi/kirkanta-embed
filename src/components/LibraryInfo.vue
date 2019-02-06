@@ -123,13 +123,13 @@
 </template>
 
 <script>
-  import apiCall from "../mixins/api-call";
-  import Services from "./Services.vue";
-  import Schedules from "./Schedules.vue";
-  import ContactInfo from "./ContactInfo";
+  import apiCall from '../mixins/api-call'
+  import Services from './Services.vue'
+  import Schedules from './Schedules.vue'
+  import ContactInfo from './ContactInfo'
 
-  import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-  import { faAddressCard, faQuoteRight, faLink, faLongArrowAltLeft } from "@fortawesome/free-solid-svg-icons";
+  import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+  import { faAddressCard, faQuoteRight, faLink, faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons'
   import {
     faFacebookSquare,
     faFlickr,
@@ -138,9 +138,9 @@
     faTwitterSquare,
     faVimeoSquare,
     faYoutube
-  } from "@fortawesome/free-brands-svg-icons";
+  } from '@fortawesome/free-brands-svg-icons'
 
-  import { faImage } from "@fortawesome/free-regular-svg-icons";
+  import { faImage } from '@fortawesome/free-regular-svg-icons'
 
   const icon_map = new Map([
     [/facebook\.com/, faFacebookSquare],
@@ -149,86 +149,86 @@
     [/pinterest\.com/, faPinterestSquare],
     [/vimeo\.com/, faVimeoSquare],
     [/twitter\.com/, faTwitterSquare],
-    [/youtube\.com/, faYoutube],
-  ]);
+    [/youtube\.com/, faYoutube]
+  ])
 
   export default {
-    props: ["id", "lang", "tabbed", "embedded", "expandMode"],
+    props: ['id', 'lang', 'tabbed', 'embedded', 'expandMode'],
     components: { ContactInfo, FontAwesomeIcon, Services, Schedules },
     data: () => ({
       library: null,
-      activeTab: "library",
+      activeTab: 'library',
       faAddressCard,
       faQuoteRight,
       faImage,
-      faLongArrowAltLeft,
+      faLongArrowAltLeft
     }),
     computed: {
-      sortedLinks() {
+      sortedLinks () {
         if (this.library.links) {
           return this.library.links.sort((a, b) => {
             // NOTE: Horribly inefficient but whatever...
 
-            let a_match = 0;
-            let b_match = 0;
+            let a_match = 0
+            let b_match = 0
 
             for (let rx of icon_map.keys()) {
               if (a.url.match(rx)) {
-                a_match = 1;
+                a_match = 1
               }
 
               if (b.url.match(rx)) {
-                b_match = 1;
+                b_match = 1
               }
             }
 
-            return a_match - b_match;
-          });
+            return a_match - b_match
+          })
         } else {
-          return null;
+          return null
         }
-      },
+      }
     },
-    async mounted() {
+    async mounted () {
       let query = {
-        with: "departments emailAddresses links mailAddress persons pictures phoneNumbers schedules services transitInfo",
-        "period.start": "0w",
-        "period.end": "4w",
-      };
+        with: 'departments emailAddresses links mailAddress persons pictures phoneNumbers schedules services transitInfo',
+        'period.start': '0w',
+        'period.end': '4w'
+      }
 
-      let response = await apiCall(`/library/${this.id}`, this.lang, query);
+      let response = await apiCall(`/library/${this.id}`, this.lang, query)
       this.library = response.data.data
     },
     methods: {
-      returnToList() {
-        this.$emit("return-to-main");
+      returnToList () {
+        this.$emit('return-to-main')
       },
-      hasPublicTransportation() {
+      hasPublicTransportation () {
         if (this.library.transit) {
           for (let [field, info] of Object.entries(this.library.transit)) {
             if (info && info.length) {
-              return true;
+              return true
             }
           }
         }
-        return false;
+        return false
       },
-      hasContactInfo() {
-        return (this.library.links.length + this.library.emailAddresses.length + this.library.phoneNumbers.length) > 0;
+      hasContactInfo () {
+        return (this.library.links.length + this.library.emailAddresses.length + this.library.phoneNumbers.length) > 0
       },
-      linkIcon(link) {
-        let icon_class = faLink;
+      linkIcon (link) {
+        let icon_class = faLink
 
         for (let [rx, icon] of icon_map) {
           if (link.url.match(rx)) {
-            icon_class = icon;
+            icon_class = icon
           }
         }
 
-        return icon_class;
-      },
+        return icon_class
+      }
     }
-  };
+  }
 </script>
 
 <style lang="scss">

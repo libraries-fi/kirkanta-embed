@@ -75,149 +75,149 @@
 </template>
 
 <script>
-  const LAUNCHER_SCRIPT = window.location.protocol + "//" + window.location.host + "/embed/v1/launcher.js";
+  const LAUNCHER_SCRIPT = window.location.protocol + '//' + window.location.host + '/embed/v1/launcher.js'
 
-  import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-  import { faClone } from "@fortawesome/free-regular-svg-icons";
+  import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+  import { faClone } from '@fortawesome/free-regular-svg-icons'
 
-  import kirjastohakemisto from "../launcher";
-  import ClipboardJS from "clipboard";
+  import kirjastohakemisto from '../launcher'
+  import ClipboardJS from 'clipboard'
 
   export default {
-    props: ["widgets"],
+    props: ['widgets'],
     data: () => ({
-      output: "",
+      output: '',
       customCss: null,
       options: {
         widget: null,
         lang: null,
-        nosandbox: false,
+        nosandbox: false
       },
       widgetOptions: {},
       languageOptions: null,
       state: {
         customizeCss: false
       },
-      faClone,
+      faClone
     }),
-    created() {
+    created () {
       this.languageOptions = [
-        { value: null, text: this.$t("- Automatic -") },
-        { value: "fi", text: this.$t("Finnish") },
-        { value: "en", text: this.$t("English") },
-        { value: "sv", text: this.$t("Swedish") }
-      ];
+        { value: null, text: this.$t('- Automatic -') },
+        { value: 'fi', text: this.$t('Finnish') },
+        { value: 'en', text: this.$t('English') },
+        { value: 'sv', text: this.$t('Swedish') }
+      ]
 
-      this.options.hakemistoWidget = this.$route.path.substr(1) || null;
-      this.updateCode();
+      this.options.hakemistoWidget = this.$route.path.substr(1) || null
+      this.updateCode()
 
-      let clipboard = new ClipboardJS("button[data-copy-code]");
+      let clipboard = new ClipboardJS('button[data-copy-code]')
     },
     computed: {
       widget: {
-        get: function() {
-          return this.$route.path.substr(1) || null;
+        get: function () {
+          return this.$route.path.substr(1) || null
         },
-        set: function(wid) {
-          this.options.hakemistoWidget = wid;
+        set: function (wid) {
+          this.options.hakemistoWidget = wid
 
           if (wid) {
-            this.$router.push({ name: wid, params: {widget: wid} });
+            this.$router.push({ name: wid, params: {widget: wid} })
           } else {
-            this.$router.push("/");
+            this.$router.push('/')
           }
         }
       },
-      availableWidgets: function() {
-        let options =  Object.keys(this.widgets).map((wid) => {
-          return { value: wid, text: this.$t(this.widgets[wid].name) };
-        });
+      availableWidgets: function () {
+        let options = Object.keys(this.widgets).map((wid) => {
+          return { value: wid, text: this.$t(this.widgets[wid].name) }
+        })
 
-        options.sort((a, b) => a.text.localeCompare(b.text));
-        options.unshift({ value: null, text: this.$t("- Select widget -")});
+        options.sort((a, b) => a.text.localeCompare(b.text))
+        options.unshift({ value: null, text: this.$t('- Select widget -')})
 
-        return options;
-      },
+        return options
+      }
     },
     methods: {
-      updateCode() {
-        function setAttribute(element, name, value) {
+      updateCode () {
+        function setAttribute (element, name, value) {
           if (Array.isArray(value)) {
             if (value.length > 0) {
-              element.dataset[name] = value.join(" ");
+              element.dataset[name] = value.join(' ')
             }
-          } else if ([0, "", null, false, undefined].indexOf(value) == -1) {
+          } else if ([0, '', null, false, undefined].indexOf(value) == -1) {
             if (value === true) {
-              value = "";
+              value = ''
             }
             // element.setAttribute("data-" + name, value);
-            element.dataset[name] = value;
+            element.dataset[name] = value
           }
         };
 
         setTimeout(() => {
           if (!this.options.hakemistoWidget) {
-            this.output = "";
-            return;
+            this.output = ''
+            return
           }
 
-          let container = document.createElement("div");
+          let container = document.createElement('div')
 
-          let script = document.createElement("script");
-          script.src = LAUNCHER_SCRIPT;
+          let script = document.createElement('script')
+          script.src = LAUNCHER_SCRIPT
 
-          this.options.css = this.customCss ? `#css-${Math.ceil(Math.random() * 999)}` : undefined;
+          this.options.css = this.customCss ? `#css-${Math.ceil(Math.random() * 999)}` : undefined
 
-          Object.keys(this.options).forEach((key) => setAttribute(container, key, this.options[key]));
-          Object.keys(this.widgetOptions).forEach((key) => setAttribute(container, key, this.widgetOptions[key]));
+          Object.keys(this.options).forEach((key) => setAttribute(container, key, this.options[key]))
+          Object.keys(this.widgetOptions).forEach((key) => setAttribute(container, key, this.widgetOptions[key]))
 
-          const output = [container.outerHTML.replace(/=""/g, ""), script.outerHTML];
+          const output = [container.outerHTML.replace(/=""/g, ''), script.outerHTML]
 
           if (this.customCss) {
-            let style = document.createElement("script");
-            style.type = "text/x-kirkanta-css";
-            style.id = this.options.css.substr(1);
-            style.textContent = this.customCss;
+            let style = document.createElement('script')
+            style.type = 'text/x-kirkanta-css'
+            style.id = this.options.css.substr(1)
+            style.textContent = this.customCss
 
-            output.push(style.outerHTML);
+            output.push(style.outerHTML)
           }
 
-          this.output = output.join("\n");
-        }, 100);
+          this.output = output.join('\n')
+        }, 100)
       },
-      onWidgetOptions(options) {
-        this.widgetOptions = options;
-        this.updateCode();
+      onWidgetOptions (options) {
+        this.widgetOptions = options
+        this.updateCode()
       },
-      onSubmit(event) {
-        event.preventDefault();
-        this.updateCode();
+      onSubmit (event) {
+        event.preventDefault()
+        this.updateCode()
       },
-      acceptCustomCss() {
-        this.state.customizeCss = false;
-        this.updateCode();
+      acceptCustomCss () {
+        this.state.customizeCss = false
+        this.updateCode()
       }
     },
     watch: {
-      widget() {
-        this.widgetOptions = {};
+      widget () {
+        this.widgetOptions = {}
       },
       options: {
-        handler() {
-          this.updateCode();
+        handler () {
+          this.updateCode()
         },
         deep: true
       },
-      output() {
+      output () {
         setTimeout(() => {
           if (this.output) {
-            kirjastohakemisto(document.querySelector("#preview [data-hakemisto-widget]"));
+            kirjastohakemisto(document.querySelector('#preview [data-hakemisto-widget]'))
           }
-        }, 100);
+        }, 100)
       }
     },
     components: { FontAwesomeIcon }
-  };
+  }
 </script>
 
 <style lang="scss">

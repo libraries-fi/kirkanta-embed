@@ -50,9 +50,9 @@
 </template>
 
 <script>
-  import AutoComplete from "./AutoComplete.vue";
+  import AutoComplete from './AutoComplete.vue'
 
-  import { libraryAutoComplete, cityAutoComplete, consortiumAutoComplete } from "../mixins/autocomplete";
+  import { libraryAutoComplete, cityAutoComplete, consortiumAutoComplete } from '../mixins/autocomplete'
 
   export default {
     data: () => ({
@@ -64,50 +64,50 @@
         library: null,
         city: null,
         consortium: null,
-        type: null,
+        type: null
       },
       typeOptions: null
     }),
-    created() {
+    created () {
       this.typeOptions = [
-        { value: "library main_library", text: this.$t("Municipal libraries") },
-        { value: "mobile", text: this.$t("Mobile libraries") },
+        { value: 'library main_library', text: this.$t('Municipal libraries') },
+        { value: 'mobile', text: this.$t('Mobile libraries') },
         // { value: "vocational_college", text: this.$t("Vocational college library") },
-        { value: "polytechnic", text: this.$t("Polytechnic libraries") },
-        { value: "university", text: this.$t("University libraries") },
-        { value: "special", text: this.$t("Special libraries") },
-        { value: "home_service institutional children school vocational_college", text: this.$t("Other") },
-      ];
+        { value: 'polytechnic', text: this.$t('Polytechnic libraries') },
+        { value: 'university', text: this.$t('University libraries') },
+        { value: 'special', text: this.$t('Special libraries') },
+        { value: 'home_service institutional children school vocational_college', text: this.$t('Other') }
+      ]
     },
     methods: {
-      async onLibraryAutoComplete(name) {
-        this.librarySuggestions = await libraryAutoComplete(name);
+      async onLibraryAutoComplete (name) {
+        this.librarySuggestions = await libraryAutoComplete(name)
       },
-      async onCityAutoComplete(name) {
-        this.citySuggestions = await cityAutoComplete(name);
+      async onCityAutoComplete (name) {
+        this.citySuggestions = await cityAutoComplete(name)
       },
-      async onConsortiumAutoComplete(name) {
-        this.consortiumSuggestions = await consortiumAutoComplete(name);
+      async onConsortiumAutoComplete (name) {
+        this.consortiumSuggestions = await consortiumAutoComplete(name)
       },
-      onSelectCity(city) {
-        console.log("SELECTED", city);
-        this.cityValues.push(city);
+      onSelectCity (city) {
+        console.log('SELECTED', city)
+        this.cityValues.push(city)
       },
-      onChange(event) {
-        this.$emit("options", this.options);
+      onChange (event) {
+        this.$emit('options', this.options)
       }
     },
     watch: {
-      cityValues() {
-        this.options.city = this.cityValues.map((city) => city.id).join(" ");
+      cityValues () {
+        this.options.city = this.cityValues.map((city) => city.id).join(' ')
       },
       options: {
-        handler() {
-          this.$emit("options", this.options);
+        handler () {
+          this.$emit('options', this.options)
         },
         deep: true
       }
     },
     components: { AutoComplete }
-  };
+  }
 </script>

@@ -40,14 +40,13 @@
 </template>
 
 <script>
-  import Collection from "../mixins/collection";
-  import apiCall from "../mixins/api-call";
+  import apiCall from '../mixins/api-call'
 
-  import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-  import { faSearch } from "@fortawesome/free-solid-svg-icons";
+  import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+  import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
   export default {
-    props: ["lang", "form"],
+    props: ['lang', 'form'],
     components: { FontAwesomeIcon },
     data: () => ({
       result: [],
@@ -58,25 +57,25 @@
     }),
     computed: {
       busy: {
-        get: function() {
-          return this.$el.hasAttribute("data-busy");
+        get () {
+          return this.$el.hasAttribute('data-busy')
         },
-        set: function(state) {
+        set (state) {
           if (this.$el) {
             if (state) {
-              this.$el.setAttribute("data-busy", "");
+              this.$el.setAttribute('data-busy', '')
             } else {
-              this.$el.removeAttribute("data-busy");
+              this.$el.removeAttribute('data-busy')
             }
           }
         }
       }
     },
-    mounted(...foo) {
-      this.onSubmit();
+    mounted (...foo) {
+      this.onSubmit()
     },
     methods: {
-      trySubmit(event) {
+      trySubmit (event) {
         if (this.timers.submit) {
           clearTimeout(this.timers.submit)
           this.timers.submit = 0
@@ -84,31 +83,29 @@
 
         this.timers.submit = setTimeout(this.onSubmit, 500)
       },
-      onClickLibrary(event) {
-        event.preventDefault();
-        this.$router.push({name: "library", params: {id: event.target.dataset.id}});
+      onClickLibrary (event) {
+        event.preventDefault()
+        this.$router.push({name: 'library', params: {id: event.target.dataset.id}})
       },
-      async onSubmit() {
-        this.busy = true;
+      async onSubmit () {
+        this.busy = true
 
         let query = {
-          sort: "name",
-          with: "schedules",
-          "period.start": "0d",
-          "period.end": "1d",
-        };
+          sort: 'name',
+          with: 'schedules',
+          'period.start': '0d',
+          'period.end': '1d'
+        }
 
-        Object.assign(query, this.form);
+        Object.assign(query, this.form)
 
-        let response = await apiCall("/library", this.lang, query);
+        let response = await apiCall('/library', this.lang, query)
 
-        this.result = response.data.items;
-        this.busy = false;
-
-        console.log(response.data.items);
+        this.result = response.data.items
+        this.busy = false
       }
-    },
-  };
+    }
+  }
 </script>
 
 <style lang="scss">

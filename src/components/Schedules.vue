@@ -75,64 +75,64 @@
 
 <script>
   import { format, toDate } from 'date-fns'
-  import { first, last } from '../mixins'
+  import { first, last } from '@/mixins'
 
-  import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-  import { faAngleDoubleLeft, faAngleDoubleRight, faArrowCircleDown, faMinusSquare } from "@fortawesome/free-solid-svg-icons";
-  import { faArrowAltCircleRight, faPlusSquare } from "@fortawesome/free-regular-svg-icons";
+  import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+  import { faAngleDoubleLeft, faAngleDoubleRight, faArrowCircleDown, faMinusSquare } from '@fortawesome/free-solid-svg-icons'
+  import { faArrowAltCircleRight, faPlusSquare } from '@fortawesome/free-regular-svg-icons'
 
-  import DateTime from "./DateTime.vue";
+  import DateTime from './DateTime.vue'
 
   export default {
-    props: ["schedules", "periods", "expandMode"],
+    props: ['schedules', 'periods', 'expandMode'],
     data: () => ({
       i: 0,
-      expandedRow: parseInt(format(new Date, "i")) - 1,
+      expandedRow: parseInt(format(new Date(), 'i')) - 1
     }),
     computed: {
-      week() {
+      week () {
         if (this.schedules) {
-          let day = this.schedules[this.i * 7];
-          return day ? format(toDate(day.date), "I") : null;
+          let day = this.schedules[this.i * 7]
+          return day ? format(toDate(day.date), 'I') : null
         }
       },
-      periodInfo() {
-        let filtered = [];
+      periodInfo () {
+        let filtered = []
         for (let pid in this.periods) {
           if (this.periods[pid].description) {
-            filtered.push(this.periods[pid]);
+            filtered.push(this.periods[pid])
           }
         }
 
-        console.log('F', filtered);
-        return filtered;
+        console.log('F', filtered)
+        return filtered
       },
       faWeekPrev: () => faAngleDoubleLeft,
       faWeekNext: () => faAngleDoubleRight,
       faExpand: () => faPlusSquare,
-      faCollapse: () => faMinusSquare,
+      faCollapse: () => faMinusSquare
     },
     methods: {
-      toggleDay(event) {
-        event.expanded = true;
+      toggleDay (event) {
+        event.expanded = true
       },
-      previousWeek() {
-        this.i = Math.max(this.i - 1, 0);
+      previousWeek () {
+        this.i = Math.max(this.i - 1, 0)
       },
-      nextWeek() {
-        this.i = Math.min(this.i + 1, (this.schedules.length / 7) - 1);
-      },
-    },
-    filters: {
-      opens(day) {
-        return first(day.times).from;
-      },
-      closes(day) {
-        return last(day.times).to;
+      nextWeek () {
+        this.i = Math.min(this.i + 1, (this.schedules.length / 7) - 1)
       }
     },
-    components: { DateTime, FontAwesomeIcon },
-  };
+    filters: {
+      opens (day) {
+        return first(day.times).from
+      },
+      closes (day) {
+        return last(day.times).to
+      }
+    },
+    components: { DateTime, FontAwesomeIcon }
+  }
 </script>
 
 <style lang="scss">

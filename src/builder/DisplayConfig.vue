@@ -25,42 +25,35 @@
 </template>
 
 <script>
-  import apiCall from "../mixins/api-call";
-  import AutoComplete from "./AutoComplete.vue";
+  import apiCall from '../mixins/api-call'
+  import AutoComplete from './AutoComplete.vue'
 
-  const AUTOCOMPLETE_LIMIT = 10;
-
-  function autocomplete(path, params) {
-    let query = Object.assign({}, params, {
-      limit: AUTOCOMPLETE_LIMIT,
-    });
-    return apiCall(path, "fi", query);
-  }
+  const AUTOCOMPLETE_LIMIT = 10
 
   export default {
     data: () => ({
       librarySuggestions: [],
       options: {
         library: null,
-        tabbed: false,
-      },
+        tabbed: false
+      }
     }),
     methods: {
-      async onLibraryAutoComplete(name) {
+      async onLibraryAutoComplete (name) {
         if (name.length >= 2) {
-          let result = await apiCall("/library", "fi", {q: name, sort: "name", limit: AUTOCOMPLETE_LIMIT});
-          this.librarySuggestions = result.data.items;
+          let result = await apiCall('/library', 'fi', {q: name, sort: 'name', limit: AUTOCOMPLETE_LIMIT})
+          this.librarySuggestions = result.data.items
         }
-      },
+      }
     },
     watch: {
       options: {
-        handler() {
-          this.$emit("options", this.options);
+        handler () {
+          this.$emit('options', this.options)
         },
         deep: true
       }
     },
     components: { AutoComplete }
-  };
+  }
 </script>

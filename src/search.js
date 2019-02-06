@@ -1,25 +1,25 @@
-import Vue from "vue";
-import VueI18n from "vue-i18n";
-import Router from "vue-router";
-import LibraryList from "./components/LibraryList.vue";
-import LibraryInfo from "./components/LibraryInfo.vue";
+import Vue from 'vue'
+import VueI18n from 'vue-i18n'
+import Router from 'vue-router'
+import LibraryList from './components/LibraryList.vue'
+import LibraryInfo from './components/LibraryInfo.vue'
 
-import fi from "messages.fi.json";
-import sv from "messages.sv.json";
-import routerConfig from "./init.router";
+import fi from 'messages.fi.json'
+import sv from 'messages.sv.json'
+import routerConfig from './init.router'
 
-Vue.use(Router);
-Vue.use(VueI18n);
+Vue.use(Router)
+Vue.use(VueI18n)
 
 class SearchWidget extends Vue {
-  constructor(container, params) {
+  constructor (container, params) {
     let search = {
       q: params.q,
       id: params.library,
       city: params.city,
       consortium: params.consortium,
-      type: params.type,
-    };
+      type: params.type
+    }
 
     if (params.branch_type) {
       /**
@@ -27,66 +27,66 @@ class SearchWidget extends Vue {
        * in widgets that used API v3 as well. Support this option so libraries
        * do not need to update their widget configurations by hand.
        */
-      params.type = params.branch_type.replace(/\blibrary\b/, 'municipal');
+      params.type = params.branch_type.replace(/\blibrary\b/, 'municipal')
 
-      console.log('TYPE', params.type);
+      console.log('TYPE', params.type)
     }
 
     let router = new Router(Object.assign(routerConfig, {
       routes: [
         {
-          path: "/",
-          name: "search",
+          path: '/',
+          name: 'search',
           component: LibraryList,
           props: (route) => ({
             form: search,
-            lang: params.lang,
+            lang: params.lang
           })
         },
         {
-          path: "/:id",
-          name: "library",
+          path: '/:id',
+          name: 'library',
           component: LibraryInfo,
           props: (route) => ({
             id: route.params.id,
             lang: params.lang,
             tabbed: params.tabbed,
             embedded: true,
-            expandMode: params.expandMode || "none"
+            expandMode: params.expandMode || 'none'
           }),
           children: [
             {
-              path: "contact",
-              name: "contact",
+              path: 'contact',
+              name: 'contact'
             },
             {
-              path: "services",
-              name: "services",
+              path: 'services',
+              name: 'services'
             }
           ]
-        },
+        }
       ]
-    }));
+    }))
 
     const i18n = new VueI18n({
       locale: params.lang,
-      messages: { fi, sv },
-    });
+      messages: { fi, sv }
+    })
 
     super({
       el: container,
       template: '<router-view @return-to-main="returnToSearch"/>',
       methods: {
-        returnToSearch() {
-          this.$router.push({name: "search"});
+        returnToSearch () {
+          this.$router.push({ name: 'search' })
         }
       },
       router,
       i18n
-    });
+    })
 
     // router.push({name: "library", params: {id: 84787, lang: "fi"}});
   }
 }
 
-window["kirjastot.fi.search"] = SearchWidget;
+window['kirjastot.fi.search'] = SearchWidget

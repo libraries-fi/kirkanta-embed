@@ -19,22 +19,21 @@
 </template>
 
 <script>
-  import { first, last } from '@/mixins'
-  import { addToMap, addToMapArray } from '@/mixins'
+  import { addToMap, addToMapArray, first, last } from '@/mixins'
 
-  function departmentContactInfo(library) {
+  function departmentContactInfo (library) {
     const departments = new Map([
       [null, {
         name: '',
         phones: [],
         emails: [],
         links: [],
-        namedGroups: new Map,
+        namedGroups: new Map()
       }]
     ])
 
-    function makeDepartmentEntry(name, id, description) {
-      return {name, id, description, phones:[], emails: [], links: [], namedGroups: new Map}
+    function makeDepartmentEntry (name, id, description) {
+      return {name, id, description, phones: [], emails: [], links: [], namedGroups: new Map()}
     }
 
     for (let department of library.departments) {
@@ -71,7 +70,7 @@
           name,
           info: (person.jobTitle || '').toLowerCase(),
           number: person.phone,
-          type: 'phone',
+          type: 'phone'
         })
       }
 
@@ -80,7 +79,7 @@
           name,
           info: (person.jobTitle || '').toLowerCase(),
           email: person.email,
-          type: 'email',
+          type: 'email'
         })
       }
     }
@@ -108,17 +107,18 @@
     props: {
       library: {
         type: Object,
-        default: () => new Object
+        default: () => new Object()
       }
     },
     computed: {
-      departments() {
-        return departmentContactInfo(this.library);
+      departments () {
+        return departmentContactInfo(this.library)
       }
     },
     methods: {
-      first, last,
-      entryIcon(entry) {
+      first,
+      last,
+      entryIcon (entry) {
         switch (entry.type) {
           case 'phone':
             return faPhone
@@ -130,7 +130,7 @@
             return faLink
         }
       },
-      entryLinkValue(entry) {
+      entryLinkValue (entry) {
         switch (entry.type) {
           case 'phone':
             return `tel:+358${entry.number.replace(/\D/g, '').substr(1)}`
@@ -142,7 +142,7 @@
             return entry.url
         }
       },
-      entryTypeLabel(entry) {
+      entryTypeLabel (entry) {
         switch (entry.type) {
           case 'phone':
             return this.$t('contact-info.phone')
@@ -153,15 +153,14 @@
           case 'link':
             return this.$t('contact-info.link')
         }
-      },
+      }
     }
-
   }
 </script>
 
 <style lang="scss" scoped>
   @import "../../scss/variables";
-  
+
   .contact-info-group {
     margin-bottom: spacing(3);
     border-bottom: $table-border-width solid $table-border-color;
