@@ -123,7 +123,6 @@
 </template>
 
 <script>
-  import Library from "../entity/library";
   import apiCall from "../mixins/api-call";
   import Services from "./Services.vue";
   import Schedules from "./Schedules.vue";

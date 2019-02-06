@@ -1,7 +1,6 @@
 import Vue from "vue";
 import VueI18n from "vue-i18n";
 import Schedules from "./components/Schedules.vue";
-import Library from "./entity/library";
 import apiCall from "./mixins/api-call";
 
 import fi from "messages.fi.json";
@@ -52,17 +51,14 @@ class SchedulesWidget extends Vue {
       }),
       async mounted() {
         let query = {
-          id: options.library,
           with: "schedules",
           refs: "period",
           "period.start": "0w",
           "period.end": "8w",
-          limit: 1,
         };
 
-        let response = await apiCall("/library", options.lang, query);
-        let library = new Library(response.data.items[0], response.data.refs);
-        this.library = library;
+        let response = await apiCall(`/library/${options.library}`, options.lang, query);
+        this.library = response.data.data;
         this.schedules = this.library.schedules;
         this.periods = response.data.refs.period;
       },

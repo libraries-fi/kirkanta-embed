@@ -59,12 +59,12 @@
     <div class="period-info" v-if="periodInfo.length">
       <template v-for="period of periodInfo">
         <p v-if="period.description">
-          <b v-if="period.valid_until">
-            <date-time :date="period.valid_from" format="P" formal short/> –
-            <date-time :date="period.valid_until" format="P" formal short/>:
+          <b v-if="period.isException">
+            <date-time :date="period.validFrom" format="P" formal short/> –
+            <date-time :date="period.validUntil" format="P" formal short/>:
           </b>
           <b v-else>
-            From <date-time :date="period.valid_from" format="P" formal short/>:
+            {{ $t('From') }} <date-time :date="period.validFrom" format="P" formal short/>:
           </b>
           <span>{{ period.description }}</span>
         </p>
@@ -103,6 +103,8 @@
             filtered.push(this.periods[pid]);
           }
         }
+
+        console.log('F', filtered);
         return filtered;
       },
       faWeekPrev: () => faAngleDoubleLeft,

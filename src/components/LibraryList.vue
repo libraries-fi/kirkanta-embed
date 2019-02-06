@@ -40,7 +40,6 @@
 </template>
 
 <script>
-  import Library from "../entity/library";
   import Collection from "../mixins/collection";
   import apiCall from "../mixins/api-call";
 
@@ -103,8 +102,10 @@
 
         let response = await apiCall("/library", this.lang, query);
 
-        this.result = [...new Collection(Library, response.data.items)];
+        this.result = response.data.items;
         this.busy = false;
+
+        console.log(response.data.items);
       }
     },
   };
