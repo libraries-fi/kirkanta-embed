@@ -1,4 +1,4 @@
-import apiCall from "../utils/api-call";
+import apiCall from "../mixins/api-call";
 
 const AUTOCOMPLETE_LIMIT = 10;
 
