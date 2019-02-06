@@ -8,10 +8,10 @@
         <ul class="services-list-item">
           <li v-for="(service, i) of group.services">
             <span v-if="service.description" class="link text-primary" v-b-popover:services-list.click.blur.top="popup(service)">
-              {{ service.custom_name || service.name }}
+              {{ service.name || service.standardName }}
             </span>
             <span v-else>
-              {{ service.custom_name || service.name }}
+              {{ service.name || service.standardName }}
             </span>
           </li>
         </ul>
@@ -79,8 +79,8 @@
 
         for (let gid of Object.keys(groups)) {
           groups[gid].services.sort((a, b) => {
-            let va = a.custom_name || a.name;
-            let vb = b.custom_name || b.name;
+            let va = a.name || a.standardName;
+            let vb = b.name || b.standardName;
 
             // Aside from Russian this is safe here, but we don't need to support Russian in widgets.
             return va.localeCompare(vb, 'fi');
@@ -100,7 +100,7 @@
       },
       popup(service) {
         return {
-          title: service.custom_name || service.name,
+          title: service.name || service.standardName,
           content: service.description,
           container: this.$el,
           show(event) {

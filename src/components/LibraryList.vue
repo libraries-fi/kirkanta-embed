@@ -3,14 +3,14 @@
     <div class="header">
       <h1>{{ $t("Library search") }}</h1>
 
-      <form @submit="onSubmit">
+      <form @submit.prevent="onSubmit">
         <input type="hidden" name="id" :value="form.library"/>
         <input type="hidden" name="city" :value="form.city"/>
         <input type="hidden" name="type" :value="form.type"/>
         <input type="hidden" name="branch_type" :value="form.branch_type"/>
 
         <div class="input-group">
-          <input type="search" class="form-control form-control-lg" name="q" :placeholder="$t('Search by name or municipality') " v-model="form.q"/>
+          <input type="search" class="form-control form-control-lg" name="q" :placeholder="$t('Search by name or municipality') " v-model="form.q" @input="trySubmit"/>
           <div class="input-group-append">
             <div class="throbber"></div>
             <button type="submit" class="btn btn-primary">
@@ -42,8 +42,8 @@
 
 <script>
   import Library from "../entity/library";
-  import Collection from "../utils/collection";
-  import apiCall from "../utils/api-call";
+  import Collection from "../mixins/collection";
+  import apiCall from "../mixins/api-call";
 
   import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
   import { faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -53,6 +53,9 @@
     components: { FontAwesomeIcon },
     data: () => ({
       result: [],
+      timers: {
+        submit: null
+      },
       faSearch
     }),
     computed: {
@@ -72,18 +75,22 @@
       }
     },
     mounted(...foo) {
-      this.submit();
+      this.onSubmit();
     },
     methods: {
-      onSubmit: function(event) {
-        event.preventDefault();
-        this.submit();
+      trySubmit(event) {
+        if (this.timers.submit) {
+          clearTimeout(this.timers.submit)
+          this.timers.submit = 0
+        }
+
+        this.timers.submit = setTimeout(this.onSubmit, 500)
       },
-      onClickLibrary: function(event) {
+      onClickLibrary(event) {
         event.preventDefault();
         this.$router.push({name: "library", params: {id: event.target.dataset.id}});
       },
-      submit: async function() {
+      async onSubmit() {
         this.busy = true;
 
         let query = {

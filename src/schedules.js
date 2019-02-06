@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueI18n from "vue-i18n";
 import Schedules from "./components/Schedules.vue";
 import Library from "./entity/library";
-import apiCall from "./utils/api-call";
+import apiCall from "./mixins/api-call";
 
 import fi from "messages.fi.json";
 import sv from "messages.sv.json";
@@ -61,10 +61,10 @@ class SchedulesWidget extends Vue {
         };
 
         let response = await apiCall("/library", options.lang, query);
-        let library = new Library(response.data.items[0], response.data.references);
+        let library = new Library(response.data.items[0], response.data.refs);
         this.library = library;
         this.schedules = this.library.schedules;
-        this.periods = response.data.references.period;
+        this.periods = response.data.refs.period;
       },
       components: { Schedules },
       i18n,

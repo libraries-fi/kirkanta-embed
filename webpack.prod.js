@@ -5,7 +5,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 delete config.entry.bootstrap;
 
-module.exports = merge(config, {
+const productionConfig = merge(config, {
   mode: "production",
   output: {
     path: path.resolve(__dirname, "public"),
@@ -36,3 +36,23 @@ module.exports = merge(config, {
   },
   plugins: [new UglifyJsPlugin]
 });
+
+// console.log(Object.keys(productionConfig.entry).map((key) => {
+//   // return merge.strategy({entry: 'prepend'})(productionConfig, {[key]: productionConfig.entry[key]});
+//
+//   const buildConfig = merge(productionConfig, {});
+//   buildConfig.entry = {[key]: productionConfig.entry[key]};
+//
+//   return buildConfig;
+// }));
+
+// module.exports = Object.keys(productionConfig.entry).map((key) => {
+//   // return merge.strategy({entry: 'prepend'})(productionConfig, {[key]: productionConfig.entry[key]});
+//
+//   const buildConfig = merge(productionConfig, {});
+//   buildConfig.entry = {[key]: productionConfig.entry[key]};
+//
+//   return buildConfig;
+// });
+
+module.exports = productionConfig;

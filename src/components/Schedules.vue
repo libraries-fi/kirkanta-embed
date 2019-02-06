@@ -1,6 +1,6 @@
 <template>
   <div class="zxc zxc-weekly-schedules" :data-expand-mode="expandMode" v-if="schedules">
-    <div class="toolbar">
+    <div class="toolbar" v-if="schedules.length">
       <button type="button" v-on:click="previousWeek" class="btn btn-link btn-sm">
         <font-awesome-icon :icon="faWeekPrev"/>
       </button>
@@ -10,7 +10,7 @@
       </button>
     </div>
 
-    <table class="table table-sm table-borderless schedules">
+    <table class="table table-sm table-borderless schedules" v-if="schedules.length">
       <thead class="sr-only">
         <tr>
           <th class="col-date">{{ $t("Date") }}</th>
@@ -34,8 +34,8 @@
           </td>
           <td v-if="day.closed" class="col-time closed">{{ $t("Closed") }}</td>
           <td v-else class="col-time">
-            <date-time :time="day.opens" format="p" formal/>
-            <date-time :time="day.closes" format="p" formal/>
+            <date-time :time="day | opens" format="p" formal/>
+            <date-time :time="day | closes" format="p" formal/>
           </td>
         </tr>
         <tr v-for="time of day.times" class="time-entry" :class="['closed', 'regular', 'self-service'][time.status]">
@@ -52,8 +52,9 @@
           <td colspan="2">{{ day.info }}</td>
         </tr>
       </tbody>
-
     </table>
+
+    <p v-else>{{ $t("There are no schedules for this library.") }}</p>
 
     <div class="period-info" v-if="periodInfo.length">
       <template v-for="period of periodInfo">
@@ -73,8 +74,8 @@
 </template>
 
 <script>
-  import format from "date-fns/format";
-  import toDate from "date-fns/toDate";
+  import { format, toDate } from 'date-fns'
+  import { first, last } from '../mixins'
 
   import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
   import { faAngleDoubleLeft, faAngleDoubleRight, faArrowCircleDown, faMinusSquare } from "@fortawesome/free-solid-svg-icons";
@@ -120,7 +121,15 @@
         this.i = Math.min(this.i + 1, (this.schedules.length / 7) - 1);
       },
     },
-    components: { DateTime, FontAwesomeIcon }
+    filters: {
+      opens(day) {
+        return first(day.times).from;
+      },
+      closes(day) {
+        return last(day.times).to;
+      }
+    },
+    components: { DateTime, FontAwesomeIcon },
   };
 </script>
 

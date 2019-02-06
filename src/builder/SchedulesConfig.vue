@@ -24,7 +24,7 @@
 </template>
 
 <script>
-  import apiCall from "../utils/api-call";
+  import apiCall from "../mixins/api-call";
   import AutoComplete from "./AutoComplete.vue";
 
   const AUTOCOMPLETE_LIMIT = 10;

@@ -7,13 +7,6 @@ class Library {
   constructor(data, refs) {
     this.__data = data;
     this.__refs = refs;
-
-    if ("schedules" in data) {
-      data.schedules = [...new SchedulesV3Adapter(data.schedules)];
-
-      // let today = format(new Date, "YYYY-MM-dd");
-      // data.schedules.forEach(day => day.expanded = (day.date == today));
-    }
   }
 
   get id() {

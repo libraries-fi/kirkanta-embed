@@ -17,8 +17,8 @@
 
         <section class="row">
           <div class="col-md-2 cover-photo-cell">
-            <div v-if="library.cover" class="cover-photo-frame">
-              <img :src="library.cover.files.small" :alt="library.cover.name" class="cover-photo"/>
+            <div v-if="library.coverPhoto" class="cover-photo-frame">
+              <img :src="library.coverPhoto.small.url" alt="" class="cover-photo"/>
             </div>
             <div v-else class="no-photo">
               <font-awesome-icon :icon="faImage" size="6x"/>
@@ -74,7 +74,7 @@
               <p>
                 {{ library.name }}<br/>
                 <template v-if="library.mailAddress.street">{{ library.mailAddress.street }}<br/></template>
-                <template v-if="library.mailAddress.box_number">P.O. Box {{ library.mailAddress.box_number}}<br/></template>
+                <template v-if="library.mailAddress.boxNumber">{{ $t('P.O. Box') }} {{ library.mailAddress.boxNumber}}<br/></template>
                 <template>{{ library.mailAddress.zipcode }} {{ library.mailAddress.area.toUpperCase() }}<br/></template>
               </p>
             </div>
@@ -107,25 +107,15 @@
         </section>
       </div>
 
-      <section v-if="library.phoneNumbers" class="content-tab" id="tab-phones" :data-active-tab="$route.name == 'phones'">
-        <h2>{{ $t("Phone numbers") }}</h2>
-        <table class="table table-sm">
-          <thead>
-            <tr>
-              <th>{{ $t("Number") }}</th>
-              <th>{{ $t("Department") }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="phone in library.phoneNumbers">
-              <td>{{ phone.number }}</td>
-              <td>{{ phone.name }}</td>
-            </tr>
-          </tbody>
-        </table>
+      <section v-if="hasContactInfo()" class="visual-section">
+        <h2>
+          <font-awesome-icon :icon="faAddressCard"/>
+          {{ $t('contact-info.contact-details')}}
+        </h2>
+        <contact-info :library="library"/>
       </section>
 
-      <section v-if="library.services.length > 0" class="content-tab" id="tab-services" :data-active-tab="$route.name == 'services'">
+      <section v-if="library.services.length" class="content-tab" id="tab-services" :data-active-tab="$route.name == 'services'">
         <services :services="library.services"/>
       </section>
     </div>
@@ -134,12 +124,13 @@
 
 <script>
   import Library from "../entity/library";
-  import apiCall from "../utils/api-call";
+  import apiCall from "../mixins/api-call";
   import Services from "./Services.vue";
   import Schedules from "./Schedules.vue";
+  import ContactInfo from "./ContactInfo";
 
   import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-  import { faQuoteRight, faLink, faLongArrowAltLeft } from "@fortawesome/free-solid-svg-icons";
+  import { faAddressCard, faQuoteRight, faLink, faLongArrowAltLeft } from "@fortawesome/free-solid-svg-icons";
   import {
     faFacebookSquare,
     faFlickr,
@@ -164,10 +155,11 @@
 
   export default {
     props: ["id", "lang", "tabbed", "embedded", "expandMode"],
-    components: { FontAwesomeIcon, Services, Schedules },
+    components: { ContactInfo, FontAwesomeIcon, Services, Schedules },
     data: () => ({
       library: null,
       activeTab: "library",
+      faAddressCard,
       faQuoteRight,
       faImage,
       faLongArrowAltLeft,
@@ -196,31 +188,23 @@
         } else {
           return null;
         }
-      }
+      },
     },
     async mounted() {
       let query = {
-        id: this.id,
-        limit: 1,
-        with: "extra links mail_address pictures phone_numbers schedules services",
+        with: "departments emailAddresses links mailAddress persons pictures phoneNumbers schedules services transitInfo",
         "period.start": "0w",
         "period.end": "4w",
       };
 
-      let response = await apiCall("/library", this.lang, query);
-      let library = response.data.items[0];
-
-      if (library) {
-        this.library = new Library(library);
-      } else {
-        throw "Library '" + query.id + "' not found";
-      }
+      let response = await apiCall(`/library/${this.id}`, this.lang, query);
+      this.library = response.data.data
     },
     methods: {
-      returnToList: function() {
+      returnToList() {
         this.$emit("return-to-main");
       },
-      hasPublicTransportation: function() {
+      hasPublicTransportation() {
         if (this.library.transit) {
           for (let [field, info] of Object.entries(this.library.transit)) {
             if (info && info.length) {
@@ -230,7 +214,10 @@
         }
         return false;
       },
-      linkIcon: function(link) {
+      hasContactInfo() {
+        return (this.library.links.length + this.library.emailAddresses.length + this.library.phoneNumbers.length) > 0;
+      },
+      linkIcon(link) {
         let icon_class = faLink;
 
         for (let [rx, icon] of icon_map) {

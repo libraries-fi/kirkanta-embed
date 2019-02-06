@@ -70,7 +70,9 @@ module.exports = {
     autoprefixer,
   ],
   resolve: {
+    extensions: ['.js', '.vue', '.json'],
     alias: {
+      '@': path.resolve('./src'),
       "vue$": "vue/dist/vue.esm.js",
       "vuex$": "vuex/dist/vuex.esm.js",
       "clipboard": "clipboard/dist/clipboard.min.js",

@@ -9,6 +9,7 @@ Day: Päivä
 Times: Ajat
 Week: Viikko
 Closed: Kiinni
+'There are no schedules for this library.': Kirjastolla ei ole aukiolotietoja.
 
 # Display
 Location: Sijainti
@@ -28,6 +29,7 @@ Service hours: Aukioloajat
 Links to other websites: Linkkejä muualle verkossa
 Transit directions: Saapumisohjeet
 Parking instructions: Pysäköinti
+P.O. Box: PL
 
 # Services
 Web services: Verkkopalvelut
@@ -39,3 +41,11 @@ Collections: Kokoelmat
 # Search
 Library search: Kirjastohaku
 Search by name or municipality: Hae kirjastoa tai kuntaa
+
+contact-info:
+  email: Sähköpostiosoite
+  phone: Puhelinnumero
+  link: Verkkosivu
+  common: Yleiset
+  department: Osasto
+  contact-details: Yhteystiedot

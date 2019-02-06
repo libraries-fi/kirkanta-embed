@@ -52,7 +52,7 @@
 <script>
   import AutoComplete from "./AutoComplete.vue";
 
-  import { libraryAutoComplete, cityAutoComplete, consortiumAutoComplete } from "../utils/autocomplete";
+  import { libraryAutoComplete, cityAutoComplete, consortiumAutoComplete } from "../mixins/autocomplete";
 
   export default {
     data: () => ({
