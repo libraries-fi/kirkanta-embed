@@ -7,7 +7,6 @@
         <input type="hidden" name="id" :value="form.library"/>
         <input type="hidden" name="city" :value="form.city"/>
         <input type="hidden" name="type" :value="form.type"/>
-        <input type="hidden" name="branch_type" :value="form.branch_type"/>
 
         <div class="input-group">
           <input type="search" class="form-control form-control-lg" name="q" :placeholder="$t('Search by name or municipality') " v-model="form.q" @input="trySubmit"/>
@@ -25,7 +24,7 @@
       <li v-for="library of result" class="col-md-2">
         <div class="library-card">
           <div class="icon">
-            <img v-if="library.cover" :src="library.cover.files.small" alt=""/>
+            <img v-if="library.coverPhoto" :src="library.coverPhoto.small.url" alt=""/>
           </div>
           <div class="info">
             <a :href="`${$t('base_url')}/${library.slug}`" @click="onClickLibrary" :data-id="library.id">{{ library.name }}</a>
@@ -95,7 +94,7 @@
 
         let query = {
           sort: "name",
-          with: "pictures schedules",
+          with: "schedules",
           "period.start": "0d",
           "period.end": "1d",
         };

@@ -19,8 +19,18 @@ class SearchWidget extends Vue {
       city: params.city,
       consortium: params.consortium,
       type: params.type,
-      branch_type: params.branch_type,
     };
+
+    if (params.branch_type) {
+      /**
+       * Property 'type' was called 'branch_type' in old Kirkanta and hence
+       * in widgets that used API v3 as well. Support this option so libraries
+       * do not need to update their widget configurations by hand.
+       */
+      params.type = params.branch_type.replace(/\blibrary\b/, 'municipal');
+
+      console.log('TYPE', params.type);
+    }
 
     let router = new Router(Object.assign(routerConfig, {
       routes: [

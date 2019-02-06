@@ -25,10 +25,10 @@
         </details>
       </b-form-group>
 
-      <b-form-group id="option-branch-type" label-for="o-branch-type">
+      <b-form-group id="option-type" label-for="o-type">
         <details>
           <summary>{{ $t("Choose library types") }}</summary>
-          <b-form-checkbox-group id="o-branch-type" name="branch_type" v-model="options.branch_type" :options="branchTypeOptions"/>
+          <b-form-checkbox-group id="o-type" name="type" v-model="options.type" :options="typeOptions"/>
         </details>
       </b-form-group>
     </div>
@@ -64,23 +64,19 @@
         library: null,
         city: null,
         consortium: null,
-        branch_type: null,
+        type: null,
       },
-      // typeOptions: [
-      //   { value: "library", text: "Library" },
-      //   { value: "main_library", text: "Main library" },
-      // ],
-      branchTypeOptions: null
+      typeOptions: null
     }),
     created() {
-      this.branchTypeOptions = [
+      this.typeOptions = [
         { value: "library main_library", text: this.$t("Municipal libraries") },
         { value: "mobile", text: this.$t("Mobile libraries") },
         // { value: "vocational_college", text: this.$t("Vocational college library") },
         { value: "polytechnic", text: this.$t("Polytechnic libraries") },
         { value: "university", text: this.$t("University libraries") },
         { value: "special", text: this.$t("Special libraries") },
-        { value: "regional home_service institutional children school vocational_college", text: this.$t("Other") },
+        { value: "home_service institutional children school vocational_college", text: this.$t("Other") },
       ];
     },
     methods: {
