@@ -40,8 +40,16 @@
             let date = toDate(this.date)
             let formatted = format(date, this.format, {locale: this.locale})
 
+            /**
+             * HACK: Drop year if displayed value is from current year.
+             */
             if (short && this.format.substr(-1) == 'P' && date.getFullYear() == (new Date()).getFullYear()) {
               formatted = formatted.substr(0, formatted.length - 4).replace(/[\s,]+$/, '')
+
+              /**
+               * HACK: reformat value for Swedish locale.
+               */
+              formatted = formatted.replace(/(\d+)-(\d+)-/, '$1.$2.')
             }
             return formatted
           } else {
