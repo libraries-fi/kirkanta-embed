@@ -17,14 +17,7 @@
     props: ['date', 'time', 'format', 'formal', 'short'],
     computed: {
       locale () {
-        let p = this.$parent
-        while (p.$parent) { p = p.$parent }
-
-        if (p.options && p.options.lang) {
-          return locales[p.options.lang]
-        } else {
-          return fi
-        }
+        return locales[this.$i18n.locale] || fi
       },
       wrap () {
         return typeof this.formal !== 'undefined'
