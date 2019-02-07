@@ -4,7 +4,7 @@ builder:
   custom-style: Redigera stilen
   language: Språk
   library: Bibliotek
-  options: Inställningars
+  options: Inställningar
   preview: Förhandsvisning
   save: Spara
   schedules: Öppettider
@@ -41,23 +41,23 @@ schedules:
     all: Alla dagar
     current-day: Bara innevarande dag
     none: Ingenting
-    title: ~
+    title: Utvidgade öppettider
 
 search:
   consortiums:
-    info: Begränsa sökningnen till de valda biblioteksnätverken.
+    info: Begränsa sökningen till de valda biblioteksnätverken.
     title: Välj biblioteksnätverk
   libraries:
     choose-types: Välj bibliotekstyper
-    info: Begränsa sökningnen till bibliotek.
+    info: Begränsa sökningen till bibliotek.
     title: Välj bibliotek
     type:
       mobile: Biblioteksbussar
       municipal: Kommunbibliotek
-      other: ~
+      other: Övriga
       polytechnic: Yrkeshögskolebibliotek
       special: Specialbibliotek
       university: Universitetsbibliotek
   municipalities:
-    info: Begränsa sökningnen till de valda kommunerna.
+    info: Begränsa sökningen till de valda kommunerna.
     title: Välj kommuner
