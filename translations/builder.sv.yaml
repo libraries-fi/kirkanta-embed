@@ -1,51 +1,63 @@
-Widget builder: Verktyg för gränssnittskomponenter
-View embed code: Visa koden för gränssnittskomponenten
-None: Ingenting
-Expand schedules: Aukiolojen laajentaminen
-Current day only: Bara innevarande dag
-All days: Alla dagar
-Options: Inställningars
-Schedules: Öppettider
-Basic settings: Allmänna inställningar
-Refresh: Uppdatera
-Custom style: Redigera stilen
-Library: Bibliotek
-Language: Språk
-"- Select widget -": "- Välj gränssnittskomponent -"
-"- Automatic -": "- Automatiskt -"
-Finnish: Finska
-English: Engelska
-Swedish: Svenska
-Preview: Förhandsvisning
-
-Save: Spara
-Copy: Kopiera
-
-Choose municipalities: Välj kommuner
-Choose consortiums: Välj biblioteksnätverk
-Choose libraries: Välj bibliotek
-Choose library types: Välj bibliotekstyper
-
-Restrict available libraries.: Begränsa sökningnen till bibliotek.
-Restrict search to selected consortiums.: Begränsa sökningnen till de valda biblioteksnätverken.
-Restrict search to selected municipalities.: Begränsa sökningnen till de valda kommunerna.
-
-Municipal libraries: Kommunbibliotek
-Mobile libraries: Biblioteksbussar
-Polytechnic libraries: Yrkeshögskolebibliotek
-University libraries: Universitetsbibliotek
-Special libraries: Specialbibliotek
-Other: Muut
-
-Library Introduction: Presentation av biblioteket
-Library Search: Sök bibliotek
+builder:
+  basic-settings: Allmänna inställningar
+  copy: Kopiera
+  custom-style: Redigera stilen
+  language: Språk
+  library: Bibliotek
+  options: Inställningars
+  preview: Förhandsvisning
+  save: Spara
+  schedules: Öppettider
+  show-code: Visa koden för gränssnittskomponenten
+  title: Verktyg för gränssnittskomponenter
+  placeholder:
+    automatic: '- Automatiskt -'
+    widget: '- Välj gränssnittskomponent -'
+  widget:
+    display: Presentation av biblioteket
+    schedules: Öppettider
+    search: Sök bibliotek
 
 help:
-  intro: Med hjäp av det här verktyget kan du bygga en gränssnittskomponent för dina egna sidor.
-  bulletins:
-    p1: Välj i menyn vilken typ av gränssnittskomponent du vill ha.
-    p2: Mata in inställningarna.
-    p3: Koden för gränssnittskomponenten hittar du under förhandsvisningen vid "Visa koden för gränssnittskomponenten"
-    p4: Klipp ut koden och klistra in den på din sida på den plats där du vill att gränssnittskomponenten ska synas.
+  intro: With this utility you can build a widget for your own website.
   advanced: >
-    <b>Avancerade användare</b>: Verktyget tillåter att ändra på gränssnittskomponentens utseende med hjälp av css. Du kan skriva in css-stilarna direkt i det erbjudna textfältet eller länka till en utomstående dokumentmall.
+    <b>Advanced users</b>: This tool allows for configuring the widget appearance using CSS.
+    It is possible to write the CSS straight into the text box or use it to link to an
+    external stylesheet.
+  bulletins:
+    p1: Choose a widget type from the menu.
+    p2: Configure your widget.
+    p3: Embed code is available below the preview.
+    p4: Copy and paste the code to your web page to the place you want to add the widget.
+
+language:
+  english: Engelska
+  finnish: Finska
+  swedish: Svenska
+
+schedules:
+  title: Öppettider
+  expand:
+    all: Alla dagar
+    current-day: Bara innevarande dag
+    none: Ingenting
+    title: ~
+
+search:
+  consortiums:
+    info: Begränsa sökningnen till de valda biblioteksnätverken.
+    title: Välj biblioteksnätverk
+  libraries:
+    choose-types: Välj bibliotekstyper
+    info: Begränsa sökningnen till bibliotek.
+    title: Välj bibliotek
+    type:
+      mobile: Biblioteksbussar
+      municipal: Kommunbibliotek
+      other: ~
+      polytechnic: Yrkeshögskolebibliotek
+      special: Specialbibliotek
+      university: Universitetsbibliotek
+  municipalities:
+    info: Begränsa sökningnen till de valda kommunerna.
+    title: Välj kommuner

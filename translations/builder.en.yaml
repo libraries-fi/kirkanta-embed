@@ -1,62 +1,63 @@
 builder:
   basic-settings: Basic settings
+  copy: Copy
+  custom-style: Custom style
+  language: Language
   library: Library
   options: Options
-  language: Language
-  custom-style: Custom style
-  save: Save
-  show-code: View embed code
-  copy: Copy
   preview: Preview
+  save: Save
+  schedules: Schedules
+  show-code: View embed code
   title: Widget builder
   placeholder:
     automatic: '- Automatic -'
     widget: '- Select widget -'
   widget:
+    display: Library introduction
     schedules: Service hours
     search: Library search
-    display: Library introduction
-
-language:
-  finnish: Finnish
-  english: English
-  swedish: Swedish
-
-schedules:
-  title: Schedules
-  expand:
-    title: Expand schedules
-    all: All days
-    none: None
-    current-day: Current day only
-
-search:
-  municipalities:
-    title: Choose municipalities
-    info: Restrict search to selected municipalities.
-  consortiums:
-    title: Choose consortiums
-    info: Restrict search to selected consortiums.
-  libraries:
-    title: Choose libraries
-    info: Restrict available libraries.
-    choose-types: Choose library types
-    type:
-      municipal: Municipal libraries
-      mobile: Mobile libraries
-      polytechnic: Polytechnic libraries
-      university: University libraries
-      special: Special libraries
-      other: Other types
 
 help:
   intro: With this utility you can build a widget for your own website.
+  advanced: >
+    <b>Advanced users</b>: This tool allows for configuring the widget appearance using CSS.
+    It is possible to write the CSS straight into the text box or use it to link to an
+    external stylesheet.
   bulletins:
     p1: Choose a widget type from the menu.
     p2: Configure your widget.
     p3: Embed code is available below the preview.
     p4: Copy and paste the code to your web page to the place you want to add the widget.
-  advanced: >
-    <b>Advanced users</b>: This tool allows for configuring the widget appearance using CSS.
-    It is possible to write the CSS straight into the text box or use it to link to an
-    external stylesheet.
+
+language:
+  english: English
+  finnish: Finnish
+  swedish: Swedish
+
+schedules:
+  title: Schedules
+  expand:
+    all: All days
+    current-day: Current day only
+    none: None
+    title: Expand schedules
+
+search:
+  consortiums:
+    info: Restrict search to selected consortiums.
+    title: Choose consortiums
+  libraries:
+    choose-types: Choose library types
+    info: Restrict available libraries.
+    title: Choose libraries
+    type:
+      mobile: Mobile libraries
+      municipal: Municipal libraries
+      other: Other types
+      polytechnic: Polytechnic libraries
+      special: Special libraries
+      university: University libraries
+  municipalities:
+    info: Restrict search to selected municipalities.
+    title: Choose municipalities

@@ -1,54 +1,22 @@
 builder:
   basic-settings: Perustiedot
-  library: Kirjasto
-  schedules: Aukiolotiedot
-  options: Asetukset
-  language: Kieli
-  custom-style: Muokkaa tyyliä
-  save: Tallenna
-  show-code: Näytä upokekoodi
   copy: Kopioi
+  custom-style: Muokkaa tyyliä
+  language: Kieli
+  library: Kirjasto
+  options: Asetukset
   preview: Esikatselu
+  save: Tallenna
+  schedules: Aukiolotiedot
+  show-code: Näytä upokekoodi
   title: Upoketyökalu
   placeholder:
     automatic: '- Automaattinen -'
     widget: '- Valitse upoke -'
   widget:
+    display: Kirjaston esittely
     schedules: Aukioloajat
     search: Kirjastohaku
-    display: Kirjaston esittely
-
-language:
-  finnish: Suomi
-  english: Englanti
-  swedish: Ruotsi
-
-schedules:
-  title: Aukiolotiedot
-  expand:
-    title: Laajenna aukiolot
-    all: Näytä kaikki
-    none: Ei käytössä
-    current-day: Kuluva päivä
-
-search:
-  municipalities:
-    title: Valitse kunnat
-    info: Hae vain valituista kunnista.
-  consortiums:
-    title: Valitse kirjastokimpat
-    info: Rajoita haku valittuihin kimppoihin.
-  libraries:
-    title: Valitse kirjastot
-    info: Voit valita näytettävät kirjastot
-    choose-types: Valitse kirjastotyypit
-    type:
-      municipal: Kunnankirjastot
-      mobile: Kirjastotoautot
-      polytechnic: AMK-kirjastot
-      university: Yliopistokirjastot
-      special: Erikoiskirjastot
-      other: Muut kirjastot
 
 help:
   intro: Tällä työkalulla voit rakentaa omille sivuillesi liitettävän upokkeen.
@@ -61,3 +29,35 @@ help:
     <b>Kehittyneet käyttäjät</b>: työkalu sallii upokkeen ulkoasun muuttamisen css:ää käyttäen.
     Voit kirjoittaa css-tyylit suoraan tarjottuun tekstikenttään tai linkittää ulkoiseen
     tyylitiedostoon.
+
+language:
+  english: Englanti
+  finnish: Suomi
+  swedish: Ruotsi
+
+schedules:
+  title: Aukiolotiedot
+  expand:
+    all: Näytä kaikki
+    current-day: Kuluva päivä
+    none: Ei käytössä
+    title: Laajenna aukiolot
+
+search:
+  consortiums:
+    info: Rajoita haku valittuihin kimppoihin.
+    title: Valitse kirjastokimpat
+  libraries:
+    choose-types: Valitse kirjastotyypit
+    info: Voit valita näytettävät kirjastot
+    title: Valitse kirjastot
+    type:
+      mobile: Kirjastotoautot
+      municipal: Kunnankirjastot
+      other: Muut kirjastot
+      polytechnic: AMK-kirjastot
+      special: Erikoiskirjastot
+      university: Yliopistokirjastot
+  municipalities:
+    info: Hae vain valituista kunnista.
+    title: Valitse kunnat
