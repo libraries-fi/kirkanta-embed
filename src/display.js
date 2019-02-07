@@ -5,6 +5,7 @@ import LibraryInfo from '@/components/LibraryInfo'
 
 import fi from 'messages.fi.json'
 import sv from 'messages.sv.json'
+import en from 'messages.en.json'
 import routerConfig from '@/init.router'
 
 Vue.use(Router)
@@ -27,7 +28,7 @@ class LibraryDisplayWidget extends Vue {
 
     const i18n = new VueI18n({
       locale: options.lang,
-      messages: { fi, sv }
+      messages: { fi, sv, en }
     })
 
     let router = new Router(Object.assign(routerConfig, {

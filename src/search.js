@@ -6,6 +6,8 @@ import LibraryInfo from '@/components/LibraryInfo'
 
 import fi from 'messages.fi.json'
 import sv from 'messages.sv.json'
+import en from 'messages.en.json'
+
 import routerConfig from '@/init.router'
 
 Vue.use(Router)
@@ -28,8 +30,6 @@ class SearchWidget extends Vue {
        * do not need to update their widget configurations by hand.
        */
       params.type = params.branch_type.replace(/\blibrary\b/, 'municipal')
-
-      console.log('TYPE', params.type)
     }
 
     let router = new Router(Object.assign(routerConfig, {
@@ -70,7 +70,7 @@ class SearchWidget extends Vue {
 
     const i18n = new VueI18n({
       locale: params.lang,
-      messages: { fi, sv }
+      messages: { fi, sv, en }
     })
 
     super({

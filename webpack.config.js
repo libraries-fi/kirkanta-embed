@@ -78,6 +78,7 @@ module.exports = {
       "clipboard": "clipboard/dist/clipboard.min.js",
       "messages.fi.json": path.resolve("translations/messages.fi.yaml"),
       "messages.sv.json": path.resolve("translations/messages.sv.yaml"),
+      "messages.en.json": path.resolve("translations/messages.en.yaml"),
       "builder.fi.json": path.resolve("translations/builder.fi.yaml"),
       "builder.sv.json": path.resolve("translations/builder.sv.yaml"),
       "builder.en.json": path.resolve("translations/builder.en.yaml"),
