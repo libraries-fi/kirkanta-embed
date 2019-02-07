@@ -84,8 +84,6 @@ class SearchWidget extends Vue {
       router,
       i18n
     })
-
-    // router.push({name: "library", params: {id: 84787, lang: "fi"}});
   }
 }
 
