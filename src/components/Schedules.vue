@@ -4,7 +4,7 @@
       <button type="button" v-on:click="previousWeek" class="btn btn-link btn-sm">
         <font-awesome-icon :icon="faWeekPrev"/>
       </button>
-      <h2 class="week-label h3">{{ $t("Week") }} {{ week }}</h2>
+      <h2 class="week-label h3">{{ $t('schedules.week') }} {{ week }}</h2>
       <button type="button" v-on:click="nextWeek" class="btn btn-link btn-sm">
         <font-awesome-icon :icon="faWeekNext"/>
       </button>
@@ -13,9 +13,9 @@
     <table class="table table-sm table-borderless schedules" v-if="schedules.length">
       <thead class="sr-only">
         <tr>
-          <th class="col-date">{{ $t("Date") }}</th>
-          <th class="col-weekday">{{ $t("Day") }}</th>
-          <th class="col-time">{{ $t("Times") }}</th>
+          <th class="col-date">{{ $t('schedules.date') }}</th>
+          <th class="col-weekday">{{ $t('schedules.day') }}</th>
+          <th class="col-time">{{ $t('schedules.times') }}</th>
         </tr>
       </thead>
 
@@ -32,16 +32,16 @@
               <font-awesome-icon :icon="faExpand" v-else/>
             </button>
           </td>
-          <td v-if="day.closed" class="col-time closed">{{ $t("Closed") }}</td>
+          <td v-if="day.closed" class="col-time closed">{{ $t('schedules.closed') }}</td>
           <td v-else class="col-time">
             <date-time :time="day | opens" format="p" formal/>
             <date-time :time="day | closes" format="p" formal/>
           </td>
         </tr>
         <tr v-for="time of day.times" class="time-entry" :class="['closed', 'regular', 'self-service'][time.status]">
-          <td v-if="time.status == 0" class="col-status">{{ $t("Library closed") }}</td>
-          <td v-if="time.status == 1" class="col-status">{{ $t("Staff present") }}</td>
-          <td v-if="time.status == 2" class="col-status">{{ $t("Self-service") }}</td>
+          <td v-if="time.status == 0" class="col-status">{{ $t('schedules.library-closed') }}</td>
+          <td v-if="time.status == 1" class="col-status">{{ $t('schedules.staff') }}</td>
+          <td v-if="time.status == 2" class="col-status">{{ $t('schedules.self-service') }}</td>
 
           <td class="col-time">
             <date-time :time="time.from" format="p"/>
@@ -54,7 +54,7 @@
       </tbody>
     </table>
 
-    <p v-else>{{ $t("There are no schedules for this library.") }}</p>
+    <p v-else>{{ $t('schedules.empty') }}</p>
 
     <div class="period-info" v-if="periodInfo.length">
       <template v-for="period of periodInfo">
@@ -64,7 +64,7 @@
             <date-time :date="period.validUntil" format="P" formal short/>:
           </b>
           <b v-else>
-            {{ $t('From') }} <date-time :date="period.validFrom" format="P" formal short/>:
+            {{ $t('schedules.from') }} <date-time :date="period.validFrom" format="P" formal short/>:
           </b>
           <span>{{ period.description }}</span>
         </p>

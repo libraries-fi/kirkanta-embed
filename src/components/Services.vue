@@ -1,6 +1,6 @@
 <template>
   <div @click="popupClose" class="row services-list">
-    <h2 class="sr-only">{{ $t("Services") }}</h2>
+    <h2 class="sr-only">{{ $t('services.title') }}</h2>
 
     <div class="col-md-2" v-for="column of columns">
       <div class="services-list-group" v-for="group of column">
@@ -32,7 +32,6 @@
     data: () => ({
       expandedService: null,
       activePopups: []
-      // groupLabels: new Map,
     }),
     computed: {
       columns () {
@@ -69,7 +68,7 @@
         for (let [i, service] of this.services.entries()) {
           if (!groups[service.type]) {
             groups[service.type] = {
-              title: this.groupLabels.get(service.type),
+              title: this.$t(`services.type.${service.type}`),
               services: [service]
             }
           } else {
@@ -110,14 +109,6 @@
       }
     },
     created () {
-      this.groupLabels = new Map([
-        ['service', this.$t('Services')],
-        ['room', this.$t('Rooms')],
-        ['hardware', this.$t('Hardware')],
-        ['collection', this.$t('Collections')],
-        ['web_service', this.$t('Web services')]
-      ])
-
       this.$root.$on('bv::popover::show', (event) => {
         if (!event.target.id) {
           let id = Math.ceil(Math.random() * 999999)

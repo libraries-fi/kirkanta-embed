@@ -1,20 +1,50 @@
-"base_url": "https://directory.libraries.fi"
+base-url: https://directory.libraries.fi
 
-schedules:
-  service-hours: Service hours
+contact-info:
+  common: Common
+  contact-details: Contact details
+  department: Department
+  email: Email
+  link: Website
+  phone: Phone number
 
 library:
-  remote-links: Links to other websites
-  introduction: Introduction
-  contact-details: Contact details
-  return-to-list: Return to list
-  location: Location
-  email: Email
-  mail-address: Mail address
-  po-box: P.O. Box
-  transit-directions: Transit directions
   buses: Buses
-  trams: Trams
-  trains: Trains
+  contact-details: Contact details
+  email: Email
+  introduction: Introduction
+  location: Location
+  mail-address: Mail address
   parking: Parking instructions
+  po-box: P.O. Box
   public-transportation: Public transportation
+  remote-links: Links to other websites
+  return-to-list: Return to list
+  trains: Trains
+  trams: Trams
+  transit-directions: Transit directions
+  search:
+    placeholder: Search by name or municipality
+    title: Library search
+
+schedules:
+  closed: Closed
+  date: Date
+  day: Day
+  empty: There are no schedules for this library.
+  from: From
+  library-closed: Library closed
+  self-service: Self-service
+  service-hours: Service hours
+  staff-present: Staff present
+  times: Open
+  week: Week
+
+services:
+  title: Services
+  type:
+    collection: Collections
+    hardware: Hardware
+    room: Rooms
+    service: Services
+    web_service: Web services

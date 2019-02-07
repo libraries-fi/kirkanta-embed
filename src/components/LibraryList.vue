@@ -1,7 +1,7 @@
 <template>
   <div class="zxc zxc-library-list" data-busy>
     <div class="header">
-      <h1>{{ $t("Library search") }}</h1>
+      <h1>{{ $t('library.search.title') }}</h1>
 
       <form @submit.prevent="onSubmit">
         <input type="hidden" name="id" :value="form.library"/>
@@ -9,7 +9,7 @@
         <input type="hidden" name="type" :value="form.type"/>
 
         <div class="input-group">
-          <input type="search" class="form-control form-control-lg" name="q" :placeholder="$t('Search by name or municipality') " v-model="form.q" @input="trySubmit"/>
+          <input type="search" class="form-control form-control-lg" name="q" :placeholder="$t('library.search.placeholder') " v-model="form.q" @input="trySubmit"/>
           <div class="input-group-append">
             <div class="throbber"></div>
             <button type="submit" class="btn btn-primary">
@@ -27,7 +27,7 @@
             <img v-if="library.coverPhoto" :src="library.coverPhoto.small.url" alt=""/>
           </div>
           <div class="info">
-            <a :href="`${$t('base_url')}/${library.slug}`" @click="onClickLibrary" :data-id="library.id">{{ library.name }}</a>
+            <a :href="`${$t('base-url')}/${library.slug}`" @click="onClickLibrary" :data-id="library.id">{{ library.name }}</a>
             <p v-if="library.address">
               {{ library.address.street }},
               {{ library.address.area || library.address.city }}

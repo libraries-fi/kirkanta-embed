@@ -1,68 +1,50 @@
-base_url: 'https://registret.biblioteken.fi'
-
-# Schedules
-Staff present: Personal på plats
-Library closed: Biblioteket är stängt
-Self-service: Meröppet
-Date: Datum
-Day: Dag
-Times: Tider
-Week: Vecka
-Closed: Stängt
-
-# Display
-Location: Plats
-Email: E-post
-Mail address: Postadress
-Public transportation: Kollektivtrafik
-Buses: Bussar
-Trains: Tåg
-Trams: Spårvagnar
-Phone numbers: Telefonnummer
-Number: Nummer
-Department: Avdelning
-Return to list: Gå tillbaka till listan
-Introduction: Presentation
-Contact details: Kontaktuppgifter
-Service hours: Öppettider
-Links to other websites: Länkar till andra webbplatser
-Transit directions: Hitta hit
-Parking instructions: Parkering
-
-# Services
-Web services: Nättjänst
-Services: Tjänst
-Rooms: Rum
-Hardware: Apparat
-Collections: Samling
-
-# Search
-Library search: Sök bibliotek
-Search by name or municipality: Sök bibliotek eller ort
-
+base-url: https://registret.biblioteken.fi
 
 contact-info:
-  email: Sähköpostiosoite
-  phone: Puhelinnumero
-  link: Verkkosivu
-  common: Yleiset
-  department: Osasto
-  contact-details: Yhteystiedot
-
-schedules:
-  service-hours: Aukioloajat
+  common: ~
+  contact-details: Kontaktuppgifter
+  department: Avdelning
+  email: E-post
+  link: ~
+  phone: ~
 
 library:
-  remote-links: Länkar till andra webbplatser
-  introduction: Presentation
-  contact-details: Kontaktuppgifter
-  return-to-list: Gå tillbaka till listan
-  location: Plats
-  email: E-post
-  mail-address: Postadress
-  po-box: PB
-  transit-directions: Hitta hit
   buses: Bussar
-  trams: Spårvagnar
-  trains: Tåg
+  contact-details: Kontaktuppgifter
+  email: E-post
+  introduction: Presentation
+  location: Plats
+  mail-address: Postadress
   parking: Parkering
+  po-box: PB
+  public-transportation: Public transportation
+  remote-links: Länkar till andra webbplatser
+  return-to-list: Gå tillbaka till listan
+  trains: Tåg
+  trams: Spårvagnar
+  transit-directions: Hitta hit
+  search:
+    placeholder: Sök bibliotek eller ort
+    title: Sök bibliotek
+
+schedules:
+  closed: Stängt
+  date: Datum
+  day: Dag
+  empty: ~
+  from: ~
+  library-closed: Biblioteket är stängt
+  self-service: Meröppet
+  service-hours: Aukioloajat
+  staff-present: Personal på plats
+  times: Tider
+  week: Vecka
+
+services:
+  title: Tjänst
+  type:
+    collection: Samling
+    hardware: Apparat
+    room: Rum
+    service: Tjänst
+    web_service: Nättjänst

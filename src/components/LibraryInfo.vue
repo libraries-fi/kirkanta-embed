@@ -83,7 +83,7 @@
 
         <section v-if="hasPublicTransportation()">
           <h2 class="sr-only">{{ $t('library.transit-directions') }}</h2>
-          <h3>{{ $t('public-transportation') }}</h3>
+          <h3>{{ $t('library.public-transportation') }}</h3>
 
           <div class="row">
             <div v-if="library.transit.buses" class="col-md-2">
