@@ -3,31 +3,31 @@
     <div class="details-group">
       <b-form-group id="option-city" label-for="o-city">
         <details>
-          <summary>{{ $t("Choose municipalities") }}</summary>
-          <small class="form-text">{{ $t("Restrict search to selected municipalities.") }}</small>
+          <summary>{{ $t('search.municipalities.title') }}</summary>
+          <small class="form-text">{{ $t('search.municipalities.info') }}</small>
           <auto-complete id="o-city" name="x-city" :value-key="'id'" :label-key="'name'" v-model="options.city" :suggestions="citySuggestions" @input="onCityAutoComplete" :multiple="true"/>
         </details>
       </b-form-group>
 
       <b-form-group id="option-consortium" label-for="o-consortium">
         <details>
-          <summary>{{ $t("Choose consortiums") }}</summary>
-          <small class="form-text">{{ $t("Restrict search to selected consortiums.") }}</small>
+          <summary>{{ $t('search.consortiums.title') }}</summary>
+          <small class="form-text">{{ $t('search.consortiums.info') }}</small>
           <auto-complete id="o-consortium" name="x-consortium" :value-key="'id'" :label-key="'name'" v-model="options.consortium" :suggestions="consortiumSuggestions" @input="onConsortiumAutoComplete" :multiple="true"/>
         </details>
       </b-form-group>
 
       <b-form-group id="option-library" label-for="o-library">
         <details>
-          <summary>{{ $t("Choose libraries") }}</summary>
-          <small class="form-text">{{ $t("Restrict available libraries.") }}</small>
+          <summary>{{ $t('search.libraries.title') }}</summary>
+          <small class="form-text">{{ $t('search.libraries.info') }}</small>
           <auto-complete id="o-library" name="x-library" :value-key="'id'" :label-key="'name'" v-model="options.library" :suggestions="librarySuggestions" @input="onLibraryAutoComplete" :multiple="true"/>
         </details>
       </b-form-group>
 
       <b-form-group id="option-type" label-for="o-type">
         <details>
-          <summary>{{ $t("Choose library types") }}</summary>
+          <summary>{{ $t('search.libraries.choose-types') }}</summary>
           <b-form-checkbox-group id="o-type" name="type" v-model="options.type" :options="typeOptions"/>
         </details>
       </b-form-group>
@@ -36,12 +36,12 @@
     <div class="details-group">
       <b-form-group id="o-expand-mode">
         <details>
-          <summary>{{ $t("Schedules") }}</summary>
-          <span class="section-label">{{ $t("Expand schedules") }}</span>
+          <summary>{{ $t('schedules.title') }}</summary>
+          <span class="section-label">{{ $t('schedules.expand.title') }}</span>
           <b-form-radio-group v-model="options.expandMode">
-            <b-form-radio :value="null">{{ $t("None") }}</b-form-radio>
-            <b-form-radio value="current">{{ $t("Current day only") }}</b-form-radio>
-            <b-form-radio value="all">{{ $t("All days") }}</b-form-radio>
+            <b-form-radio :value="null">{{ $t('schedules.expand.none') }}</b-form-radio>
+            <b-form-radio value="current">{{ $t('schedules.expand.current-day') }}</b-form-radio>
+            <b-form-radio value="all">{{ $t('schedules.expand.all') }}</b-form-radio>
           </b-form-radio-group>
         </details>
       </b-form-group>
@@ -70,13 +70,13 @@
     }),
     created () {
       this.typeOptions = [
-        { value: 'library main_library', text: this.$t('Municipal libraries') },
-        { value: 'mobile', text: this.$t('Mobile libraries') },
+        { value: 'library main_library', text: this.$t('search.libraries.type.municipal') },
+        { value: 'mobile', text: this.$t('search.libraries.type.mobile') },
         // { value: "vocational_college", text: this.$t("Vocational college library") },
-        { value: 'polytechnic', text: this.$t('Polytechnic libraries') },
-        { value: 'university', text: this.$t('University libraries') },
-        { value: 'special', text: this.$t('Special libraries') },
-        { value: 'home_service institutional children school vocational_college', text: this.$t('Other') }
+        { value: 'polytechnic', text: this.$t('search.libraries.type.polytechnic') },
+        { value: 'university', text: this.$t('search.libraries.type.university') },
+        { value: 'special', text: this.$t('search.libraries.type.special') },
+        { value: 'home_service institutional children school vocational_college', text: this.$t('search.libraries.type.other') }
       ]
     },
     methods: {
@@ -90,7 +90,6 @@
         this.consortiumSuggestions = await consortiumAutoComplete(name)
       },
       onSelectCity (city) {
-        console.log('SELECTED', city)
         this.cityValues.push(city)
       },
       onChange (event) {

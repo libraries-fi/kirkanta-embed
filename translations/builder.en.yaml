@@ -1,3 +1,54 @@
+builder:
+  basic-settings: Basic settings
+  library: Library
+  options: Options
+  language: Language
+  custom-style: Custom style
+  save: Save
+  show-code: View embed code
+  copy: Copy
+  preview: Preview
+  title: Widget builder
+  placeholder:
+    automatic: '- Automatic -'
+    widget: '- Select widget -'
+  widget:
+    schedules: Service hours
+    search: Library search
+    display: Library introduction
+
+language:
+  finnish: Finnish
+  english: English
+  swedish: Swedish
+
+schedules:
+  title: Schedules
+  expand:
+    title: Expand schedules
+    all: All days
+    none: None
+    current-day: Current day only
+
+search:
+  municipalities:
+    title: Choose municipalities
+    info: Restrict search to selected municipalities.
+  consortiums:
+    title: Choose consortiums
+    info: Restrict search to selected consortiums.
+  libraries:
+    title: Choose libraries
+    info: Restrict available libraries.
+    choose-types: Choose library types
+    type:
+      municipal: Municipal libraries
+      mobile: Mobile libraries
+      polytechnic: Polytechnic libraries
+      university: University libraries
+      special: Special libraries
+      other: Other types
+
 help:
   intro: With this utility you can build a widget for your own website.
   bulletins:

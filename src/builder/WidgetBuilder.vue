@@ -7,23 +7,16 @@
           </div>
 
           <fieldset class="options" v-if="widget">
-            <legend>{{ $t("Options") }}</legend>
+            <legend>{{ $t('builder.options') }}</legend>
 
             <router-view @options="onWidgetOptions"/>
 
-            <b-form-group id="option-lang" :label="$t('Language')" label-for="o-lang">
+            <b-form-group id="option-lang" :label="$t('builder.language')" label-for="o-lang">
               <b-form-select id="o-lang" v-model="options.lang" :options="languageOptions"/>
             </b-form-group>
 
-            <!-- <div class="form-group">
-              <b-form-checkbox id="o-nosandbox" v-model="options.nosandbox">
-                Advanced mode
-              </b-form-checkbox>
-            </div> -->
-
             <div class="form-group">
-              <!-- <button type="submit" class="btn btn-primary">{{ $t("Refresh") }}</button> -->
-              <button type="button" class="btn btn-link" @click="state.customizeCss = true">{{ $t("Custom style") }}</button>
+              <button type="button" class="btn btn-link" @click="state.customizeCss = true">{{ $t('builder.custom-style') }}</button>
             </div>
           </fieldset>
         </form>
@@ -33,17 +26,17 @@
         <div id="custom-css-popup" v-if="state.customizeCss">
           <b-textarea id="custom-css" v-model="customCss" rows="10"/>
           <div class="mt-3">
-            <button type="button" class="btn btn-primary" @click="acceptCustomCss()">{{ $t("Save") }}</button>
+            <button type="button" class="btn btn-primary" @click="acceptCustomCss()">{{ $t('builder.save') }}</button>
           </div>
         </div>
 
         <details id="output" class="bg-cogs" v-if="output">
-          <summary class="bg-gradient-warning">{{ $t("View embed code") }}</summary>
+          <summary class="bg-gradient-warning">{{ $t('builder.show-code') }}</summary>
 
           <!-- NOTE: Copying works only when the textarea is actually visible. -->
           <button type="button" class="btn btn-success btn-sm" data-copy-code data-clipboard-target="#output-value">
             <font-awesome-icon :icon="faClone"/>
-            {{ $t("Copy") }}
+            {{ $t('builder.copy') }}
           </button>
 
           <div>
@@ -53,12 +46,12 @@
 
         <div id="preview-container" class="p-lg-3">
           <template v-if="output">
-            <span class="badge badge-lg badge-info">{{ $t("Preview") }}</span>
+            <span class="badge badge-lg badge-info">{{ $t('builder.preview') }}</span>
             <div id="preview" v-html="output"/>
           </template>
           <template v-else>
             <div id="builder-guide" class="col">
-              <h1>{{ $t("Widget builder") }}</h1>
+              <h1>{{ $t('builder.title') }}</h1>
               <p>{{ $t("help.intro") }}</p>
               <ol>
                 <li>{{ $t("help.bulletins.p1") }}</li>
@@ -102,10 +95,10 @@
     }),
     created () {
       this.languageOptions = [
-        { value: null, text: this.$t('- Automatic -') },
-        { value: 'fi', text: this.$t('Finnish') },
-        { value: 'en', text: this.$t('English') },
-        { value: 'sv', text: this.$t('Swedish') }
+        { value: null, text: this.$t('builder.placeholder.automatic') },
+        { value: 'fi', text: this.$t('language.finnish') },
+        { value: 'en', text: this.$t('language.english') },
+        { value: 'sv', text: this.$t('language.swedish') }
       ]
 
       this.options.hakemistoWidget = this.$route.path.substr(1) || null
@@ -130,11 +123,11 @@
       },
       availableWidgets: function () {
         let options = Object.keys(this.widgets).map((wid) => {
-          return { value: wid, text: this.$t(this.widgets[wid].name) }
+          return { value: wid, text: this.$t(`builder.widget.${wid}`) }
         })
 
         options.sort((a, b) => a.text.localeCompare(b.text))
-        options.unshift({ value: null, text: this.$t('- Select widget -')})
+        options.unshift({ value: null, text: this.$t('builder.placeholder.widget')})
 
         return options
       }

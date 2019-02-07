@@ -23,15 +23,12 @@ Vue.use(VueI18n)
  */
 const widgets = {
   schedules: {
-    name: 'Schedules',
     form: SchedulesConfig
   },
   search: {
-    name: 'Library Search',
     form: SearchConfig
   },
   display: {
-    name: 'Library Introduction',
     form: DisplayConfig
   }
 }
