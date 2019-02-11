@@ -19,22 +19,23 @@ builder:
     search: Sök bibliotek
 
 contact-info:
-  hide-staff: Piilota henkilökunta
-  scope: Yhteystietojen laajuus
-  section-title: Yhteystiedot
-  show-all: Näytä kaikki
+  hide-staff: Göm personalen
+  scope: Visning av kontaktuppgifter
+  section-title: Kontaktuppgifter
+  show-all: Visa allt
 
 help:
-  intro: With this utility you can build a widget for your own website.
+  intro: Med det här verktyget kan du bygga en gränssnittskomponent till din egen webbplats.
   advanced: >
-    <b>Advanced users</b>: This tool allows for configuring the widget appearance using CSS.
-    It is possible to write the CSS straight into the text box or use it to link to an
-    external stylesheet.
+    <b>Avancerade användare:</b>: Verktyget tillåter dig att ändra på gränssnittskomponentens
+    utseende med hjälp av CCS. Du kan skriva in CCS-stilen direkt i textrutan eller länka till en
+    extern stilmall.
+
   bulletins:
-    p1: Choose a widget type from the menu.
-    p2: Configure your widget.
-    p3: Embed code is available below the preview.
-    p4: Copy and paste the code to your web page to the place you want to add the widget.
+    p1: Välj från menyn den typ av gränssnittskomponent du vill använda.
+    p2: Mata in inställningarna för gränssnittkomponenten.
+    p3: Du hittar inbäddningskoden under förhandsvisningen genom att klicka på texten ”Visa koden för gränssnittskomponenten”.
+    p4: Kopiera och klistra in koden på det stället på din webbsida där du vill att gränssnittskomponenten ska synas.
 
 language:
   english: Engelska

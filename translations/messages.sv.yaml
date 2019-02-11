@@ -31,7 +31,7 @@ schedules:
   closed: Stängt
   date: Datum
   day: Dag
-  empty: ~
+  empty: Biblioteket saknar uppgifter om öppettider
   from: Fr.o.m.
   library-closed: Biblioteket är stängt
   self-service: Meröppet
