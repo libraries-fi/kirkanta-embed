@@ -1,12 +1,12 @@
 base-url: https://registret.biblioteken.fi
 
 contact-info:
-  common: ~
+  common: Allmänna
   contact-details: Kontaktuppgifter
   department: Avdelning
   email: E-post
-  link: ~
-  phone: ~
+  link: Webbsida
+  phone: Telefonnummer
 
 library:
   buses: Bussar
@@ -32,7 +32,7 @@ schedules:
   date: Datum
   day: Dag
   empty: ~
-  from: ~
+  from: Fr.o.m.
   library-closed: Biblioteket är stängt
   self-service: Meröppet
   service-hours: Aukioloajat
