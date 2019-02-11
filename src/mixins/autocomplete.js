@@ -6,7 +6,8 @@ function autocomplete (path, params) {
   let query = Object.assign({}, params, {
     limit: AUTOCOMPLETE_LIMIT
   })
-  return apiCall(path, 'fi', query)
+  let lang = document.documentElement.lang || 'fi'
+  return apiCall(path, lang, query)
 }
 
 async function libraryAutoComplete (name) {
