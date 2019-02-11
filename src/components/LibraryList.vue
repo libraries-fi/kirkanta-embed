@@ -94,7 +94,9 @@
           sort: 'name',
           with: 'schedules',
           'period.start': '0d',
-          'period.end': '1d'
+          'period.end': '1d',
+          limit: 20,
+          skip: 0
         }
 
         Object.assign(query, this.form)
