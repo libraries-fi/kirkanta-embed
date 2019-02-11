@@ -5,7 +5,7 @@
 
       <div class="contact-info-body">
         <div v-for="entries in department.groups" class="contact-info-item">
-          <h4 class="contact-info-entry-label h6">{{ first(entries).name }}</h4>
+          <h4 class="contact-info-entry-label h6">{{ first(entries).name }}<template v-if="first(entries).info">, {{ first(entries).info }}</template></h4>
           <ul>
             <li v-for="entry in entries">
               <span class="sr-only">{{ entryTypeLabel(entry) }}</span>
@@ -74,6 +74,7 @@
         const name = `${person.firstName} ${person.lastName}`
 
         if (person.phone) {
+          console.log('TITLE', person)
           addToMapArray(department.namedGroups, name, {
             name,
             info: (person.jobTitle || '').toLowerCase(),
