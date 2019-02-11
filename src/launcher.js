@@ -5,14 +5,14 @@ import kifiLogo from '../images/kirjastot-fi.svg'
 
 async function kirjastohakemisto (element) {
   if (!element) {
-    throw 'Passed null element to kirjastohakemisto()'
+    throw new Error('Passed null element to kirjastohakemisto()')
   }
 
-  const params = extract_params(element.dataset)
-  const enable_sandbox = !params.nosandbox
-  const sandbox_height = parseInt(params.height) || 'auto'
+  const params = extractParams(element.dataset)
+  const enableSandbox = !params.nosandbox
+  const sandboxHeight = parseInt(params.height) || 'auto'
 
-  sandboxed(enable_sandbox).then(async ([window, viewport]) => {
+  sandboxed(enableSandbox).then(async ([window, viewport]) => {
     const scope = window.document
     const App = await load_app(params.widget)
     let wrapper = scope.createElement('div')
@@ -22,36 +22,36 @@ async function kirjastohakemisto (element) {
 
     let app = new App(wrapper, params)
 
-    if (enable_sandbox && sandbox_height == 'auto') {
-      resize_sandbox(window.frameElement, viewport)
+    if (enableSandbox && sandboxHeight === 'auto') {
+      resizeSandbox(window.frameElement, viewport)
     }
 
-    add_attribution(viewport)
+    addAttribution(viewport)
 
     /*
      * MUST load the script sandboxed, otherwise Vue.js injects the styles from the app
      * to the parent document and messes everything up.
      */
-    function load_app (app_id) {
+    function load_app (appId) {
       return new Promise((resolve, reject) => {
-        const path = [config.path, app_id + '.js'].join('/')
+        const path = [config.path, appId + '.js'].join('/')
         const script = scope.createElement('script')
 
         script.src = path
         script.type = 'application/javascript'
 
-        script.addEventListener('load', () => resolve(window['kirjastot.fi.' + app_id]))
+        script.addEventListener('load', () => resolve(window['kirjastot.fi.' + appId]))
 
         scope.head.appendChild(script)
       })
     }
   })
 
-  function extract_params (dataset) {
+  function extractParams (dataset) {
     let params = Object.create(null)
 
     for (let key in dataset) {
-      if (key == 'hakemistoWidget') {
+      if (key === 'hakemistoWidget') {
         params.widget = dataset[key]
       } else {
         params[key] = dataset[key].length ? dataset[key] : true
@@ -69,10 +69,10 @@ async function kirjastohakemisto (element) {
     return params
   }
 
-  function sandboxed (enable_sandbox) {
-    if (enable_sandbox) {
+  function sandboxed (enableSandbox) {
+    if (enableSandbox) {
       return new Promise((resolve, reject) => {
-        let sandbox = create_sandbox(params)
+        let sandbox = createSandbox(params)
 
         sandbox.addEventListener('load', () => {
           /*
@@ -109,7 +109,7 @@ async function kirjastohakemisto (element) {
     }
   }
 
-  function create_sandbox (params) {
+  function createSandbox (params) {
     let sandbox = document.createElement('iframe')
     sandbox.style.width = '100%'
     sandbox.style.borderWidth = '0'
@@ -121,23 +121,23 @@ async function kirjastohakemisto (element) {
     return sandbox
   }
 
-  function resize_sandbox (sandbox, widget) {
+  function resizeSandbox (sandbox, widget) {
     let body = sandbox.contentWindow.document.body
 
-    function on_resize () {
+    function onResize () {
       // Add 20 px to work around Firefox's margin collapse.
       sandbox.style.height = widget.offsetHeight + 'px'
     }
 
     if (typeof ResizeObserver === 'function') {
-      let observer = new ResizeObserver(on_resize)
+      let observer = new ResizeObserver(onResize)
       observer.observe(widget)
     } else {
-      let observer = new ResizeSensor(widget, on_resize)
+      let observer = new ResizeSensor(widget, onResize)
     }
   }
 
-  function add_attribution (container) {
+  function addAttribution (container) {
     const logo = document.createElement('img')
     logo.width = '80'
     logo.src = `data:image/svg+xml;utf8,${encodeURIComponent(kifiLogo)}`

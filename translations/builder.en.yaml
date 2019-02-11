@@ -18,6 +18,12 @@ builder:
     schedules: Service hours
     search: Library search
 
+contact-info:
+  hide-staff: Exclude staff
+  scope: Choose scope of information
+  section-title: Contact details
+  show-all: Display everything
+
 help:
   intro: With this utility you can build a widget for your own website.
   advanced: >

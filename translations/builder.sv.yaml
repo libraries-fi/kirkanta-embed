@@ -18,6 +18,12 @@ builder:
     schedules: Öppettider
     search: Sök bibliotek
 
+contact-info:
+  hide-staff: Piilota henkilökunta
+  scope: Yhteystietojen laajuus
+  section-title: Yhteystiedot
+  show-all: Näytä kaikki
+
 help:
   intro: With this utility you can build a widget for your own website.
   advanced: >

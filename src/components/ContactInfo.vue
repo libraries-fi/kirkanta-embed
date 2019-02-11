@@ -32,6 +32,8 @@
       }]
     ])
 
+    const nameMap = new Map([[null, departments.get(null)]])
+
     function makeDepartmentEntry (name, id, description) {
       return {name, id, description, phones: [], emails: [], links: [], namedGroups: new Map()}
     }
@@ -39,6 +41,7 @@
     for (let department of library.departments) {
       let { name, id, description } = department
       departments.set(id, makeDepartmentEntry(name, id, description))
+      nameMap.set(name, departments.get(id))
     }
 
     for (let entry of library.phoneNumbers) {
@@ -59,28 +62,34 @@
       addToMapArray(departments.get(entry.department).namedGroups, entry.name, entry)
     }
 
-    for (let person of library.persons) {
-      const name = `${person.firstName} ${person.lastName}`
-      const dkey = person.department || person.responsibility
+    if (library.persons) {
+      for (let person of library.persons) {
+        let department = nameMap.get(person.responsibility || null)
 
-      addToMap(departments, dkey, makeDepartmentEntry(dkey))
+        if (!department) {
+          department = makeDepartmentEntry(person.responsibility)
+          addToMap(departments, person.responsibility, department)
+        }
 
-      if (person.phone) {
-        addToMapArray(departments.get(dkey).namedGroups, name, {
-          name,
-          info: (person.jobTitle || '').toLowerCase(),
-          number: person.phone,
-          type: 'phone'
-        })
-      }
+        const name = `${person.firstName} ${person.lastName}`
 
-      if (person.email) {
-        addToMapArray(departments.get(dkey).namedGroups, name, {
-          name,
-          info: (person.jobTitle || '').toLowerCase(),
-          email: person.email,
-          type: 'email'
-        })
+        if (person.phone) {
+          addToMapArray(department.namedGroups, name, {
+            name,
+            info: (person.jobTitle || '').toLowerCase(),
+            number: person.phone,
+            type: 'phone'
+          })
+        }
+
+        if (person.email) {
+          addToMapArray(department.namedGroups, name, {
+            name,
+            info: (person.jobTitle || '').toLowerCase(),
+            email: person.email,
+            type: 'email'
+          })
+        }
       }
     }
 
@@ -184,5 +193,6 @@
 
   .contact-info-entry-label {
     line-height: 1.6;
+    margin-bottom: 0;
   }
 </style>

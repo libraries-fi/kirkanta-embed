@@ -1,5 +1,5 @@
 <template>
-  <article class="zxc zxc-library-info" :data-tabbed="tabbed ? '' : false" v-if="library">
+  <article v-if="library" class="zxc zxc-library-info">
     <div class="header">
       <button v-if="embedded" type="button" class="btn btn-link" @click="returnToList">
         <font-awesome-icon :icon="faLongArrowAltLeft"/>
@@ -116,6 +116,10 @@
       </section>
 
       <section v-if="library.services.length" class="content-tab" id="tab-services" :data-active-tab="$route.name == 'services'">
+        <h2>
+          <font-awesome-icon :icon="faLuggageCart"/>
+          {{ $t('services.title') }}
+        </h2>
         <services :services="library.services"/>
       </section>
     </div>
@@ -129,7 +133,8 @@
   import ContactInfo from './ContactInfo'
 
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-  import { faAddressCard, faQuoteRight, faLink, faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons'
+  import { faAddressCard, faLink, faLongArrowAltLeft, faLuggageCart, faQuoteRight } from '@fortawesome/free-solid-svg-icons'
+
   import {
     faFacebookSquare,
     faFlickr,
@@ -153,17 +158,27 @@
   ])
 
   export default {
-    props: ['id', 'lang', 'tabbed', 'embedded', 'expandMode'],
+    props: {
+      id: { type: String, default: null },
+      lang: { type: String, default: null },
+      embedded: { type: Boolean, default: false },
+      expandMode: { type: String, default: 'none' },
+      disable: { type: String, default: '' }
+    },
     components: { ContactInfo, FontAwesomeIcon, Services, Schedules },
     data: () => ({
       library: null,
       activeTab: 'library',
       faAddressCard,
-      faQuoteRight,
       faImage,
-      faLongArrowAltLeft
+      faLongArrowAltLeft,
+      faLuggageCart,
+      faQuoteRight,
     }),
     computed: {
+      disabledSections () {
+        return this.disable.split(/\s+/)
+      },
       sortedLinks () {
         if (this.library.links) {
           return this.library.links.sort((a, b) => {
@@ -191,9 +206,13 @@
     },
     async mounted () {
       let query = {
-        with: 'departments emailAddresses links mailAddress persons pictures phoneNumbers schedules services transitInfo',
+        with: ['departments', 'emailAddresses', 'links', 'mailAddress', 'pictures', 'phoneNumbers', 'schedules', 'services', 'transitInfo'],
         'period.start': '0w',
         'period.end': '4w'
+      }
+
+      if (this.disabledSections.indexOf('staff') == -1) {
+        query.with.push('persons')
       }
 
       let response = await apiCall(`/library/${this.id}`, this.lang, query)
@@ -214,7 +233,8 @@
         return false
       },
       hasContactInfo () {
-        return (this.library.links.length + this.library.emailAddresses.length + this.library.phoneNumbers.length) > 0
+        let persons = this.library.persons || []
+        return (this.library.links.length + this.library.emailAddresses.length + this.library.phoneNumbers.length + persons.length) > 0
       },
       linkIcon (link) {
         let icon_class = faLink
@@ -262,16 +282,6 @@
       margin-right: spacing(3);
       display: inline-block;
       line-height: 2;
-    }
-
-    &[data-tabbed] {
-      .content-tab {
-        display: none;
-      }
-
-      .content-tab[data-active-tab] {
-        display: initial;
-      }
     }
   }
 

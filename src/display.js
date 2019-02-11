@@ -16,12 +16,24 @@ class LibraryDisplayWidget extends Vue {
     let options = Object.assign({
       lang: null,
       library: null,
-      tabbed: false,
+
+      /**
+       * Used to flag that this widget is a page inside LibraryList widget.
+       * Will render an additional link for returning to the search results.
+       */
       embedded: false,
+
+      /**
+       * Turn off visual sections by adding them into this list.
+       *
+       * Options:
+       * - staff := exclude staff from contact info
+       */
+      disable: '',
 
       /*
        * Mode for expanding time entry rows.
-       * current|all|none
+       * none|current|all
        */
       expandMode: 'none'
     }, params)
@@ -58,7 +70,7 @@ class LibraryDisplayWidget extends Vue {
 
     super({
       el: container,
-      template: '<library-info :id="library" :lang="lang" :tabbed="tabbed" :embedded="embedded" :expandMode="expandMode"/>',
+      template: '<library-info :id="library" :lang="lang" :embedded="embedded" :expandMode="expandMode" :disable="disable"/>',
       data: () => options,
       components: { LibraryInfo },
       router,

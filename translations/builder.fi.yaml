@@ -18,6 +18,12 @@ builder:
     schedules: Aukioloajat
     search: Kirjastohaku
 
+contact-info:
+  hide-staff: Piilota henkilökunta
+  scope: Yhteystietojen laajuus
+  section-title: Yhteystiedot
+  show-all: Näytä kaikki
+
 help:
   intro: Tällä työkalulla voit rakentaa omille sivuillesi liitettävän upokkeen.
   bulletins:

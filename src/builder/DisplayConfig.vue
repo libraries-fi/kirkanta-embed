@@ -20,6 +20,17 @@
           </b-form-radio-group>
         </details>
       </b-form-group>
+
+      <b-form-group id="o-contact-info">
+        <details>
+          <summary>{{ $t('contact-info.section-title') }}</summary>
+          <span class="section-label">{{ $t('contact-info.scope') }}</span>
+          <b-form-radio-group v-model="options.disable">
+            <b-form-radio :value="null">{{ $t('contact-info.show-all') }}</b-form-radio>
+            <b-form-radio value="staff">{{ $t('contact-info.hide-staff') }}</b-form-radio>
+          </b-form-radio-group>
+        </details>
+      </b-form-group>
     </div>
   </div>
 </template>
@@ -35,7 +46,8 @@
       librarySuggestions: [],
       options: {
         library: null,
-        tabbed: false
+        tabbed: false,
+        disable: null
       }
     }),
     methods: {
