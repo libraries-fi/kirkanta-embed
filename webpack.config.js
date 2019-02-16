@@ -1,4 +1,5 @@
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const webpack = require('webpack')
 const autoprefixer = require('autoprefixer')
 const path = require('path')
 
@@ -66,6 +67,9 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.VERSION': JSON.stringify(require('./package.json').version)
+    }),
     new VueLoaderPlugin(),
     autoprefixer
   ],
