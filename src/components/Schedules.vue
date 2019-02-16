@@ -19,7 +19,7 @@
         </tr>
       </thead>
 
-      <tbody v-for="(day, index) of schedules.slice(this.i * 7, (this.i + 1) * 7)" :class="parseInt(day.live_status) ? 'current-day' : null" :data-expanded="index == expandedRow">
+      <tbody v-for="(day, index) of schedules.slice(this.i * 7, (this.i + 1) * 7)" :class="isToday(day) ? 'current-day' : null" :data-expanded="index == expandedRow">
         <tr class="day-entry">
           <th :rowspan="day.times.length + 1 + (day.info ? 1 : 0)" scope="row" class="col-date">
             <date-time :date="day.date" format="P" formal short/>
@@ -40,7 +40,7 @@
         </tr>
         <tr v-for="time of day.times" class="time-entry" :class="['closed', 'regular', 'self-service'][time.status]">
           <td v-if="time.status == 0" class="col-status">{{ $t('schedules.library-closed') }}</td>
-          <td v-if="time.status == 1" class="col-status">{{ $t('schedules.staff') }}</td>
+          <td v-if="time.status == 1" class="col-status">{{ $t('schedules.staff-present') }}</td>
           <td v-if="time.status == 2" class="col-status">{{ $t('schedules.self-service') }}</td>
 
           <td class="col-time">
@@ -74,7 +74,7 @@
 </template>
 
 <script>
-  import { format, toDate } from 'date-fns'
+  import { format, isSameDay, toDate } from 'date-fns'
   import { first, last } from '@/mixins'
 
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -120,6 +120,9 @@
       },
       nextWeek () {
         this.i = Math.min(this.i + 1, (this.schedules.length / 7) - 1)
+      },
+      isToday (day) {
+        return isSameDay(new Date(), toDate(day.date))
       }
     },
     filters: {
