@@ -21,100 +21,100 @@
 </template>
 
 <script>
-  const USER_INPUT_TIMEOUT = 300
-  const BLUR_TIMEOUT = 300
+const USER_INPUT_TIMEOUT = 300
+const BLUR_TIMEOUT = 300
 
-  function accepts (input, entry) {
-    return entry == input
-  }
+function accepts (input, entry) {
+  return entry === input
+}
 
-  export default {
-    props: ['id', 'name', 'value', 'suggestions', 'valueKey', 'labelKey', 'descriptionKey', 'required', 'multiple'],
-    model: {
-      prop: 'value',
-      event: 'change'
+export default {
+  props: ['id', 'name', 'value', 'suggestions', 'valueKey', 'labelKey', 'descriptionKey', 'required', 'multiple'],
+  model: {
+    prop: 'value',
+    event: 'change'
+  },
+  data: () => ({
+    inputTimer: null,
+    blurTimer: null,
+    userInput: '',
+    autoCompleteItems: [],
+    autoCompleteVisible: false,
+    selected: []
+  }),
+  methods: {
+    noop (event) {
+      event.preventDefault()
     },
-    data: () => ({
-      inputTimer: null,
-      blurTimer: null,
-      userInput: '',
-      autoCompleteItems: [],
-      autoCompleteVisible: false,
-      selected: []
-    }),
-    methods: {
-      noop (event) {
-        event.preventDefault()
-      },
-      filterSuggestions () {
-        this.autoCompleteItems = this.data.filter((entry) => {
-          if (this.filter) {
-            return this.filter(this.userInput, entry)
-          } else {
-            return accepts(this.userInput, entry[this.labelKey])
-          }
-        })
-      },
-      onClick (event) {
-        this.onSelectItem(event.target.dataset.i)
-        this.onBlur()
-      },
-      onSelectItem (i) {
-        let entry = this.autoCompleteItems[i]
-        if (this.multiple) {
-          this.selected.push(entry)
-          this.userInput = ''
+    filterSuggestions () {
+      this.autoCompleteItems = this.data.filter((entry) => {
+        if (this.filter) {
+          return this.filter(this.userInput, entry)
         } else {
-          this.selected.pop()
-          this.selected.push(entry)
-          this.userInput = entry[this.labelKey]
+          return accepts(this.userInput, entry[this.labelKey])
         }
+      })
+    },
+    onClick (event) {
+      this.onSelectItem(event.target.dataset.i)
+      this.onBlur()
+    },
+    onSelectItem (i) {
+      let entry = this.autoCompleteItems[i]
+      if (this.multiple) {
+        this.selected.push(entry)
+        this.userInput = ''
+      } else {
+        this.selected.pop()
+        this.selected.push(entry)
+        this.userInput = entry[this.labelKey]
+      }
 
-        this.$emit('select', entry)
-      },
-      onKeyUp (event) {
-        this.onInput(event.target.value)
-      },
-      onInput (value) {
-        if (this.inputTimer) {
-          this.inputTimer = clearTimeout(this.inputTimer)
-        }
+      this.$emit('select', entry)
+    },
+    onKeyUp (event) {
+      this.onInput(event.target.value)
+    },
+    onInput (value) {
+      if (this.inputTimer) {
+        this.inputTimer = clearTimeout(this.inputTimer)
+      }
 
-        this.inputTimer = setTimeout(() => {
-          this.$emit('input', value)
-          this.inputTimer = null
-        }, USER_INPUT_TIMEOUT)
-      },
-      onFocus () {
-        this.autoCompleteVisible = true
+      this.inputTimer = setTimeout(() => {
+        this.$emit('input', value)
+        this.inputTimer = null
+      }, USER_INPUT_TIMEOUT)
+    },
+    onFocus () {
+      this.autoCompleteVisible = true
 
-        if (this.blurTimer) {
-          this.blurTimer = clearTimeout(this.blurTimer)
-        }
-      },
-      onBlur () {
-        if (!this.blurTimer) {
-          this.blurTimer = setTimeout(() => {
-            this.autoCompleteVisible = false
-          }, BLUR_TIMEOUT)
-        }
-      },
-      removeOption (i) {
-        this.selected.splice(i, 1)
+      if (this.blurTimer) {
+        this.blurTimer = clearTimeout(this.blurTimer)
       }
     },
-    watch: {
-      selected (selected) {
-        let values = selected.map((entry) => entry[this.valueKey])
-        let value = this.multiple ? values : values[0]
-
-        this.$emit('change', value)
-      },
-      suggestions (entries) {
-        this.autoCompleteItems = entries
+    onBlur () {
+      if (!this.blurTimer) {
+        this.blurTimer = setTimeout(() => {
+          this.autoCompleteVisible = false
+        }, BLUR_TIMEOUT)
       }
+    },
+    removeOption (i) {
+      this.selected.splice(i, 1)
+    }
+  },
+  watch: {
+    selected (selected) {
+      let values = selected.map((entry) => entry[this.valueKey])
+      let value = this.multiple ? values : values[0]
+
+      this.$emit('change', value)
+    },
+    suggestions (entries) {
+      this.autoCompleteItems = entries
     }
   }
+}
 </script>
 
 <style lang="scss">

@@ -60,63 +60,63 @@
 </template>
 
 <script>
-  import AutoComplete from './AutoComplete.vue'
+import AutoComplete from './AutoComplete.vue'
 
-  import { libraryAutoComplete, cityAutoComplete, consortiumAutoComplete } from '../mixins/autocomplete'
+import { libraryAutoComplete, cityAutoComplete, consortiumAutoComplete } from '../mixins/autocomplete'
 
-  export default {
-    data: () => ({
-      citySuggestions: [],
-      cityValues: [],
-      librarySuggestions: [],
-      consortiumSuggestions: [],
-      options: {
-        library: null,
-        city: null,
-        consortium: null,
-        type: null
-      },
-      typeOptions: null
-    }),
-    created () {
-      this.typeOptions = [
-        { value: 'library main_library', text: this.$t('search.libraries.type.municipal') },
-        { value: 'mobile', text: this.$t('search.libraries.type.mobile') },
-        // { value: "vocational_college", text: this.$t("Vocational college library") },
-        { value: 'polytechnic', text: this.$t('search.libraries.type.polytechnic') },
-        { value: 'university', text: this.$t('search.libraries.type.university') },
-        { value: 'special', text: this.$t('search.libraries.type.special') },
-        { value: 'home_service institutional children school vocational_college', text: this.$t('search.libraries.type.other') }
-      ]
+export default {
+  data: () => ({
+    citySuggestions: [],
+    cityValues: [],
+    librarySuggestions: [],
+    consortiumSuggestions: [],
+    options: {
+      library: null,
+      city: null,
+      consortium: null,
+      type: null
     },
-    methods: {
-      async onLibraryAutoComplete (name) {
-        this.librarySuggestions = await libraryAutoComplete(name)
-      },
-      async onCityAutoComplete (name) {
-        this.citySuggestions = await cityAutoComplete(name)
-      },
-      async onConsortiumAutoComplete (name) {
-        this.consortiumSuggestions = await consortiumAutoComplete(name)
-      },
-      onSelectCity (city) {
-        this.cityValues.push(city)
-      },
-      onChange (event) {
+    typeOptions: null
+  }),
+  created () {
+    this.typeOptions = [
+      { value: 'library main_library', text: this.$t('search.libraries.type.municipal') },
+      { value: 'mobile', text: this.$t('search.libraries.type.mobile') },
+      // { value: "vocational_college", text: this.$t("Vocational college library") },
+      { value: 'polytechnic', text: this.$t('search.libraries.type.polytechnic') },
+      { value: 'university', text: this.$t('search.libraries.type.university') },
+      { value: 'special', text: this.$t('search.libraries.type.special') },
+      { value: 'home_service institutional children school vocational_college', text: this.$t('search.libraries.type.other') }
+    ]
+  },
+  methods: {
+    async onLibraryAutoComplete (name) {
+      this.librarySuggestions = await libraryAutoComplete(name)
+    },
+    async onCityAutoComplete (name) {
+      this.citySuggestions = await cityAutoComplete(name)
+    },
+    async onConsortiumAutoComplete (name) {
+      this.consortiumSuggestions = await consortiumAutoComplete(name)
+    },
+    onSelectCity (city) {
+      this.cityValues.push(city)
+    },
+    onChange (event) {
+      this.$emit('options', this.options)
+    }
+  },
+  watch: {
+    cityValues () {
+      this.options.city = this.cityValues.map((city) => city.id).join(' ')
+    },
+    options: {
+      handler () {
         this.$emit('options', this.options)
-      }
-    },
-    watch: {
-      cityValues () {
-        this.options.city = this.cityValues.map((city) => city.id).join(' ')
       },
-      options: {
-        handler () {
-          this.$emit('options', this.options)
-        },
-        deep: true
-      }
-    },
-    components: { AutoComplete }
-  }
+      deep: true
+    }
+  },
+  components: { AutoComplete }
+}
 </script>

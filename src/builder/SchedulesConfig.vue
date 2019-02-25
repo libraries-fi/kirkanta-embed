@@ -24,42 +24,42 @@
 </template>
 
 <script>
-  import apiCall from '../mixins/api-call'
-  import AutoComplete from './AutoComplete.vue'
+import apiCall from '../mixins/api-call'
+import AutoComplete from './AutoComplete.vue'
 
-  const AUTOCOMPLETE_LIMIT = 10
+const AUTOCOMPLETE_LIMIT = 10
 
-  export default {
-    data: () => ({
-      librarySuggestions: [],
-      libraryValues: [],
-      options: {
-        expandMode: null,
-        library: null
+export default {
+  data: () => ({
+    librarySuggestions: [],
+    libraryValues: [],
+    options: {
+      expandMode: null,
+      library: null
+    }
+  }),
+  methods: {
+    onSelectLibrary (library) {
+      this.options.library = library.id
+    },
+    async onLibraryAutoComplete (value) {
+      if (value.length >= 2) {
+        let response = await apiCall('/library', 'fi', { q: value, sort: 'name', limit: AUTOCOMPLETE_LIMIT })
+
+        this.librarySuggestions = response.data.items
+      } else {
+        this.librarySuggestions = []
       }
-    }),
-    methods: {
-      onSelectLibrary (library) {
-        this.options.library = library.id
+    }
+  },
+  watch: {
+    options: {
+      handler () {
+        this.$emit('options', this.options)
       },
-      async onLibraryAutoComplete (value) {
-        if (value.length >= 2) {
-          let response = await apiCall('/library', 'fi', {q: value, sort: 'name', limit: AUTOCOMPLETE_LIMIT})
-
-          this.librarySuggestions = response.data.items
-        } else {
-          this.librarySuggestions = []
-        }
-      }
-    },
-    watch: {
-      options: {
-        handler () {
-          this.$emit('options', this.options)
-        },
-        deep: true
-      }
-    },
-    components: { AutoComplete }
-  }
+      deep: true
+    }
+  },
+  components: { AutoComplete }
+}
 </script>

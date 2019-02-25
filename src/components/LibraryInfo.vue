@@ -127,128 +127,128 @@
 </template>
 
 <script>
-  import apiCall from '../mixins/api-call'
-  import Services from './Services'
-  import Schedules from './Schedules'
-  import ContactInfo from './ContactInfo'
+import apiCall from '../mixins/api-call'
+import Services from './Services'
+import Schedules from './Schedules'
+import ContactInfo from './ContactInfo'
 
-  import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-  import { faAddressCard, faLink, faLongArrowAltLeft, faLuggageCart, faQuoteRight } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faAddressCard, faLink, faLongArrowAltLeft, faLuggageCart, faQuoteRight } from '@fortawesome/free-solid-svg-icons'
 
-  import {
-    faFacebookSquare,
-    faFlickr,
-    faInstagram,
-    faPinterestSquare,
-    faTwitterSquare,
-    faVimeoSquare,
-    faYoutube
-  } from '@fortawesome/free-brands-svg-icons'
+import {
+  faFacebookSquare,
+  faFlickr,
+  faInstagram,
+  faPinterestSquare,
+  faTwitterSquare,
+  faVimeoSquare,
+  faYoutube
+} from '@fortawesome/free-brands-svg-icons'
 
-  import { faImage } from '@fortawesome/free-regular-svg-icons'
+import { faImage } from '@fortawesome/free-regular-svg-icons'
 
-  const icon_map = new Map([
-    [/facebook\.com/, faFacebookSquare],
-    [/flickr\.com/, faFlickr],
-    [/instagram\.com/, faInstagram],
-    [/pinterest\.com/, faPinterestSquare],
-    [/vimeo\.com/, faVimeoSquare],
-    [/twitter\.com/, faTwitterSquare],
-    [/youtube\.com/, faYoutube]
-  ])
+const iconMap = new Map([
+  [/facebook\.com/, faFacebookSquare],
+  [/flickr\.com/, faFlickr],
+  [/instagram\.com/, faInstagram],
+  [/pinterest\.com/, faPinterestSquare],
+  [/vimeo\.com/, faVimeoSquare],
+  [/twitter\.com/, faTwitterSquare],
+  [/youtube\.com/, faYoutube]
+])
 
-  export default {
-    props: {
-      id: { type: String, default: null },
-      lang: { type: String, default: null },
-      embedded: { type: Boolean, default: false },
-      expandMode: { type: String, default: 'none' },
-      disable: { type: String, default: '' }
+export default {
+  props: {
+    id: { type: String, default: null },
+    lang: { type: String, default: null },
+    embedded: { type: Boolean, default: false },
+    expandMode: { type: String, default: 'none' },
+    disable: { type: String, default: '' }
+  },
+  components: { ContactInfo, FontAwesomeIcon, Services, Schedules },
+  data: () => ({
+    library: null,
+    activeTab: 'library',
+    faAddressCard,
+    faImage,
+    faLongArrowAltLeft,
+    faLuggageCart,
+    faQuoteRight
+  }),
+  computed: {
+    disabledSections () {
+      return this.disable.split(/\s+/)
     },
-    components: { ContactInfo, FontAwesomeIcon, Services, Schedules },
-    data: () => ({
-      library: null,
-      activeTab: 'library',
-      faAddressCard,
-      faImage,
-      faLongArrowAltLeft,
-      faLuggageCart,
-      faQuoteRight,
-    }),
-    computed: {
-      disabledSections () {
-        return this.disable.split(/\s+/)
-      },
-      sortedLinks () {
-        if (this.library.links) {
-          return this.library.links.sort((a, b) => {
-            // NOTE: Horribly inefficient but whatever...
+    sortedLinks () {
+      if (this.library.links) {
+        return this.library.links.sort((a, b) => {
+          // NOTE: Horribly inefficient but whatever...
 
-            let a_match = 0
-            let b_match = 0
+          let aMatch = 0
+          let bMatch = 0
 
-            for (let rx of icon_map.keys()) {
-              if (a.url.match(rx)) {
-                a_match = 1
-              }
-
-              if (b.url.match(rx)) {
-                b_match = 1
-              }
+          for (let rx of iconMap.keys()) {
+            if (a.url.match(rx)) {
+              aMatch = 1
             }
 
-            return a_match - b_match
-          })
-        } else {
-          return null
-        }
-      }
-    },
-    async mounted () {
-      let query = {
-        with: ['departments', 'emailAddresses', 'links', 'mailAddress', 'pictures', 'phoneNumbers', 'schedules', 'services', 'transitInfo'],
-        'period.start': '0w',
-        'period.end': '4w'
-      }
-
-      if (this.disabledSections.indexOf('staff') == -1) {
-        query.with.push('persons')
-      }
-
-      let response = await apiCall(`/library/${this.id}`, this.lang, query)
-      this.library = response.data.data
-    },
-    methods: {
-      returnToList () {
-        this.$emit('return-to-main')
-      },
-      hasPublicTransportation () {
-        if (this.library.transit) {
-          for (let [field, info] of Object.entries(this.library.transit)) {
-            if (info && info.length) {
-              return true
+            if (b.url.match(rx)) {
+              bMatch = 1
             }
           }
-        }
-        return false
-      },
-      hasContactInfo () {
-        let persons = this.library.persons || []
-        return (this.library.links.length + this.library.emailAddresses.length + this.library.phoneNumbers.length + persons.length) > 0
-      },
-      linkIcon (link) {
-        let icon_class = faLink
 
-        for (let [rx, icon] of icon_map) {
-          if (link.url.match(rx)) {
-            icon_class = icon
-          }
-        }
-
-        return icon_class
+          return aMatch - bMatch
+        })
+      } else {
+        return null
       }
     }
+  },
+  async mounted () {
+    let query = {
+      with: ['departments', 'emailAddresses', 'links', 'mailAddress', 'pictures', 'phoneNumbers', 'schedules', 'services', 'transitInfo'],
+      'period.start': '0w',
+      'period.end': '4w'
+    }
+
+    if (this.disabledSections.indexOf('staff') === -1) {
+      query.with.push('persons')
+    }
+
+    let response = await apiCall(`/library/${this.id}`, this.lang, query)
+    this.library = response.data.data
+  },
+  methods: {
+    returnToList () {
+      this.$emit('return-to-main')
+    },
+    hasPublicTransportation () {
+      if (this.library.transit) {
+        for (let info of Object.values(this.library.transit)) {
+          if (info && info.length) {
+            return true
+          }
+        }
+      }
+      return false
+    },
+    hasContactInfo () {
+      let persons = this.library.persons || []
+      return (this.library.links.length + this.library.emailAddresses.length + this.library.phoneNumbers.length + persons.length) > 0
+    },
+    linkIcon (link) {
+      let iconClass = faLink
+
+      for (let [rx, icon] of iconMap) {
+        if (link.url.match(rx)) {
+          iconClass = icon
+        }
+      }
+
+      return iconClass
+    }
   }
+}
 </script>
 
 <style lang="scss">

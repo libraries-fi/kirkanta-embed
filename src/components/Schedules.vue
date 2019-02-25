@@ -138,132 +138,132 @@ export default {
 </script>
 
 <style lang="scss">
-  @import "../../scss/variables";
+@import "../../scss/variables";
 
-  .zxc-weekly-schedules {
-    th[scope="row"] {
-      font-weight: unset;
+.zxc-weekly-schedules {
+  th[scope="row"] {
+    font-weight: unset;
+  }
+
+  .toolbar {
+    display: flex;
+
+    button {
+      color: unset;
     }
 
-    .toolbar {
-      display: flex;
-
-      button {
-        color: unset;
-      }
-
-      h2 {
-        line-height: 1.8;
-      }
+    h2 {
+      line-height: 1.8;
     }
+  }
 
-    .week-label {
-      text-align: center;
-      flex-grow: 1;
-      margin: 0;
+  .week-label {
+    text-align: center;
+    flex-grow: 1;
+    margin: 0;
+  }
+
+  .col-date {
+    width: 1rem;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .col-weekday {
+    width: 300px;
+    text-align: left;
+  }
+
+  .col-time {
+    width: 1rem;
+    white-space: nowrap;
+    text-align: center;
+
+    :last-child:before {
+      content: " – ";
     }
+  }
 
-    .col-date {
-      width: 1rem;
-      white-space: nowrap;
-      text-align: center;
+  .day-entry {
+    .closed {
+      text-transform: lowercase;
     }
+  }
 
-    .col-weekday {
-      width: 300px;
-      text-align: left;
+  .time-entry {
+    color: $text-muted;
+    font-size: smaller;
+
+    &.closed {
+      color: theme-color("danger");
     }
+  }
 
-    .col-time {
-      width: 1rem;
-      white-space: nowrap;
-      text-align: center;
+  .day-entry + .time-entry {
+    th, td {
+      padding-top: 0;
+    }
+  }
 
-      :last-child:before {
-        content: " – ";
-      }
+  .current-day {
+    background-color: theme-color("light");
+    // border-top: 1px solid $border-light !important;
+    // border-bottom: 1px solid $border-light !important;
+  }
+
+  .day-info {
+    font-size: smaller;
+  }
+
+  .period-info {
+    border-top: 3px dashed $table-border-color;
+    padding: spacing(1);
+
+    span {
+      white-space: pre-line;
+    }
+  }
+
+  &[data-expand-mode="current"] {
+    .col-weekday button {
+      padding: 0;
+      line-height: inherit;
+      float: right;
     }
 
     .day-entry {
-      .closed {
-        text-transform: lowercase;
+      th, td {
+        padding-top: $table-cell-padding;
+        padding-bottom: $table-cell-padding;
       }
     }
 
     .time-entry {
-      color: $text-muted;
-      font-size: smaller;
-
-      &.closed {
-        color: theme-color("danger");
-      }
+      display: none;
     }
 
-    .day-entry + .time-entry {
-      th, td {
-        padding-top: 0;
-      }
-    }
-
-    .current-day {
-      background-color: theme-color("light");
-      // border-top: 1px solid $border-light !important;
-      // border-bottom: 1px solid $border-light !important;
-    }
-
-    .day-info {
-      font-size: smaller;
-    }
-
-    .period-info {
-      border-top: 3px dashed $table-border-color;
-      padding: spacing(1);
-
-      span {
-        white-space: pre-line;
-      }
-    }
-
-    &[data-expand-mode="current"] {
-      .col-weekday button {
-        padding: 0;
-        line-height: inherit;
-        float: right;
-      }
-
-      .day-entry {
-        th, td {
-          padding-top: $table-cell-padding;
-          padding-bottom: $table-cell-padding;
-        }
-      }
-
+    tbody[data-expanded] {
       .time-entry {
-        display: none;
-      }
-
-      tbody[data-expanded] {
-        .time-entry {
-          display: table-row;
-        }
-      }
-    }
-
-    &[data-expand-mode="none"] {
-      .time-entry {
-        display: none !important;
-      }
-    }
-
-    &[data-expand-mode="all"] {
-
-    }
-
-    &[data-no-browse] {
-      .toolbar,
-      .col-date {
-        display: none;
+        display: table-row;
       }
     }
   }
+
+  &[data-expand-mode="none"] {
+    .time-entry {
+      display: none !important;
+    }
+  }
+
+  &[data-expand-mode="all"] {
+
+  }
+
+  &[data-no-browse] {
+    .toolbar,
+    .col-date {
+      display: none;
+    }
+  }
+}
 </style>

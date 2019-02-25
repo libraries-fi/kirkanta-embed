@@ -40,141 +40,141 @@
 </template>
 
 <script>
-  import apiCall from '../mixins/api-call'
+import apiCall from '../mixins/api-call'
 
-  import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-  import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
-  export default {
-    props: ['lang', 'form'],
-    components: { FontAwesomeIcon },
-    data: () => ({
-      result: [],
-      timers: {
-        submit: null
+export default {
+  props: ['lang', 'form'],
+  components: { FontAwesomeIcon },
+  data: () => ({
+    result: [],
+    timers: {
+      submit: null
+    },
+    faSearch
+  }),
+  computed: {
+    busy: {
+      get () {
+        return this.$el.hasAttribute('data-busy')
       },
-      faSearch
-    }),
-    computed: {
-      busy: {
-        get () {
-          return this.$el.hasAttribute('data-busy')
-        },
-        set (state) {
-          if (this.$el) {
-            if (state) {
-              this.$el.setAttribute('data-busy', '')
-            } else {
-              this.$el.removeAttribute('data-busy')
-            }
+      set (state) {
+        if (this.$el) {
+          if (state) {
+            this.$el.setAttribute('data-busy', '')
+          } else {
+            this.$el.removeAttribute('data-busy')
           }
         }
       }
-    },
-    mounted (...foo) {
-      this.onSubmit()
-    },
-    methods: {
-      trySubmit (event) {
-        if (this.timers.submit) {
-          clearTimeout(this.timers.submit)
-          this.timers.submit = 0
-        }
-
-        this.timers.submit = setTimeout(this.onSubmit, 500)
-      },
-      onClickLibrary (event) {
-        event.preventDefault()
-        this.$router.push({name: 'library', params: {id: event.target.dataset.id}})
-      },
-      async onSubmit () {
-        this.busy = true
-
-        let query = {
-          sort: 'name',
-          with: 'schedules',
-          'period.start': '0d',
-          'period.end': '1d',
-          limit: 20,
-          skip: 0
-        }
-
-        Object.assign(query, this.form)
-
-        let response = await apiCall('/library', this.lang, query)
-
-        this.result = response.data.items
-        this.busy = false
+    }
+  },
+  mounted (...foo) {
+    this.onSubmit()
+  },
+  methods: {
+    trySubmit (event) {
+      if (this.timers.submit) {
+        clearTimeout(this.timers.submit)
+        this.timers.submit = 0
       }
+
+      this.timers.submit = setTimeout(this.onSubmit, 500)
+    },
+    onClickLibrary (event) {
+      event.preventDefault()
+      this.$router.push({ name: 'library', params: { id: event.target.dataset.id } })
+    },
+    async onSubmit () {
+      this.busy = true
+
+      let query = {
+        sort: 'name',
+        with: 'schedules',
+        'period.start': '0d',
+        'period.end': '1d',
+        limit: 20,
+        skip: 0
+      }
+
+      Object.assign(query, this.form)
+
+      let response = await apiCall('/library', this.lang, query)
+
+      this.result = response.data.items
+      this.busy = false
     }
   }
+}
 </script>
 
 <style lang="scss">
-  @import "../../scss/variables";
+@import "../../scss/variables";
 
-  .zxc-library-list {
-    // Negative margins cause the iframe sandbox to show a scroll bar.
-    overflow-x: hidden;
+.zxc-library-list {
+  // Negative margins cause the iframe sandbox to show a scroll bar.
+  overflow-x: hidden;
 
-    input[type="search"] {
-      flex-grow: 1;
-    }
+  input[type="search"] {
+    flex-grow: 1;
+  }
 
-    .throbber {
-      width: 2rem;
-      background-color: blue;
-      margin-left: -2rem - spacing(2);
-      margin-right: spacing(2);
-      display: none;
-    }
+  .throbber {
+    width: 2rem;
+    background-color: blue;
+    margin-left: -2rem - spacing(2);
+    margin-right: spacing(2);
+    display: none;
+  }
 
-    .search-results {
-      margin-left: -1 * spacing(1);
-      margin-right: -1 * spacing(1);
-    }
+  .search-results {
+    margin-left: -1 * spacing(1);
+    margin-right: -1 * spacing(1);
+  }
 
-    .library-card {
-      height: 4rem;
-      border: 1px solid #ccc;
+  .library-card {
+    height: 4rem;
+    border: 1px solid #ccc;
+    display: flex;
+    overflow: hidden;
+    // margin: spacing(1);
+    margin-bottom: $grid-gutter-width / 2;
+
+    .icon {
+      width: 100px;
+      flex: 0 0 100px;
+      background-color: #eee;
+      flex-direction: column;
       display: flex;
       overflow: hidden;
-      // margin: spacing(1);
-      margin-bottom: $grid-gutter-width / 2;
 
-      .icon {
-        width: 100px;
-        flex: 0 0 100px;
-        background-color: #eee;
-        flex-direction: column;
-        display: flex;
-        overflow: hidden;
-
-        .icon-bg {
-        }
-
-        img {
-          width: calc(100% + 40px);
-          height: auto;
-        }
+      .icon-bg {
       }
 
-      .info {
-        padding-left: spacing(2);
-        padding-right: spacing(2);
-        flex: 1 0 100%;
+      img {
+        width: calc(100% + 40px);
+        height: auto;
+      }
+    }
 
-        a {
-          // font-size: larger;
-          line-height: 2.5;
-        }
+    .info {
+      padding-left: spacing(2);
+      padding-right: spacing(2);
+      flex: 1 0 100%;
+
+      a {
+        // font-size: larger;
+        line-height: 2.5;
       }
     }
   }
+}
 
-  .zxc-library-list[data-busy] {
-    .throbber {
-      display: unset;
-    }
+.zxc-library-list[data-busy] {
+  .throbber {
+    display: unset;
   }
+}
 </style>

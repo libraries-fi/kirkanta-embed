@@ -36,36 +36,36 @@
 </template>
 
 <script>
-  import apiCall from '../mixins/api-call'
-  import AutoComplete from './AutoComplete.vue'
+import apiCall from '../mixins/api-call'
+import AutoComplete from './AutoComplete.vue'
 
-  const AUTOCOMPLETE_LIMIT = 10
+const AUTOCOMPLETE_LIMIT = 10
 
-  export default {
-    data: () => ({
-      librarySuggestions: [],
-      options: {
-        library: null,
-        tabbed: false,
-        disable: null
+export default {
+  data: () => ({
+    librarySuggestions: [],
+    options: {
+      library: null,
+      tabbed: false,
+      disable: null
+    }
+  }),
+  methods: {
+    async onLibraryAutoComplete (name) {
+      if (name.length >= 2) {
+        let result = await apiCall('/library', 'fi', { q: name, sort: 'name', limit: AUTOCOMPLETE_LIMIT })
+        this.librarySuggestions = result.data.items
       }
-    }),
-    methods: {
-      async onLibraryAutoComplete (name) {
-        if (name.length >= 2) {
-          let result = await apiCall('/library', 'fi', {q: name, sort: 'name', limit: AUTOCOMPLETE_LIMIT})
-          this.librarySuggestions = result.data.items
-        }
-      }
-    },
-    watch: {
-      options: {
-        handler () {
-          this.$emit('options', this.options)
-        },
-        deep: true
-      }
-    },
-    components: { AutoComplete }
-  }
+    }
+  },
+  watch: {
+    options: {
+      handler () {
+        this.$emit('options', this.options)
+      },
+      deep: true
+    }
+  },
+  components: { AutoComplete }
+}
 </script>
