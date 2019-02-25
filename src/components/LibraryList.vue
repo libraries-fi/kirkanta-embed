@@ -90,8 +90,6 @@ export default {
     async onSubmit () {
       this.busy = true
 
-      console.log('P?', this.paging)
-
       let query = {
         sort: 'name',
         with: 'schedules',
@@ -100,7 +98,7 @@ export default {
         skip: 0,
 
         // Revert to a sane fallback value in case the librarians misconfigure their widgets.
-        limit: this.paging ? 10 : 100
+        limit: this.paging ? 20 : 100
       }
 
       Object.assign(query, this.form)

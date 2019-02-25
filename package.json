@@ -1,6 +1,6 @@
 {
   "name": "kirjastohakemisto-widgets",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Embeddable widgets for Kirjastohakemisto",
   "repository": "https://github.com/libraries-fi/kirkanta-embed",
   "main": "index.js",
