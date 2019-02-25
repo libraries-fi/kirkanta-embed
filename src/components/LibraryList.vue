@@ -46,7 +46,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 export default {
-  props: ['lang', 'form'],
+  props: ['lang', 'form', 'paging'],
   components: { FontAwesomeIcon },
   data: () => ({
     result: [],
@@ -90,13 +90,17 @@ export default {
     async onSubmit () {
       this.busy = true
 
+      console.log('P?', this.paging)
+
       let query = {
         sort: 'name',
         with: 'schedules',
         'period.start': '0d',
         'period.end': '1d',
-        limit: 20,
-        skip: 0
+        skip: 0,
+
+        // Revert to a sane fallback value in case the librarians misconfigure their widgets.
+        limit: this.paging ? 10 : 100
       }
 
       Object.assign(query, this.form)

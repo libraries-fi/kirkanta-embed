@@ -56,6 +56,12 @@
         </details>
       </b-form-group>
     </div>
+
+    <div class="ml-3 mb-3">
+      <b-form-checkbox v-model="pagingEnabled" :value="true" :unchecked-value="false">
+        Use paging
+      </b-form-checkbox>
+    </div>
   </div>
 </template>
 
@@ -74,7 +80,8 @@ export default {
       library: null,
       city: null,
       consortium: null,
-      type: null
+      type: null,
+      noPaging: false
     },
     typeOptions: null
   }),
@@ -88,6 +95,17 @@ export default {
       { value: 'special', text: this.$t('search.libraries.type.special') },
       { value: 'home_service institutional children school vocational_college', text: this.$t('search.libraries.type.other') }
     ]
+  },
+  computed: {
+    pagingEnabled: {
+      get () {
+        return !this.noPaging
+      },
+      set (value) {
+        this.options.noPaging = !value
+        // this.onChange()
+      }
+    }
   },
   methods: {
     async onLibraryAutoComplete (name) {

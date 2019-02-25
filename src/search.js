@@ -15,14 +15,6 @@ Vue.use(VueI18n)
 
 class SearchWidget extends Vue {
   constructor (container, params) {
-    let search = {
-      q: params.q,
-      id: params.library,
-      city: params.city,
-      consortium: params.consortium,
-      type: params.type
-    }
-
     if (params.branch_type) {
       /**
        * Property 'type' was called 'branch_type' in old Kirkanta and hence
@@ -30,6 +22,14 @@ class SearchWidget extends Vue {
        * do not need to update their widget configurations by hand.
        */
       params.type = params.branch_type.replace(/\blibrary\b/, 'municipal')
+    }
+
+    let search = {
+      q: params.q,
+      id: params.library,
+      city: params.city,
+      consortium: params.consortium,
+      type: params.type,
     }
 
     let router = new Router(Object.assign(routerConfig, {
@@ -40,7 +40,8 @@ class SearchWidget extends Vue {
           component: LibraryList,
           props: (route) => ({
             form: search,
-            lang: params.lang
+            lang: params.lang,
+            paging: !('noPaging' in params)
           })
         },
         {
