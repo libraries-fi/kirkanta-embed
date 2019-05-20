@@ -10,6 +10,7 @@ builder:
   schedules: Aukiolotiedot
   show-code: Näytä upokekoodi
   title: Upoketyökalu
+  use-paging: Käytä sivutusta
   placeholder:
     automatic: '- Automaattinen -'
     widget: '- Valitse upoke -'

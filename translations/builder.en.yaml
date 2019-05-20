@@ -10,6 +10,7 @@ builder:
   schedules: Schedules
   show-code: View embed code
   title: Widget builder
+  use-paging: Use paging
   placeholder:
     automatic: '- Automatic -'
     widget: '- Select widget -'
