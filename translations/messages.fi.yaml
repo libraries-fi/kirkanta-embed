@@ -26,6 +26,7 @@ library:
   search:
     placeholder: Hae nimellä tai kunnalla
     title: Kirjastohaku
+    load-more: Näytä lisää tuloksia
 
 schedules:
   closed: Kiinni

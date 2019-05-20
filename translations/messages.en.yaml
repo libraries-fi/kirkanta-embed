@@ -26,6 +26,7 @@ library:
   search:
     placeholder: Search by name or municipality
     title: Library search
+    load-more: Load more results
 
 schedules:
   closed: Closed
