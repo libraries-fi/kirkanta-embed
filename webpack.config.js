@@ -68,7 +68,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.BUILD_TIME': JSON.stringify(Date.now())
+      'process.env.BUILD_TIME': JSON.stringify(Math.ceil(Date.now() / 1000)).substr(4)
     }),
     new VueLoaderPlugin(),
     autoprefixer
