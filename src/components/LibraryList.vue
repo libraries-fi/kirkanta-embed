@@ -36,6 +36,10 @@
         </div>
       </li>
     </ol>
+
+    <div class="load-more-container">
+      <button type="button" class="btn btn-link btn-lg" @click="loadMore">{{ $t('library.search.load-more')}}</button>
+    </div>
   </div>
 </template>
 
@@ -50,6 +54,7 @@ export default {
   components: { FontAwesomeIcon },
   data: () => ({
     result: [],
+    pageNumber: 1,
     timers: {
       submit: null
     },
@@ -87,26 +92,37 @@ export default {
       event.preventDefault()
       this.$router.push({ name: 'library', params: { id: event.target.dataset.id } })
     },
-    async onSubmit () {
+    async onSubmit (append = false) {
       this.busy = true
+
+      // Revert to a sane fallback value in case the librarians misconfigure their widgets.
+      const pageSize = this.paging ? 20 : 100
 
       let query = {
         sort: 'name',
         with: 'schedules',
         'period.start': '0d',
         'period.end': '1d',
-        skip: 0,
-
-        // Revert to a sane fallback value in case the librarians misconfigure their widgets.
-        limit: this.paging ? 20 : 100
+        skip: (this.pageNumber - 1) * pageSize,
+        limit: pageSize
       }
 
       Object.assign(query, this.form)
 
       let response = await apiCall('/library', this.lang, query)
 
-      this.result = response.data.items
+      if (append) {
+        this.result.push(...response.data.items)
+      } else {
+        this.result = response.data.items
+      }
+
       this.busy = false
+    },
+    loadMore () {
+      console.log('LOAD MORE')
+      this.pageNumber++
+      this.onSubmit(true)
     }
   }
 }
@@ -171,6 +187,11 @@ export default {
         line-height: 2.5;
       }
     }
+  }
+
+  .load-more-container {
+    display: flex;
+    justify-content: space-around;
   }
 }
 
