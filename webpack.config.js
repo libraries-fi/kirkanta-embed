@@ -68,7 +68,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.VERSION': JSON.stringify(require('./package.json').version)
+      'process.env.BUILD_TIME': JSON.stringify(Date.now())
     }),
     new VueLoaderPlugin(),
     autoprefixer

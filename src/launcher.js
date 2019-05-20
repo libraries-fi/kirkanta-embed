@@ -34,7 +34,7 @@ async function kirjastohakemisto (element) {
      */
     function load_app (appId) {
       return new Promise((resolve, reject) => {
-        const path = `${config.path}/${appId}.js?v${process.env.VERSION}`
+        const path = `${config.path}/${appId}.js?v${process.env.BUILD_TIME}`
         const script = scope.createElement('script')
 
         script.src = path
