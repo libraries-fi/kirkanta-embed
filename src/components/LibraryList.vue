@@ -37,7 +37,7 @@
       </li>
     </ol>
 
-    <div class="load-more-container">
+    <div class="load-more-container" v-if="canLoadMore">
       <button type="button" class="btn btn-link btn-lg" @click="loadMore">{{ $t('library.search.load-more')}}</button>
     </div>
   </div>
@@ -54,7 +54,8 @@ export default {
   components: { FontAwesomeIcon },
   data: () => ({
     result: [],
-    pageNumber: 1,
+    pageNumber: 0,
+    canLoadMore: true,
     timers: {
       submit: null
     },
@@ -98,12 +99,16 @@ export default {
       // Revert to a sane fallback value in case the librarians misconfigure their widgets.
       const pageSize = this.paging ? 20 : 100
 
+      if (!append) {
+        this.pageNumber = 0
+      }
+
       let query = {
         sort: 'name',
         with: 'schedules',
         'period.start': '0d',
         'period.end': '1d',
-        skip: (this.pageNumber - 1) * pageSize,
+        skip: this.pageNumber * pageSize,
         limit: pageSize
       }
 
@@ -117,10 +122,10 @@ export default {
         this.result = response.data.items
       }
 
+      this.canLoadMore = response.data.items.length === pageSize
       this.busy = false
     },
     loadMore () {
-      console.log('LOAD MORE')
       this.pageNumber++
       this.onSubmit(true)
     }
