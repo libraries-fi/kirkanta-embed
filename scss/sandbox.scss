@@ -17,4 +17,8 @@
   table {
     font-size: inherit;
   }
+
+  .btn:focus, .btn.focus {
+    outline: 5px auto -webkit-focus-ring-color;
+  }
 }
