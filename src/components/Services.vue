@@ -102,6 +102,7 @@ export default {
         title: service.name || service.standardName,
         content: service.description,
         container: this.$el,
+        html: true,
         show (event) {
           console.log(event)
         }
