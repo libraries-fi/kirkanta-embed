@@ -1,11 +1,11 @@
 <template>
   <div class="zxc zxc-weekly-schedules" :data-expand-mode="expandMode" v-if="schedules">
     <div class="toolbar" v-if="schedules.length">
-      <button type="button" v-on:click="previousWeek" class="btn btn-link btn-sm">
+      <button type="button" v-on:click="previousWeek" class="btn btn-link btn-sm" :aria-label="$t('schedules.previous-week')">
         <font-awesome-icon :icon="faWeekPrev"/>
       </button>
       <h2 class="week-label h3">{{ $t('schedules.week') }} {{ week }}</h2>
-      <button type="button" v-on:click="nextWeek" class="btn btn-link btn-sm">
+      <button type="button" v-on:click="nextWeek" class="btn btn-link btn-sm" :aria-label="$t('schedules.next-week')">
         <font-awesome-icon :icon="faWeekNext"/>
       </button>
     </div>

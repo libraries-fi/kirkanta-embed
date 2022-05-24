@@ -40,6 +40,8 @@ schedules:
   staff-present: Staff present
   times: Open
   week: Week
+  previous-week: Previous week
+  next-week: Next week
 
 services:
   title: Services
