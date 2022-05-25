@@ -39,6 +39,8 @@ schedules:
   staff-present: Personal på plats
   times: Tider
   week: Vecka
+  previous-week: Föregående vecka
+  next-week: Nästa vecka
 
 services:
   title: Tjänst

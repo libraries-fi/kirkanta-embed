@@ -40,6 +40,8 @@ schedules:
   staff-present: Henkilökunta paikalla
   times: Auki
   week: Viikko
+  previous-week: Edellinen viikko
+  next-week: Seuraava viikko
 
 services:
   title: Palvelut
