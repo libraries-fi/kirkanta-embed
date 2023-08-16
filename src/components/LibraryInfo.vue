@@ -18,7 +18,7 @@
         <section class="row">
           <div class="col-md-2 cover-photo-cell">
             <div v-if="library.coverPhoto" class="cover-photo-frame">
-              <img :src="library.coverPhoto.small.url" alt="" class="cover-photo"/>
+              <img :src="library.coverPhoto.medium.url" alt="" class="cover-photo"/>
             </div>
             <div v-else class="no-photo">
               <font-awesome-icon :icon="faImage" size="6x"/>
