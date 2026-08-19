@@ -43,6 +43,16 @@ schedules:
   previous-week: Edellinen viikko
   next-week: Seuraava viikko
   attribution-label: Kirjastot.fi
+  show-day-hours: "Näytä {weekday} {date} aukioloajat"
+  hide-day-hours: "Piilota {weekday} {date} aukioloajat"
+  weekdays:
+    monday: maanantain
+    tuesday: tiistain
+    wednesday: keskiviikon
+    thursday: torstain
+    friday: perjantain
+    saturday: lauantain
+    sunday: sunnuntain
 
 services:
   title: Palvelut

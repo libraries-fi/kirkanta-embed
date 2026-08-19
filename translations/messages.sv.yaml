@@ -42,6 +42,16 @@ schedules:
   previous-week: Föregående vecka
   next-week: Nästa vecka
   attribution-label: Kirjastot.fi
+  show-day-hours: "Visa öppettiderna för {weekday} den {date}"
+  hide-day-hours: "Dölj öppettiderna för {weekday} den {date}"
+  weekdays:
+    monday: måndagen
+    tuesday: tisdagen
+    wednesday: onsdagen
+    thursday: torsdagen
+    friday: fredagen
+    saturday: lördagen
+    sunday: söndagen
 
 services:
   title: Tjänst
