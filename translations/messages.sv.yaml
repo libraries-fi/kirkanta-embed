@@ -35,7 +35,7 @@ schedules:
   from: Fr.o.m.
   library-closed: Biblioteket är stängt
   self-service: Meröppet
-  service-hours: Aukioloajat
+  service-hours: Öppettider
   staff-present: Personal på plats
   times: Tider
   week: Vecka

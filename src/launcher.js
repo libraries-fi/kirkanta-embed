@@ -22,6 +22,10 @@ async function kirjastohakemisto (element) {
 
     let app = new App(wrapper, params)
 
+    if (enableSandbox && params.widget === 'schedules') {
+      setSandboxTitle(window.frameElement, app)
+    }
+
     if (enableSandbox && sandboxHeight === 'auto') {
       resizeSandbox(window.frameElement, viewport)
     }
@@ -129,6 +133,17 @@ async function kirjastohakemisto (element) {
       sandbox.style.height = widget.offsetHeight + 'px'
     }
     let observer = new ResizeSensor(widget, onResize)
+  }
+
+  function setSandboxTitle (sandbox, app) {
+    const prefix = app.$t('schedules.service-hours')
+    sandbox.title = prefix
+
+    app.$watch('library', library => {
+      if (library) {
+        sandbox.title = `${prefix}: ${library.name}`
+      }
+    }, { immediate: true })
   }
 
   function addAttribution (container) {
