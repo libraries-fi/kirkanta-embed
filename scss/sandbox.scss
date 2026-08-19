@@ -21,4 +21,10 @@
   .btn:focus, .btn.focus {
     outline: 5px auto -webkit-focus-ring-color;
   }
+
+  :focus-visible, .btn:focus-visible {
+    outline: 3px solid #000;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 6px #fff;
+  }
 }
