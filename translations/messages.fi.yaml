@@ -42,6 +42,7 @@ schedules:
   week: Viikko
   previous-week: Edellinen viikko
   next-week: Seuraava viikko
+  attribution-label: Kirjastot.fi
 
 services:
   title: Palvelut

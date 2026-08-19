@@ -30,7 +30,7 @@ async function kirjastohakemisto (element) {
       resizeSandbox(window.frameElement, viewport)
     }
 
-    addAttribution(viewport)
+    addAttribution(viewport, app.$t('schedules.attribution-label'))
 
     /*
      * MUST load the script sandboxed, otherwise Vue.js injects the styles from the app
@@ -146,13 +146,14 @@ async function kirjastohakemisto (element) {
     }, { immediate: true })
   }
 
-  function addAttribution (container) {
+  function addAttribution (container, label) {
     const logo = document.createElement('img')
     logo.width = '80'
     logo.src = `data:image/svg+xml;utf8,${encodeURIComponent(kifiLogo)}`
 
     const link = document.createElement('a')
     link.href = 'https://hakemisto.kirjastot.fi'
+    link.setAttribute('aria-label', label)
     link.className = 'attribution'
     link.style.position = 'relative'
     // link.style.left = "calc(100% - 80px)";

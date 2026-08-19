@@ -41,6 +41,7 @@ schedules:
   week: Vecka
   previous-week: Föregående vecka
   next-week: Nästa vecka
+  attribution-label: Kirjastot.fi
 
 services:
   title: Tjänst
