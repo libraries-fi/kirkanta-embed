@@ -42,6 +42,7 @@ schedules:
   week: Week
   previous-week: Previous week
   next-week: Next week
+  attribution-label: Kirjastot.fi
 
 services:
   title: Services
