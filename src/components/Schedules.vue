@@ -4,7 +4,7 @@
       <button type="button" v-on:click="previousWeek" class="btn btn-link btn-sm" :aria-label="$t('schedules.previous-week')">
         <font-awesome-icon :icon="faWeekPrev"/>
       </button>
-      <h2 class="week-label h3">{{ $t('schedules.week') }} {{ week }}</h2>
+      <h2 class="week-label h3" aria-live="polite" aria-atomic="true">{{ $t('schedules.week') }} {{ week }}</h2>
       <button type="button" v-on:click="nextWeek" class="btn btn-link btn-sm" :aria-label="$t('schedules.next-week')">
         <font-awesome-icon :icon="faWeekNext"/>
       </button>
