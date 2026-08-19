@@ -43,6 +43,16 @@ schedules:
   previous-week: Previous week
   next-week: Next week
   attribution-label: Kirjastot.fi
+  show-day-hours: "Show opening hours for {weekday}, {date}"
+  hide-day-hours: "Hide opening hours for {weekday}, {date}"
+  weekdays:
+    monday: Monday
+    tuesday: Tuesday
+    wednesday: Wednesday
+    thursday: Thursday
+    friday: Friday
+    saturday: Saturday
+    sunday: Sunday
 
 services:
   title: Services

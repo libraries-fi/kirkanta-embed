@@ -27,9 +27,16 @@
           <td class="col-weekday">
             <date-time :date="day.date" format="cccc"/>
 
-            <button class="btn btn-link" @click="expandedRow = index" v-if="expandMode == 'current' && !day.closed">
-              <font-awesome-icon :icon="faCollapse" v-if="index == expandedRow"/>
-              <font-awesome-icon :icon="faExpand" v-else/>
+            <button
+              type="button"
+              class="btn btn-link"
+              @click="toggleDay(index)"
+              :aria-label="dayToggleLabel(day, index)"
+              :aria-expanded="index == expandedRow"
+              v-if="expandMode == 'current' && !day.closed"
+            >
+              <font-awesome-icon :icon="faCollapse" aria-hidden="true" v-if="index == expandedRow"/>
+              <font-awesome-icon :icon="faExpand" aria-hidden="true" v-else/>
             </button>
           </td>
           <td v-if="day.closed" class="col-time closed">{{ $t('schedules.closed') }}</td>
@@ -83,6 +90,9 @@ import { faPlusSquare } from '@fortawesome/free-regular-svg-icons'
 
 import DateTime from './DateTime'
 
+const weekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+const dateFormats = { fi: 'd.M.', sv: 'd.M.', en: 'M/d' }
+
 export default {
   props: ['schedules', 'periods', 'expandMode'],
   data: () => ({
@@ -112,8 +122,18 @@ export default {
     faCollapse: () => faMinusSquare
   },
   methods: {
-    toggleDay (event) {
-      event.expanded = true
+    dayToggleLabel (day, index) {
+      const date = toDate(day.date)
+      const weekdayKey = weekdays[parseInt(format(date, 'i')) - 1]
+      const weekday = this.$t(`schedules.weekdays.${weekdayKey}`)
+      const dateFormat = dateFormats[this.$i18n.locale] || dateFormats.fi
+      const formattedDate = format(date, dateFormat)
+      const label = index === this.expandedRow ? 'schedules.hide-day-hours' : 'schedules.show-day-hours'
+
+      return this.$t(label, { weekday, date: formattedDate })
+    },
+    toggleDay (index) {
+      this.expandedRow = this.expandedRow === index ? null : index
     },
     previousWeek () {
       this.i = Math.max(this.i - 1, 0)
